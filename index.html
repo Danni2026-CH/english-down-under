@@ -911,12 +911,13 @@ function showApiModal() {
 }
 function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key.startsWith('sk-ant-')) {
-    alert('That doesn\'t look right — your key should start with sk-ant-');
+  if (!key || key.length < 10) {
+    alert('Please paste your full API key.');
     return;
   }
   sessionStorage.setItem('anthro_key', key);
   document.getElementById('apiModal').style.display = 'none';
+  alert('API key saved! Now click AI Feedback again.');
 }
 function skipApiKey() {
   document.getElementById('apiModal').style.display = 'none';
