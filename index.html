@@ -887,10 +887,11 @@ Keep it under 100 words. Be warm, specific, and actionable.`
       })
     });
     const result = await resp.json();
-    const text = result.content.map(b => b.text || '').join('');
+    if (result.error) throw new Error(result.error.message);
+    const text = (result.content || []).map(b => b.text || '').join('');
     showFeedback(fbId, 'result', text.replace(/\n/g, '<br>'));
   } catch (e) {
-    showFeedback(fbId, 'error', '⚠️ Error: ' + e.message + ' — Key stored: ' + (getApiKey() ? 'YES (' + getApiKey().substring(0,12) + '...)' : 'NO'));
+    showFeedback(fbId, 'error', '⚠️ Error: ' + e.message);
   }
 }
 
