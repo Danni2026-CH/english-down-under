@@ -632,17 +632,7 @@ let activeAudio = null;
 // ── INIT ──
 window.addEventListener('load', async () => {
   document.getElementById('loadingMsg').textContent = 'Loading episode content…';
-  // Load content
   data = FALLBACK;
-  if (SHEET_CSV_URL) {
-    try {
-    if (SHEET_CSV_URL) {
-      const sheetData = await loadFromSheet(SHEET_CSV_URL);
-      if (sheetData && sheetData.echo.length > 0) data = sheetData;
-  } catch (e) {
-    data = FALLBACK;
-    document.getElementById('setupBanner').style.display = 'block';
-  }
   applyEpisodeMeta();
   setTimeout(() => {
     const ls = document.getElementById('loadingScreen');
@@ -881,10 +871,7 @@ Give feedback in exactly 3 bullet points:
 Keep it under 100 words. Be warm, specific, and actionable.`
   };
 
-  // Load content
-  data = FALLBACK;
-  if (SHEET_CSV_URL) {
-    try {
+  try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
