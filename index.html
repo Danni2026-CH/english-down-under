@@ -322,7 +322,7 @@ body {
 .summary-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
 .summary-table tr:nth-child(even) td { background: var(--warm); }
 
-/* ── SETUP BANNER (shown if no sheet configured) ── */
+/* ── SETUP BANNER ── */
 .setup-banner {
   background: #fff8e6; border: 2px solid var(--amber);
   border-radius: 10px; padding: 18px 20px; margin-bottom: 20px;
@@ -334,24 +334,55 @@ body {
   font-size: 0.82rem; color: var(--ink);
 }
 
+/* ── GENERATING SPINNER ── */
+.generating {
+  display: inline-block; width: 12px; height: 12px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: var(--amber-light);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 6px; vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
 .hidden { display: none !important; }
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 </style>
 </head>
 <body>
 
-<!-- API KEY MODAL -->
+<!-- ═══════════════════════════════════════════
+     API KEY MODAL — now collects BOTH keys
+     ═══════════════════════════════════════════ -->
 <div id="apiModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2000;align-items:center;justify-content:center;">
   <div style="background:#fdfaf4;border-radius:14px;padding:32px 28px;max-width:480px;width:90%;border-top:4px solid #c8860a;">
-    <div style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:6px;">🔑 Enter your API Key</div>
-    <p style="font-size:0.85rem;color:#7a6e60;margin-bottom:20px;line-height:1.6;">Your key is stored only in this browser session — it is never saved to any file or server. You will need to enter it each time you open the app.</p>
-    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7a6e60;margin-bottom:6px;">Anthropic API Key</div>
-    <input id="apiKeyInput" type="password" placeholder="sk-ant-api03-..." style="width:100%;padding:12px 14px;border:1.5px solid #d6cab6;border-radius:8px;font-size:0.9rem;outline:none;margin-bottom:16px;font-family:'DM Sans',sans-serif;">
+    <div style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:6px;">🔑 Enter your API Keys</div>
+    <p style="font-size:0.85rem;color:#7a6e60;margin-bottom:20px;line-height:1.6;">
+      Your keys are stored only in this browser session — never saved to any file or server.
+    </p>
+
+    <!-- Anthropic key -->
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7a6e60;margin-bottom:6px;">
+      Anthropic API Key <span style="color:#c8860a;">*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;">(for AI Feedback)</span>
+    </div>
+    <input id="apiKeyInput" type="password" placeholder="sk-ant-api03-…"
+      style="width:100%;padding:12px 14px;border:1.5px solid #d6cab6;border-radius:8px;font-size:0.9rem;outline:none;margin-bottom:18px;font-family:'DM Sans',sans-serif;">
+
+    <!-- OpenAI key — NEW -->
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7a6e60;margin-bottom:6px;">
+      OpenAI API Key <span style="color:#3d7a52;">*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;">(for Sam &amp; Leo voices)</span>
+    </div>
+    <input id="openaiKeyInput" type="password" placeholder="sk-…"
+      style="width:100%;padding:12px 14px;border:1.5px solid #d6cab6;border-radius:8px;font-size:0.9rem;outline:none;margin-bottom:20px;font-family:'DM Sans',sans-serif;">
+
     <div style="display:flex;gap:10px;">
-      <button onclick="saveApiKey()" style="flex:1;background:#c8860a;color:#12100e;border:none;padding:11px;border-radius:7px;font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;">Save & Continue →</button>
+      <button onclick="saveApiKey()" style="flex:1;background:#c8860a;color:#12100e;border:none;padding:11px;border-radius:7px;font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;">Save &amp; Continue →</button>
       <button onclick="skipApiKey()" style="background:transparent;color:#7a6e60;border:1.5px solid #d6cab6;padding:11px 16px;border-radius:7px;font-size:0.85rem;cursor:pointer;font-family:'DM Sans',sans-serif;">Skip for now</button>
     </div>
-    <p style="font-size:0.75rem;color:#7a6e60;margin-top:14px;">Get your key at <strong>console.anthropic.com</strong> → API Keys</p>
+    <p style="font-size:0.75rem;color:#7a6e60;margin-top:14px;">
+      Anthropic key → <strong>console.anthropic.com</strong> → API Keys<br>
+      OpenAI key → <strong>platform.openai.com</strong> → API Keys
+    </p>
   </div>
 </div>
 
@@ -390,10 +421,7 @@ body {
 
 <div class="main">
 
-  <!-- SETUP BANNER -->
-  <div class="setup-banner" id="setupBanner">
-    <strong>⚙️ Setup needed:</strong> To load live content from your Google Sheet, open this HTML file and paste your Sheet's published CSV URL into the <code>SHEET_CSV_URL</code> variable at the top of the &lt;script&gt; section. See the Setup Guide for step-by-step instructions.
-  </div>
+  <div class="setup-banner" id="setupBanner"></div>
 
   <!-- ── PHASE 0: WARMUP ── -->
   <div id="phase0">
@@ -402,9 +430,7 @@ body {
       <div class="badge badge-easy">2 min</div>
     </div>
     <div class="card">
-      <div class="episode-theme-banner" id="themeBanner">
-        🎙 Loading episode theme…
-      </div>
+      <div class="episode-theme-banner" id="themeBanner">🎙 Loading episode theme…</div>
       <div class="warmup-wrap">
         <div class="card-label">🎯 Core Principle — Read this aloud</div>
         <div class="warmup-quote">"To improve English speaking, I must actually speak. Imitation is my bridge to fluency."</div>
@@ -576,47 +602,46 @@ body {
 
 </div><!-- /main -->
 
-<!-- Hidden audio element -->
 <audio id="audioPlayer" style="display:none"></audio>
 
 <script>
 // ═══════════════════════════════════════════════════════════
-//  ⚙️  CONFIGURATION — Edit these two values to connect your
-//      Google Sheet and Anthropic API key
+//  ⚙️  CONFIGURATION
 // ═══════════════════════════════════════════════════════════
 
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfQZt28AiC8BNP47ROmslYmyQiY4vFKCQ6ssf6E2O9RK9Kxz2dXOL5gGS1gg7hhl72aTK7rldY2RXb/pub?gid=2049289900&single=true&output=csv';
-// Paste your Google Sheet published CSV URL here
-// Example: 'https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/export?format=csv&gid=0'
-
-const ANTHROPIC_API_KEY = '';
-// Paste your Anthropic API key here
-// Example: 'sk-ant-api03-...'
 
 // ═══════════════════════════════════════════════════════════
+//  🎙  VOICE CONFIGURATION
+//  Sam  = 'fable'  (warm female Australian feel)
+//  Leo  = 'onyx'   (deeper male voice)
+//  Other options: alloy, echo, nova, shimmer
+// ═══════════════════════════════════════════════════════════
+const VOICE_SAM = 'fable';
+const VOICE_LEO = 'onyx';
 
-// ── FALLBACK CONTENT (used when Sheet not configured) ──
+// ── FALLBACK CONTENT ──
 const FALLBACK = {
   episode: 'Episode 1',
   theme: '🌏 Everyday Conversations',
   echo: [
-    { text: "She's already left for the station.", audio: '' },
-    { text: "The weather here changes every single hour.", audio: '' },
-    { text: "Could you pass me the salt, please?", audio: '' },
-    { text: "I haven't seen anything like this before.", audio: '' },
-    { text: "He decided to take the longer route home.", audio: '' },
-    { text: "They've been waiting for over an hour.", audio: '' },
+    { text: "She's already left for the station." },
+    { text: "The weather here changes every single hour." },
+    { text: "Could you pass me the salt, please?" },
+    { text: "I haven't seen anything like this before." },
+    { text: "He decided to take the longer route home." },
+    { text: "They've been waiting for over an hour." },
   ],
   persp: [
-    { text: "I love traveling because it opens my mind. Last year, I went to Japan and it changed my life.", audio: '' },
-    { text: "I am exhausted. I stayed up too late finishing my project.", audio: '' },
-    { text: "I exercise every morning before breakfast. It gives me energy for the whole day.", audio: '' },
-    { text: "I moved to a new city last month. I am still trying to find my way around.", audio: '' },
+    { text: "I love traveling because it opens my mind. Last year, I went to Japan and it changed my life." },
+    { text: "I am exhausted. I stayed up too late finishing my project." },
+    { text: "I exercise every morning before breakfast. It gives me energy for the whole day." },
+    { text: "I moved to a new city last month. I am still trying to find my way around." },
   ],
   summ: [
-    { text: "Learning a new language takes a lot of patience. You will make mistakes every single day. But every mistake is actually a lesson. Over time, those small lessons add up to real fluency.", audio: '' },
-    { text: "Exercise is not just about looking good. It improves your mood, your sleep, and your memory. Even a 20-minute walk can reduce stress significantly. The key is to make it a daily habit.", audio: '' },
-    { text: "Sleep is one of the most important things for your brain. When you sleep, your brain processes everything you learned that day. Without enough sleep, it is hard to concentrate or remember new things.", audio: '' },
+    { text: "Learning a new language takes a lot of patience. You will make mistakes every single day. But every mistake is actually a lesson. Over time, those small lessons add up to real fluency." },
+    { text: "Exercise is not just about looking good. It improves your mood, your sleep, and your memory. Even a 20-minute walk can reduce stress significantly. The key is to make it a daily habit." },
+    { text: "Sleep is one of the most important things for your brain. When you sleep, your brain processes everything you learned that day. Without enough sleep, it is hard to concentrate or remember new things." },
   ]
 };
 
@@ -627,7 +652,8 @@ let currentPhase = 0;
 let timerSecs = 20 * 60;
 let timerStarted = false;
 let timerInterval = null;
-let activeAudio = null;
+// Cache generated audio blobs so we don't re-generate on Replay
+let audioCache = { echo: null, persp: null, summ: null };
 
 // ── INIT ──
 window.addEventListener('load', async () => {
@@ -640,27 +666,6 @@ window.addEventListener('load', async () => {
     setTimeout(() => ls.style.display = 'none', 500);
   }, 1800);
 });
-
-// ── SHEET LOADER ──
-async function loadFromSheet(url) {
-  const resp = await fetch(url);
-  const csv = await resp.text();
-  const rows = csv.trim().split('\n').map(r =>
-    r.split(',').map(c => c.replace(/^"|"$/g, '').trim())
-  );
-  // Expected columns: type, text, audio_url
-  // type = echo | persp | summ | meta
-  const result = { echo: [], persp: [], summ: [], episode: 'Episode', theme: '' };
-  rows.slice(1).forEach(row => {
-    const [type, text, audio] = row;
-    if (type === 'meta_episode') result.episode = text;
-    else if (type === 'meta_theme') result.theme = text;
-    else if (type === 'echo') result.echo.push({ text, audio: audio || '' });
-    else if (type === 'persp') result.persp.push({ text, audio: audio || '' });
-    else if (type === 'summ')  result.summ.push({ text, audio: audio || '' });
-  });
-  return result;
-}
 
 function applyEpisodeMeta() {
   document.getElementById('episodePill').textContent = data.episode;
@@ -714,15 +719,88 @@ function buildDots(id, total, current) {
   el.appendChild(lbl);
 }
 
-// ── NEXT SENTENCE LOADERS ──
+// ═══════════════════════════════════════════════════════════
+//  🎙  TTS — GENERATE AUDIO VIA OPENAI
+// ═══════════════════════════════════════════════════════════
+
+async function generateTTS(key, text, voice) {
+  const openaiKey = getOpenAIKey();
+  const btn = document.getElementById(key + 'PlayBtn');
+  const status = document.getElementById(key + 'Status');
+
+  // Clear cache for this key
+  audioCache[key] = null;
+
+  if (!openaiKey) {
+    // No key yet — show modal when they press play
+    btn.disabled = false;
+    btn.textContent = '▶';
+    status.textContent = 'Press play — you\'ll be asked for your OpenAI key';
+    btn.dataset.needsKey = 'true';
+    btn.dataset.text = text;
+    btn.dataset.voice = voice;
+    return;
+  }
+
+  // Show generating state
+  btn.disabled = true;
+  btn.textContent = '…';
+  status.innerHTML = '<span class="generating"></span>Generating audio…';
+  document.getElementById(key + 'Wave').classList.remove('playing');
+
+  try {
+    const resp = await fetch('https://api.openai.com/v1/audio/speech', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + openaiKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'tts-1',
+        voice: voice,
+        input: text,
+        speed: 0.92   // slightly slower — better for learners
+      })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.error?.message || 'OpenAI TTS error ' + resp.status);
+    }
+
+    const audioBlob = await resp.blob();
+    const audioUrl = URL.createObjectURL(audioBlob);
+    audioCache[key] = audioUrl;
+
+    btn.disabled = false;
+    btn.textContent = '▶';
+    btn.dataset.needsKey = '';
+    status.textContent = 'Ready — press play';
+
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = '▶';
+    status.textContent = '⚠️ ' + e.message;
+    // If it's an auth error, clear the stored key so they can re-enter
+    if (e.message.includes('401') || e.message.includes('Incorrect API key')) {
+      sessionStorage.removeItem('openai_key');
+      status.textContent = '⚠️ Invalid OpenAI key — click play to re-enter';
+      btn.dataset.needsKey = 'true';
+      btn.dataset.text = text;
+      btn.dataset.voice = voice;
+    }
+  }
+}
+
+// ── NEXT LOADERS ──
 function nextEcho() {
   idx.echo = (idx.echo + 1) % data.echo.length;
   const item = data.echo[idx.echo];
   document.getElementById('echoText').textContent = item.text;
   document.getElementById('echoResp').value = '';
   hideFeedback('echoFB');
-  setAudioReady('echo', item.audio);
   buildDots('echoProg', data.echo.length, idx.echo);
+  generateTTS('echo', item.text, VOICE_SAM);
 }
 
 function nextPersp() {
@@ -731,8 +809,8 @@ function nextPersp() {
   document.getElementById('perspText').textContent = item.text;
   document.getElementById('perspResp').value = '';
   hideFeedback('perspFB');
-  setAudioReady('persp', item.audio);
   buildDots('perspProg', data.persp.length, idx.persp);
+  generateTTS('persp', item.text, VOICE_LEO);
 }
 
 function nextSumm() {
@@ -741,57 +819,47 @@ function nextSumm() {
   document.getElementById('summText').textContent = item.text;
   document.getElementById('summResp').value = '';
   hideFeedback('summFB');
-  setAudioReady('summ', item.audio);
   buildDots('summProg', data.summ.length, idx.summ);
+  generateTTS('summ', item.text, VOICE_SAM);
 }
 
-// ── AUDIO ──
-function setAudioReady(key, url) {
-  const btn = document.getElementById(key + 'PlayBtn');
-  const status = document.getElementById(key + 'Status');
-  if (url) {
-    btn.disabled = false;
-    btn.textContent = '▶';
-    status.textContent = 'Ready — press play';
-    btn.dataset.url = url;
-  } else {
-    btn.disabled = true;
-    btn.textContent = '▶';
-    status.textContent = 'Audio not configured yet — see Setup Guide';
-    btn.dataset.url = '';
-  }
-  document.getElementById(key + 'Wave').classList.remove('playing');
-}
-
+// ── AUDIO PLAYBACK ──
 function stopCurrentAudio() {
   const player = document.getElementById('audioPlayer');
   player.pause();
-  player.src = '';
   ['echo', 'persp', 'summ'].forEach(k => {
     const w = document.getElementById(k + 'Wave');
     if (w) w.classList.remove('playing');
-    const s = document.getElementById(k + 'Status');
     const b = document.getElementById(k + 'PlayBtn');
-    if (b && b.dataset.url) {
-      if (s) s.textContent = 'Ready — press play';
-      if (b) b.textContent = '▶';
-    }
+    if (b && !b.disabled) b.textContent = '▶';
   });
 }
 
 function playAudio(key) {
   const btn = document.getElementById(key + 'PlayBtn');
-  const url = btn.dataset.url;
-  if (!url) return;
-  const player = document.getElementById('audioPlayer');
-  const wave = document.getElementById(key + 'Wave');
   const status = document.getElementById(key + 'Status');
+  const wave = document.getElementById(key + 'Wave');
 
+  // If needs key (no OpenAI key set yet), show modal first then regenerate
+  if (btn.dataset.needsKey === 'true') {
+    showApiModal(async () => {
+      // After key saved, regenerate
+      await generateTTS(key, btn.dataset.text, btn.dataset.voice);
+      if (audioCache[key]) playAudio(key);
+    });
+    return;
+  }
+
+  const url = audioCache[key];
+  if (!url) {
+    status.textContent = '⚠️ No audio yet — press Next Sentence first';
+    return;
+  }
+
+  const player = document.getElementById('audioPlayer');
   stopCurrentAudio();
 
-  // Convert Google Drive share link to direct link if needed
-  const directUrl = convertDriveUrl(url);
-  player.src = directUrl;
+  player.src = url;
   player.play().then(() => {
     wave.classList.add('playing');
     btn.textContent = '⏸';
@@ -801,43 +869,29 @@ function playAudio(key) {
       btn.textContent = '▶';
       status.textContent = 'Done — now repeat!';
     };
-  }).catch(() => {
-    status.textContent = '⚠️ Audio error — check Google Drive URL';
+  }).catch(e => {
+    status.textContent = '⚠️ Playback error: ' + e.message;
   });
 }
 
 function replayAudio(key) {
-  const btn = document.getElementById(key + 'PlayBtn');
-  if (btn && btn.dataset.url) playAudio(key);
-}
-
-function convertDriveUrl(url) {
-  // Convert Google Drive share URL to direct download stream
-  // https://drive.google.com/file/d/FILE_ID/view → https://drive.google.com/uc?export=open&id=FILE_ID
-  const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-  if (match) return 'https://drive.google.com/uc?export=open&id=' + match[1];
-  return url;
+  playAudio(key);
 }
 
 // ── AI FEEDBACK ──
 async function getFeedback(key) {
   const fbId = key + 'FB';
   const respId = key + 'Resp';
-
   const response = document.getElementById(respId).value.trim();
   if (!response) { alert('Please write your response first.'); return; }
 
-  const ANTHROPIC_API_KEY = getApiKey();
-  if (!ANTHROPIC_API_KEY) {
-    showApiModal();
-    return;
-  }
+  const anthropicKey = getApiKey();
+  if (!anthropicKey) { showApiModal(); return; }
 
   let original = '';
   if (key === 'echo') original = document.getElementById('echoText').textContent;
   else if (key === 'persp') original = document.getElementById('perspText').textContent;
   else original = document.getElementById('summText').textContent;
-
   if (original.includes('Press "Next')) { alert('Please load content first.'); return; }
 
   showFeedback(fbId, 'loading', 'Sam &amp; Leo are reviewing your response…');
@@ -851,7 +905,6 @@ Give friendly feedback in exactly 3 short bullet points:
 • Any differences from the original sentence
 • One specific tip to improve their echo accuracy
 Keep the total under 80 words. Use warm, supportive language.`,
-
     persp: `You are a warm English grammar coach for "English Down Under", an Australian learning channel.
 The learner heard this first-person statement: "${original}"
 They rewrote it in third person as: "${response}"
@@ -860,7 +913,6 @@ Give feedback in exactly 3 bullet points:
 • Are the verb forms correct (e.g. am→is, have→has)?
 • One specific grammar tip
 Keep it under 90 words. Be encouraging and specific.`,
-
     summ: `You are a supportive English fluency coach for "English Down Under", an Australian learning channel.
 The learner listened to this passage: "${original}"
 They wrote this summary: "${response}"
@@ -876,7 +928,7 @@ Keep it under 100 words. Be warm, specific, and actionable.`
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
+        'x-api-key': anthropicKey,
         'anthropic-version': '2023-06-01',
         'anthropic-dangerous-direct-browser-access': 'true'
       },
@@ -905,26 +957,44 @@ function hideFeedback(id) {
 }
 
 // ── API KEY MODAL ──
-function showApiModal() {
+let _modalCallback = null;
+
+function showApiModal(callback) {
+  _modalCallback = callback || null;
   const modal = document.getElementById('apiModal');
   modal.style.display = 'flex';
   document.getElementById('apiKeyInput').focus();
 }
+
 function saveApiKey() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key || key.length < 10) {
-    alert('Please paste your full API key.');
+  const anthroKey = document.getElementById('apiKeyInput').value.trim();
+  const openaiKey = document.getElementById('openaiKeyInput').value.trim();
+
+  if (!anthroKey && !openaiKey) {
+    alert('Please paste at least one API key.');
     return;
   }
-  sessionStorage.setItem('anthro_key', key);
+  if (anthroKey && anthroKey.length > 10) sessionStorage.setItem('anthro_key', anthroKey);
+  if (openaiKey && openaiKey.length > 10) sessionStorage.setItem('openai_key', openaiKey);
+
   document.getElementById('apiModal').style.display = 'none';
-  alert('API key saved! Now click AI Feedback again.');
+
+  if (_modalCallback) {
+    _modalCallback();
+    _modalCallback = null;
+  }
 }
+
 function skipApiKey() {
   document.getElementById('apiModal').style.display = 'none';
+  _modalCallback = null;
 }
+
 function getApiKey() {
   return sessionStorage.getItem('anthro_key') || '';
+}
+function getOpenAIKey() {
+  return sessionStorage.getItem('openai_key') || '';
 }
 
 // ── RESTART ──
@@ -935,6 +1005,7 @@ function restartLesson() {
   document.getElementById('timerLabel').textContent = '20:00';
   document.getElementById('timerCircle').style.strokeDashoffset = '0';
   idx = { echo: -1, persp: -1, summ: -1 };
+  audioCache = { echo: null, persp: null, summ: null };
   stopCurrentAudio();
   goPhase(0);
 }
