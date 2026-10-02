@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Australian English Guides — Real-Life Situations | English Down Under</title>
+<meta name="description" content="Guides to speaking Australian English in real situations: cafés, job interviews, renting, small talk, phone calls, rhythm and vowel sounds.">
+<link rel="canonical" href="https://englishdownunder.au/guides/">
+<meta property="og:title" content="Australian English Guides">
+<meta property="og:url" content="https://englishdownunder.au/guides/">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head><body>
+<header class="nav"><div class="wrap">
+<a class="brand" href="/">English <span>Down Under</span></a>
+<nav><a href="/lab/">Imitation Lab</a><a href="/phrases/">Phrases</a><a class="on" href="/guides/">Guides</a><a href="/tools/">Tools</a><a href="/episodes/">Episodes</a><a href="https://fairdinkumslang.au">Slang</a></nav>
+</div></header>
+<div class="band"><div class="wrap">
+<div class="crumbs" style="padding:0 0 10px;color:#B7CEDD"><a href="/">Home</a> › Guides</div>
+<h1>English for real life in Australia</h1>
+<p>What to say, how to say it, and what locals actually do. Every phrase has audio.</p>
+</div></div>
+<main class="wrap wide" style="max-width:1100px">
+<div class="filters" id="filters"><button class="on" data-c="all">All</button><button data-c="Daily life">Daily life</button><button data-c="Work">Work</button><button data-c="Social">Social</button><button data-c="Pronunciation">Pronunciation</button></div>
+<div class="grid g3" id="cards" style="margin-top:16px"><a class="card" href="/guides/cafe/" data-c="Daily life"><div class="ico">☕</div><h3>Ordering at a Café</h3><p>Flat white, long black, takeaway or sit-in — what to say and how to understand the questions.</p><p style="margin-top:12px"><span class="pill">Daily life</span><span class="pill">Beginner</span></p></a><a class="card" href="/guides/job-interview/" data-c="Work"><div class="ico">💼</div><h3>Job Interview English</h3><p>Answers, polite phrasing and the small talk before you sit down.</p><p style="margin-top:12px"><span class="pill">Work</span><span class="pill">Intermediate</span></p></a><a class="card" href="/guides/renting/" data-c="Daily life"><div class="ico">🏠</div><h3>Renting a Flat</h3><p>Inspections, agents, bond and lease language made simple.</p><p style="margin-top:12px"><span class="pill">Daily life</span><span class="pill">Intermediate</span></p></a><a class="card" href="/guides/small-talk/" data-c="Social"><div class="ico">💬</div><h3>Small Talk &amp; Banter</h3><p>Weather, weekend plans and friendly teasing without confusion.</p><p style="margin-top:12px"><span class="pill">Social</span><span class="pill">Beginner</span></p></a><a class="card" href="/guides/phone-calls/" data-c="Work"><div class="ico">📞</div><h3>Phone Calls</h3><p>How to start, ask for help and repeat things politely on the phone.</p><p style="margin-top:12px"><span class="pill">Work</span><span class="pill">Intermediate</span></p></a><a class="card" href="/guides/rhythm/" data-c="Pronunciation"><div class="ico">🎵</div><h3>Rhythm &amp; Linking</h3><p>Why &quot;g&#x27;day&quot; and &quot;how ya going&quot; sound the way they do.</p><p style="margin-top:12px"><span class="pill">Pronunciation</span><span class="pill">Intermediate</span></p></a><a class="card" href="/guides/vowels/" data-c="Pronunciation"><div class="ico">👄</div><h3>Aussie Vowel Sounds</h3><p>The sounds that make an accent sound Australian, one by one.</p><p style="margin-top:12px"><span class="pill">Pronunciation</span><span class="pill">Advanced</span></p></a></div>
+<div class="sister">
+<div><strong>🦘 Looking for slang?</strong><br><span style="color:var(--muted)">Fair Dinkum has 600+ Aussie slang words with origin stories.</span></div>
+<a class="btn" href="https://fairdinkumslang.au">Visit Fair Dinkum →</a></div>
+</main>
+<footer><div class="wrap">
+<div>© English Down Under · Made with love in Australia</div>
+<div style="display:flex;gap:18px;flex-wrap:wrap"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="https://fairdinkumslang.au">Fair Dinkum</a></div>
+</div></footer>
+<script>
+document.getElementById('filters').addEventListener('click',function(ev){
+  var b=ev.target.closest('button');if(!b)return;
+  document.querySelectorAll('#filters button').forEach(function(x){x.classList.toggle('on',x===b)});
+  var c=b.getAttribute('data-c');
+  document.querySelectorAll('#cards .card').forEach(function(a){a.style.display=(c==='all'||a.getAttribute('data-c')===c)?'':'none'});
+});
+</script>
+</body></html>

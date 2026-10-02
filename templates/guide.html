@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}} — Australian English Guide | English Down Under</title>
+<meta name="description" content="{{summary}}">
+<link rel="canonical" href="https://englishdownunder.au/guides/{{slug}}/">
+<meta property="og:title" content="{{title}} — Australian English Guide">
+<meta property="og:description" content="{{summary}}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://englishdownunder.au/guides/{{slug}}/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{{jsonld}}</script>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">English <span>Down Under</span></a>
+    <nav><a href="/lab/">Imitation Lab</a><a href="/phrases/">Phrases</a><a class="on" href="/guides/">Guides</a><a href="/tools/">Tools</a><a href="/episodes/">Episodes</a><a href="https://fairdinkumslang.au">Slang</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumbs"><a href="/">Home</a> › <a href="/guides/">Guides</a> › {{title}}</div>
+  <span class="pill">{{category}}</span><span class="pill">{{level}}</span>
+  <h1>{{icon}} {{title}}</h1>
+  <p class="lead">{{intro}}</p>
+  <nav class="toc" aria-label="In this guide">{{toc_html}}</nav>
+
+  {{sections_html}}
+
+  <h2>Phrases from this guide</h2>
+  <div class="related">{{phrases_html}}</div>
+
+  <h2>Practise it</h2>
+  <div class="card">
+    <p style="margin-top:0;color:var(--ink)">Reading is not enough. Say these phrases out loud: listen, repeat, and keep the rhythm.</p>
+    <a class="btn gold" href="/lab/">Start the 20-minute lesson →</a>
+  </div>
+
+  <h2>Keep going</h2>
+  <div class="related">{{related_html}}</div>
+
+  <div class="sister">
+    <div><strong>🦘 Want the slang meanings?</strong><br><span style="color:var(--muted)">Look up Aussie slang and origin stories on Fair Dinkum.</span></div>
+    <a class="btn" href="https://fairdinkumslang.au">Visit Fair Dinkum →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© English Down Under · Made with love in Australia</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="https://fairdinkumslang.au">Fair Dinkum</a></div>
+  </div>
+</footer>
+
+<script>
+// Hear any phrase in the browser's Australian voice (swap for recordings later)
+document.addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-say]');
+  if(!b||!('speechSynthesis' in window))return;
+  var u=new SpeechSynthesisUtterance(b.getAttribute('data-say'));
+  u.lang='en-AU';u.rate=.9;
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "ep01-everyday-aussie-life",
+    "number": 1,
+    "season": 1,
+    "title": "Everyday Aussie Life",
+    "theme": "Everyday conversations & coffee",
+    "summary": "Practise natural everyday English with Sam and Leo: short sentences to echo, thoughts to shift into he/she/they, and ideas to summarise in your own words.",
+    "youtube_id": "",
+    "minutes": 20,
+    "key_phrases": [],
+    "echo": [
+      {"text": "She's already left for the station.", "audio": "/audio/ep01/ep01_echo_01.mp3"},
+      {"text": "The weather here changes every single hour.", "audio": "/audio/ep01/ep01_echo_02.mp3"},
+      {"text": "Could you pass me the salt, please?", "audio": "/audio/ep01/ep01_echo_03.mp3"},
+      {"text": "I haven't seen anything like this before.", "audio": "/audio/ep01/ep01_echo_04.mp3"},
+      {"text": "He decided to take the longer route home.", "audio": "/audio/ep01/ep01_echo_05.mp3"},
+      {"text": "They've been waiting for over an hour.", "audio": "/audio/ep01/ep01_echo_06.mp3"}
+    ],
+    "perspective": [
+      {"text": "I love traveling because it opens my mind. Last year, I went to Japan and it changed my life.", "audio": "/audio/ep01/ep01_persp_01.mp3"},
+      {"text": "I am exhausted. I stayed up too late finishing my project.", "audio": "/audio/ep01/ep01_persp_02.mp3"},
+      {"text": "I exercise every morning before breakfast. It gives me energy for the whole day.", "audio": "/audio/ep01/ep01_persp_03.mp3"},
+      {"text": "I moved to a new city last month. I am still trying to find my way around.", "audio": "/audio/ep01/ep01_persp_04.mp3"}
+    ],
+    "summary_passages": [
+      {"text": "Learning a new language takes a lot of patience. You will make mistakes every single day. But every mistake is actually a lesson. Over time, those small lessons add up to real fluency.", "audio": "/audio/ep01/ep01_summ_01.mp3"},
+      {"text": "Exercise is not just about looking good. It improves your mood, your sleep, and your memory. Even a 20-minute walk can reduce stress significantly. The key is to make it a daily habit.", "audio": "/audio/ep01/ep01_summ_02.mp3"},
+      {"text": "Sleep is one of the most important things for your brain. When you sleep, your brain processes everything you learned that day. Without enough sleep, it is hard to concentrate or remember new things.", "audio": "/audio/ep01/ep01_summ_03.mp3"}
+    ]
+  }
+]

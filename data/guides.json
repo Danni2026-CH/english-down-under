@@ -1,0 +1,283 @@
+[
+  {
+    "slug": "cafe",
+    "title": "Ordering at a Café",
+    "icon": "☕",
+    "category": "Daily life",
+    "level": "Beginner",
+    "summary": "Flat white, long black, takeaway or sit-in — what to say and how to understand the questions.",
+    "intro": "Australian café culture is a big deal, and ordering is quick and friendly. Short, polite orders are normal. You usually order and pay at the counter, then wait for your name or number.",
+    "sections": [
+      {
+        "heading": "Placing your order",
+        "items": [
+          {"say": "Can I get a flat white, please?", "note": "A polite, very common way to order. \"Can I get…\" is more natural here than \"I want…\"."},
+          {"say": "Flat white, please.", "note": "Short and perfectly normal. Add \"please\" and a smile.", "phrase": "flat-white-please"},
+          {"say": "Can I have a large cappuccino to go?", "note": "\"To go\" is understood, but many Australians say \"takeaway\"."},
+          {"say": "Could I get that with oat milk?", "note": "Most cafés offer soy, oat and almond milk, sometimes for a small extra charge."}
+        ],
+        "tip": "Coffee names differ between countries. A flat white is espresso with steamed milk and a thin layer of foam. A long black is espresso poured over hot water. A short black is a single espresso."
+      },
+      {
+        "heading": "Questions the staff might ask",
+        "items": [
+          {"say": "Takeaway or sit in?", "note": "Do you want your drink to go, or will you stay at the café?"},
+          {"say": "Name for the order?", "note": "They write your name on the cup so they can call it out."},
+          {"say": "Anything else for you?", "note": "Reply \"That's all, thanks\" or add a food item."},
+          {"say": "Would you like that hot or iced?", "note": "Common in summer."}
+        ]
+      },
+      {
+        "heading": "Paying and finishing",
+        "items": [
+          {"say": "Can I pay by card?", "note": "Cards and phone payments are accepted almost everywhere."},
+          {"say": "Could I get the bill, please?", "note": "If you are seated, you can ask for \"the bill\". Many cafés expect you to pay at the counter."},
+          {"say": "Thanks, cheers!", "note": "\"Cheers\" is a casual way to say thanks.", "phrase": "no-worries"}
+        ],
+        "tip": "Tipping is not expected in Australia. Some people round up or leave a little extra for great service, but it is optional."
+      }
+    ],
+    "key_phrases": ["flat-white-please", "no-worries", "how-ya-going"],
+    "related": ["small-talk", "rhythm"]
+  },
+  {
+    "slug": "job-interview",
+    "title": "Job Interview English",
+    "icon": "💼",
+    "category": "Work",
+    "level": "Intermediate",
+    "summary": "Answers, polite phrasing and the small talk before you sit down.",
+    "intro": "Australian interviews are professional but usually relaxed and friendly. Interviewers often like a modest, honest style: describe your achievements clearly and with facts, without exaggerating.",
+    "sections": [
+      {
+        "heading": "Before the interview starts",
+        "items": [
+          {"say": "Thanks for having me.", "note": "A polite, natural thing to say when you sit down."},
+          {"say": "Yes, I found you easily, thanks.", "note": "A reply to \"Did you find us okay?\""},
+          {"say": "A glass of water would be great, thanks.", "note": "If they offer a drink, a short polite answer is fine."},
+          {"say": "How ya going?", "note": "A friendly greeting you may hear from staff. A simple reply is \"Good, thanks. You?\"", "phrase": "how-ya-going"}
+        ]
+      },
+      {
+        "heading": "Answering common questions",
+        "items": [
+          {"say": "I'm a marketing coordinator with four years of experience in…", "note": "A clear way to answer \"Tell me about yourself\"."},
+          {"say": "One of my strengths is…", "note": "Follow it with a short real example."},
+          {"say": "I'd say I sometimes tend to…, so I've started…", "note": "For weaknesses, show what you are doing to improve."},
+          {"say": "In my last role, I helped the team to…", "note": "Using \"helped the team\" sounds modest and collaborative, which many Australian workplaces like."}
+        ],
+        "tip": "In Australia, people who boast can come across badly. This is sometimes called \"tall poppy syndrome\". Share results confidently, but stay factual and credit your team."
+      },
+      {
+        "heading": "Asking questions and finishing",
+        "items": [
+          {"say": "What does a typical day look like in this role?", "note": "A good question that shows real interest."},
+          {"say": "What are the next steps in the process?", "note": "A polite way to ask when you will hear back."},
+          {"say": "Thanks for your time. I really enjoyed meeting you.", "note": "A warm, professional ending."},
+          {"say": "I can provide referees if you need them.", "note": "In Australia, \"referees\" is the usual word for the people who can recommend you. They are also called \"references\"."}
+        ]
+      }
+    ],
+    "key_phrases": ["how-ya-going", "no-worries", "reckon"],
+    "related": ["phone-calls", "small-talk"]
+  },
+  {
+    "slug": "renting",
+    "title": "Renting a Flat",
+    "icon": "🏠",
+    "category": "Daily life",
+    "level": "Intermediate",
+    "summary": "Inspections, agents, bond and lease language made simple.",
+    "intro": "Renting in Australia has its own vocabulary. Rent is usually quoted per week, you view properties at an \"inspection\", and you apply through a real estate agent or property manager.",
+    "sections": [
+      {
+        "heading": "Finding and viewing a place",
+        "items": [
+          {"say": "Can I book an inspection?", "note": "An inspection is a viewing of a rental property.", "phrase": "can-i-book-an-inspection"},
+          {"say": "Is the property still available?", "note": "Good to ask before you travel to the inspection."},
+          {"say": "Is it furnished or unfurnished?", "note": "Most rentals are unfurnished."},
+          {"say": "Are pets allowed?", "note": "You can also say \"Is it pet friendly?\""}
+        ]
+      },
+      {
+        "heading": "Questions about money and the lease",
+        "items": [
+          {"say": "How much is the rent per week?", "note": "Rent is commonly advertised weekly, even if you pay fortnightly or monthly."},
+          {"say": "How much is the bond?", "note": "The bond is a security deposit held until you move out. Rules differ between states."},
+          {"say": "How long is the lease?", "note": "A lease is the rental agreement. Common lengths are six or twelve months."},
+          {"say": "Are any bills included?", "note": "Ask whether water, electricity or internet are included in the rent."}
+        ],
+        "tip": "Rules for bonds, notice periods and inspections are different in each state or territory. Check your state's official tenancy website before you sign."
+      },
+      {
+        "heading": "Applying",
+        "items": [
+          {"say": "Can I apply for this property?", "note": "Most agents use an online application form."},
+          {"say": "I can provide referees and proof of income.", "note": "Agents often ask for ID, proof of income and referees."},
+          {"say": "When would the property be available from?", "note": "Asks for the move-in date."},
+          {"say": "Could I get a copy of the condition report?", "note": "The condition report records the state of the property when you move in. Check it carefully."}
+        ]
+      }
+    ],
+    "key_phrases": ["can-i-book-an-inspection", "no-worries"],
+    "related": ["phone-calls", "small-talk"]
+  },
+  {
+    "slug": "small-talk",
+    "title": "Small Talk & Banter",
+    "icon": "💬",
+    "category": "Social",
+    "level": "Beginner",
+    "summary": "Weather, weekend plans and friendly teasing without confusion.",
+    "intro": "Small talk is how Australians are friendly with people they have just met: at work, in queues and at the shops. Questions are light, and answers are usually short and relaxed.",
+    "sections": [
+      {
+        "heading": "Starting a chat",
+        "items": [
+          {"say": "How ya going?", "note": "A greeting that does not need a long answer. Try \"Good, thanks. You?\"", "phrase": "how-ya-going"},
+          {"say": "Got any plans for the weekend?", "note": "A very common question on Thursday or Friday."},
+          {"say": "How's your week been?", "note": "A friendly question at work."},
+          {"say": "Bit warm today, isn't it?", "note": "The weather is a safe and popular topic."}
+        ]
+      },
+      {
+        "heading": "Replies that sound natural",
+        "items": [
+          {"say": "Not too bad.", "note": "A relaxed way to say you are fine."},
+          {"say": "No worries.", "note": "Replies to thanks or apologies.", "phrase": "no-worries"},
+          {"say": "I reckon it'll be a good one.", "note": "\"Reckon\" means \"think\".", "phrase": "reckon"},
+          {"say": "Yeah, nah.", "note": "Often means \"no\", while \"nah, yeah\" often means \"yes\". The tone and context help you tell them apart."}
+        ],
+        "tip": "Friendly teasing is common between friends and colleagues. If someone gives you a hard time in a light, smiling way, they are usually showing they like you. You can tease back gently."
+      },
+      {
+        "heading": "Keeping it going",
+        "items": [
+          {"say": "Good on ya!", "note": "Praise, like \"Well done!\"."},
+          {"say": "She'll be right.", "note": "A relaxed way to say \"It will be okay\"."},
+          {"say": "Anyway, I'd better get going.", "note": "A polite way to end a conversation."},
+          {"say": "Catch you later!", "note": "A casual goodbye."}
+        ]
+      }
+    ],
+    "key_phrases": ["how-ya-going", "no-worries", "reckon", "gday"],
+    "related": ["rhythm", "cafe"]
+  },
+  {
+    "slug": "phone-calls",
+    "title": "Phone Calls",
+    "icon": "📞",
+    "category": "Work",
+    "level": "Intermediate",
+    "summary": "How to start, ask for help and repeat things politely on the phone.",
+    "intro": "Phone calls are harder than face-to-face talking because you cannot see the other person. Short polite phrases and asking people to repeat things are completely normal.",
+    "sections": [
+      {
+        "heading": "Starting the call",
+        "items": [
+          {"say": "Hi, it's Sam speaking.", "note": "A natural way to say who you are."},
+          {"say": "Could I speak to Jordan, please?", "note": "Polite and clear."},
+          {"say": "I'm calling about the rental listing.", "note": "Say the reason early."},
+          {"say": "Is now a good time?", "note": "Useful when you call someone directly."}
+        ],
+        "tip": "Australians say \"mobile\" or \"mobile phone\" for what some countries call a \"cell phone\". You may also hear \"I'll give you a ring\" or \"a call\"."
+      },
+      {
+        "heading": "When you don't understand",
+        "items": [
+          {"say": "Sorry, could you say that again, please?", "note": "A polite way to ask for repetition."},
+          {"say": "Could you speak a little slower, please?", "note": "Completely normal to ask."},
+          {"say": "Could you spell that for me?", "note": "Great for names and email addresses."},
+          {"say": "Let me just check I've got that right.", "note": "Repeat the details back to confirm."}
+        ]
+      },
+      {
+        "heading": "Ending the call",
+        "items": [
+          {"say": "Could I leave a message?", "note": "If the person is not available."},
+          {"say": "Could you ask them to call me back?", "note": "Then give your name and number slowly."},
+          {"say": "Thanks for your help. Have a good day!", "note": "A friendly ending."},
+          {"say": "No worries, thanks. Bye!", "note": "A natural, casual finish.", "phrase": "no-worries"}
+        ]
+      }
+    ],
+    "key_phrases": ["no-worries", "can-i-book-an-inspection"],
+    "related": ["job-interview", "renting"]
+  },
+  {
+    "slug": "rhythm",
+    "title": "Rhythm & Linking",
+    "icon": "🎵",
+    "category": "Pronunciation",
+    "level": "Intermediate",
+    "summary": "Why \"g'day\" and \"how ya going\" sound the way they do.",
+    "intro": "A lot of an accent is rhythm, not just individual sounds. In relaxed Australian speech, important words are stressed, small words become weak, and words link together into chunks.",
+    "sections": [
+      {
+        "heading": "Linking words into chunks",
+        "items": [
+          {"say": "How ya going?", "note": "Say \"how-yuh-GOH-in\" as one smooth chunk, not four separate words.", "phrase": "how-ya-going"},
+          {"say": "What are you doing?", "note": "In relaxed speech this can sound like \"Whatcha doing?\"."},
+          {"say": "Do you want to come?", "note": "Often becomes \"D'ya wanna come?\" in casual speech."},
+          {"say": "I don't know.", "note": "Often shortened to \"I dunno\"."}
+        ],
+        "tip": "Practise in chunks. Listen to a whole short sentence, then say it back without pausing between the words."
+      },
+      {
+        "heading": "Stress the important words",
+        "items": [
+          {"say": "No WORries.", "note": "The stress falls on the first syllable of \"worries\".", "phrase": "no-worries"},
+          {"say": "I REckon it'll rain.", "note": "Stress the idea words and let the small words fall away.", "phrase": "reckon"},
+          {"say": "Flat WHITE, please.", "note": "The key word gets the strongest stress.", "phrase": "flat-white-please"}
+        ]
+      },
+      {
+        "heading": "Weak and shortened syllables",
+        "items": [
+          {"say": "g'day", "note": "The first syllable is very short and light.", "phrase": "gday"},
+          {"say": "afternoon → arvo", "note": "Australians love shortening words and adding a final -o or -ie sound."},
+          {"say": "breakfast → brekkie", "note": "Another popular shortening."}
+        ]
+      }
+    ],
+    "key_phrases": ["how-ya-going", "gday", "no-worries"],
+    "related": ["vowels", "small-talk"]
+  },
+  {
+    "slug": "vowels",
+    "title": "Aussie Vowel Sounds",
+    "icon": "👄",
+    "category": "Pronunciation",
+    "level": "Advanced",
+    "summary": "The sounds that make an accent sound Australian, one by one.",
+    "intro": "Vowels are the biggest difference between accents. Here are some of the features people most often notice in Australian English. Listen to real speakers too, because accents vary by region and by person.",
+    "sections": [
+      {
+        "heading": "Sounds that stand out",
+        "items": [
+          {"say": "day, mate, g'day", "note": "The vowel starts lower and more open than in many other accents. That is why \"g'day\" can sound a bit like \"g'dye\" to some listeners.", "phrase": "gday"},
+          {"say": "no, go, going", "note": "The vowel glides and often starts from a more central sound, closer to \"uh\" than a rounded \"o\"."},
+          {"say": "too, new, blue", "note": "Many Australians say these vowels further forward in the mouth, so they sound less rounded."}
+        ]
+      },
+      {
+        "heading": "The R sound",
+        "items": [
+          {"say": "car, water, teacher", "note": "Australian English is non-rhotic. The R is not pronounced at the end of a word or before a consonant."},
+          {"say": "water, better", "note": "A T between vowels is often pronounced quickly, so \"water\" can sound a bit like \"WAW-duh\"."},
+          {"say": "far away", "note": "Before a vowel, the R can appear to link the words together."}
+        ],
+        "tip": "Don't copy sounds from a spelling. Listen first, repeat the sound slowly, then put it into a full sentence."
+      },
+      {
+        "heading": "Regional differences",
+        "items": [
+          {"say": "dance, chance, graph", "note": "Some Australians, especially in South Australia, use a longer \"ah\" sound. Others, such as many in Sydney, use a shorter \"a\" sound."},
+          {"say": "Both are Australian", "note": "Neither is wrong. Choose one model and stay consistent while you practise."}
+        ]
+      }
+    ],
+    "key_phrases": ["gday", "how-ya-going"],
+    "related": ["rhythm", "small-talk"]
+  }
+]

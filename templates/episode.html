@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Episode {{number}}: {{title}} | English Down Under</title>
+<meta name="description" content="{{summary}}">
+<link rel="canonical" href="https://englishdownunder.au/episodes/{{slug}}/">
+<meta property="og:title" content="Episode {{number}}: {{title}}">
+<meta property="og:description" content="{{summary}}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://englishdownunder.au/episodes/{{slug}}/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{{jsonld}}</script>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">English <span>Down Under</span></a>
+    <nav><a href="/lab/">Imitation Lab</a><a href="/phrases/">Phrases</a><a href="/guides/">Guides</a><a href="/tools/">Tools</a><a class="on" href="/episodes/">Episodes</a><a href="https://fairdinkumslang.au">Slang</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumbs"><a href="/">Home</a> › <a href="/episodes/">Episodes</a> › Episode {{number}}</div>
+  <span class="pill gold">Season {{season}} · Episode {{number}}</span><span class="pill">{{minutes}} min practice</span>
+  <h1>{{title}}</h1>
+  <p class="lead">{{summary}}</p>
+
+  {{video_html}}
+
+  <h2>How this episode works</h2>
+  <div class="steps">
+    <div class="card"><b>1. Echo</b><small>Listen to Sam, then say the sentence back at the same speed and rhythm.</small></div>
+    <div class="card"><b>2. Perspective shift</b><small>Leo speaks in the first person. Say it again with he, she or they.</small></div>
+    <div class="card"><b>3. Summary</b><small>Listen once, then explain the idea in your own words with linking words.</small></div>
+  </div>
+
+  {{phrases_section}}
+
+  <h2>Level 1 — Echo</h2>
+  <div class="card">{{echo_html}}</div>
+
+  <h2>Level 2 — Perspective shift</h2>
+  <p style="color:var(--muted);margin:0 0 10px">Change “I” to “he”, “she” or “they”, and watch the verbs: “I am” becomes “he is”, “I have” becomes “she has”.</p>
+  <div class="card">{{persp_html}}</div>
+
+  <h2>Level 3 — Summary challenge</h2>
+  <p style="color:var(--muted);margin:0 0 10px">Listen once without stopping. Then say or write a summary using at least three connected sentences, with words like <em>because</em>, <em>however</em> and <em>therefore</em>.</p>
+  <div class="card">{{summ_html}}</div>
+
+  {{transcript_section}}
+
+  <h2>Do the full lesson</h2>
+  <div class="card">
+    <p style="margin-top:0;color:var(--ink)">The Imitation Lab runs all three levels in a 20-minute session, with a timer and a practice streak.</p>
+    <a class="btn gold" href="/lab/">Open the Imitation Lab →</a>
+  </div>
+
+  <div class="row" style="justify-content:space-between;margin-top:30px">{{prevnext_html}}</div>
+
+  <div class="sister">
+    <div><strong>🦘 Want the slang meanings?</strong><br><span style="color:var(--muted)">Fair Dinkum has 600+ Aussie slang words with origin stories.</span></div>
+    <a class="btn" href="https://fairdinkumslang.au">Visit Fair Dinkum →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© English Down Under · Made with love in Australia</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="https://fairdinkumslang.au">Fair Dinkum</a></div>
+  </div>
+</footer>
+
+<script>
+function norm(s){return s.toLowerCase().replace(/[^a-z' ]/g,' ').replace(/\s+/g,' ').trim()}
+
+// Hear: use the recorded MP3 if it exists, otherwise the browser's Australian voice
+function tts(text,rate){
+  if(!('speechSynthesis' in window))return;
+  var u=new SpeechSynthesisUtterance(text);u.lang='en-AU';u.rate=rate||.9;
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+var current=null;
+document.addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-say]');if(!b)return;
+  var text=b.getAttribute('data-say'),src=b.getAttribute('data-audio');
+  if(current){current.pause();current=null}
+  if(!src){tts(text);return}
+  var a=new Audio(src);current=a;
+  a.onerror=function(){tts(text)};
+  a.play().catch(function(){tts(text)});
+});
+
+// Echo check: how many of the target words did we hear?
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+document.querySelectorAll('[data-mic]').forEach(function(btn){
+  var res=btn.parentElement.parentElement.querySelector('.res');
+  if(!SR){btn.disabled=true;res.textContent='Speech practice needs Chrome or Edge.';return}
+  btn.onclick=function(){
+    var want=norm(btn.getAttribute('data-mic')).split(' ');
+    var r=new SR();r.lang='en-AU';r.interimResults=false;r.maxAlternatives=1;
+    res.textContent='Listening…';
+    r.onresult=function(e){
+      var said=norm(e.results[0][0].transcript),got=said.split(' ');
+      var hit=want.filter(function(w){return got.indexOf(w)>-1}).length;
+      var pct=Math.round(hit/want.length*100);
+      res.innerHTML='We heard: “'+said.replace(/</g,'&lt;')+'” — <b>'+pct+'% match</b>'+(pct>=80?' 🎉':pct>=50?' — nearly there!':' — try again a little slower');
+    };
+    r.onerror=function(){res.textContent="Couldn't hear that. Check your mic permission and try again."};
+    r.start();
+  };
+});
+</script>
+</body>
+</html>

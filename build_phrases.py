@@ -3,12 +3,12 @@
 
 Usage:  python3 build_phrases.py
 Reads   data/phrases.json  +  templates/phrase.html
-Writes  phrases/<slug>/index.html, phrases/index.html (A-Z hub), sitemap.xml
+Writes  phrases/<slug>/index.html, phrases/index.html (A-Z hub), data/phrase-index.json
 
 Optional per-phrase field "audio": "/audio/phrases/<slug>.mp3" adds a recorded
 player above the browser voice. Add a phrase = add one object to the JSON, rerun.
 """
-import html, json, pathlib, datetime
+import html, json, pathlib
 
 ROOT = pathlib.Path(__file__).parent
 SITE = "https://englishdownunder.au"
@@ -118,11 +118,4 @@ index = [{"t": p["phrase"], "d": f'{p["category"]} · {short(p["meaning"], 60)}'
           "u": f'/phrases/{p["slug"]}/'} for p in phrases]
 (ROOT / "data" / "phrase-index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1), encoding="utf-8")
 
-# ---- Sitemap ----
-today = datetime.date.today().isoformat()
-urls = [f"{SITE}/", f"{SITE}/lab/", f"{SITE}/phrases/"] + [f'{SITE}/phrases/{p["slug"]}/' for p in phrases]
-sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-           + "".join(f"  <url><loc>{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n")
-(ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
-
-print(f"Built {len(phrases)} phrase pages + hub + phrase-index.json + sitemap.xml")
+print(f"Built {len(phrases)} phrase pages + hub + phrase-index.json")
