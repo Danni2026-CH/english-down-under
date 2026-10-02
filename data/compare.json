@@ -1,67 +1,437 @@
 {
   "vocab": [
-    {"concept": "Cell phone", "au": "mobile", "us": "cell phone", "uk": "mobile", "note": "Australians say \"mobile\" or \"mobile phone\"."},
-    {"concept": "Flip-flops", "au": "thongs", "us": "flip-flops", "uk": "flip-flops", "note": "Careful: in the US, \"thong\" means a type of underwear."},
-    {"concept": "Trash can", "au": "rubbish bin", "us": "trash can", "uk": "bin"},
-    {"concept": "Sweater", "au": "jumper", "us": "sweater", "uk": "jumper"},
-    {"concept": "Pickup truck", "au": "ute", "us": "pickup truck", "uk": "pickup truck", "note": "\"Ute\" is short for \"utility vehicle\"."},
-    {"concept": "Soda", "au": "soft drink", "us": "soda", "uk": "fizzy drink"},
-    {"concept": "Cookie", "au": "biscuit", "us": "cookie", "uk": "biscuit", "note": "A US \"biscuit\" is a soft, savoury bread roll, which is a different thing."},
-    {"concept": "French fries", "au": "hot chips", "us": "fries", "uk": "chips", "note": "In Australia, \"chips\" can mean hot chips or packet chips. Context tells you which."},
-    {"concept": "Potato chips", "au": "chips", "us": "chips", "uk": "crisps"},
-    {"concept": "Vacation", "au": "holiday", "us": "vacation", "uk": "holiday", "note": "In the US, \"holiday\" often means a public holiday."},
-    {"concept": "Elevator", "au": "lift", "us": "elevator", "uk": "lift"},
-    {"concept": "Apartment", "au": "flat or unit", "us": "apartment", "uk": "flat"},
-    {"concept": "Gasoline", "au": "petrol", "us": "gas", "uk": "petrol"},
-    {"concept": "Gas station", "au": "servo", "us": "gas station", "uk": "petrol station", "note": "\"Servo\" is short for \"service station\"."},
-    {"concept": "Sneakers", "au": "runners", "us": "sneakers", "uk": "trainers", "note": "\"Sneakers\" is also understood in Australia."},
-    {"concept": "Takeout", "au": "takeaway", "us": "takeout", "uk": "takeaway"},
-    {"concept": "Diaper", "au": "nappy", "us": "diaper", "uk": "nappy"},
-    {"concept": "Sidewalk", "au": "footpath", "us": "sidewalk", "uk": "pavement"},
-    {"concept": "Mailbox", "au": "letterbox", "us": "mailbox", "uk": "letterbox"},
-    {"concept": "Flashlight", "au": "torch", "us": "flashlight", "uk": "torch"},
-    {"concept": "Shopping cart", "au": "trolley", "us": "cart", "uk": "trolley"},
-    {"concept": "Car trunk", "au": "boot", "us": "trunk", "uk": "boot"},
-    {"concept": "Car hood", "au": "bonnet", "us": "hood", "uk": "bonnet"},
-    {"concept": "Tank top", "au": "singlet", "us": "tank top", "uk": "vest"},
-    {"concept": "Comforter", "au": "doona", "us": "comforter", "uk": "duvet"},
-    {"concept": "Cooler", "au": "esky", "us": "cooler", "uk": "cool box", "note": "\"Esky\" is originally a brand name that became the everyday word."},
-    {"concept": "Liquor store", "au": "bottle shop", "us": "liquor store", "uk": "off-licence"},
-    {"concept": "Bell pepper", "au": "capsicum", "us": "bell pepper", "uk": "pepper"},
-    {"concept": "Cilantro", "au": "coriander", "us": "cilantro", "uk": "coriander"},
-    {"concept": "Arugula", "au": "rocket", "us": "arugula", "uk": "rocket"},
-    {"concept": "Eggplant", "au": "eggplant", "us": "eggplant", "uk": "aubergine"},
-    {"concept": "Zucchini", "au": "zucchini", "us": "zucchini", "uk": "courgette"}
+    {
+      "concept": "Cell phone",
+      "au": "mobile",
+      "us": "cell phone",
+      "uk": "mobile",
+      "note": "Australians say \"mobile\" or \"mobile phone\"."
+    },
+    {
+      "concept": "Flip-flops",
+      "au": "thongs",
+      "us": "flip-flops",
+      "uk": "flip-flops",
+      "note": "Careful: in the US, \"thong\" means a type of underwear."
+    },
+    {
+      "concept": "Trash can",
+      "au": "rubbish bin",
+      "us": "trash can",
+      "uk": "bin"
+    },
+    {
+      "concept": "Sweater",
+      "au": "jumper",
+      "us": "sweater",
+      "uk": "jumper"
+    },
+    {
+      "concept": "Pickup truck",
+      "au": "ute",
+      "us": "pickup truck",
+      "uk": "pickup truck",
+      "note": "\"Ute\" is short for \"utility vehicle\"."
+    },
+    {
+      "concept": "Soda",
+      "au": "soft drink",
+      "us": "soda",
+      "uk": "fizzy drink"
+    },
+    {
+      "concept": "Cookie",
+      "au": "biscuit",
+      "us": "cookie",
+      "uk": "biscuit",
+      "note": "A US \"biscuit\" is a soft, savoury bread roll, which is a different thing."
+    },
+    {
+      "concept": "French fries",
+      "au": "hot chips",
+      "us": "fries",
+      "uk": "chips",
+      "note": "In Australia, \"chips\" can mean hot chips or packet chips. Context tells you which."
+    },
+    {
+      "concept": "Potato chips",
+      "au": "chips",
+      "us": "chips",
+      "uk": "crisps"
+    },
+    {
+      "concept": "Vacation",
+      "au": "holiday",
+      "us": "vacation",
+      "uk": "holiday",
+      "note": "In the US, \"holiday\" often means a public holiday."
+    },
+    {
+      "concept": "Elevator",
+      "au": "lift",
+      "us": "elevator",
+      "uk": "lift"
+    },
+    {
+      "concept": "Apartment",
+      "au": "flat or unit",
+      "us": "apartment",
+      "uk": "flat"
+    },
+    {
+      "concept": "Gasoline",
+      "au": "petrol",
+      "us": "gas",
+      "uk": "petrol"
+    },
+    {
+      "concept": "Gas station",
+      "au": "servo",
+      "us": "gas station",
+      "uk": "petrol station",
+      "note": "\"Servo\" is short for \"service station\"."
+    },
+    {
+      "concept": "Sneakers",
+      "au": "runners",
+      "us": "sneakers",
+      "uk": "trainers",
+      "note": "\"Sneakers\" is also understood in Australia."
+    },
+    {
+      "concept": "Takeout",
+      "au": "takeaway",
+      "us": "takeout",
+      "uk": "takeaway"
+    },
+    {
+      "concept": "Diaper",
+      "au": "nappy",
+      "us": "diaper",
+      "uk": "nappy"
+    },
+    {
+      "concept": "Sidewalk",
+      "au": "footpath",
+      "us": "sidewalk",
+      "uk": "pavement"
+    },
+    {
+      "concept": "Mailbox",
+      "au": "letterbox",
+      "us": "mailbox",
+      "uk": "letterbox"
+    },
+    {
+      "concept": "Flashlight",
+      "au": "torch",
+      "us": "flashlight",
+      "uk": "torch"
+    },
+    {
+      "concept": "Shopping cart",
+      "au": "trolley",
+      "us": "cart",
+      "uk": "trolley"
+    },
+    {
+      "concept": "Car trunk",
+      "au": "boot",
+      "us": "trunk",
+      "uk": "boot"
+    },
+    {
+      "concept": "Car hood",
+      "au": "bonnet",
+      "us": "hood",
+      "uk": "bonnet"
+    },
+    {
+      "concept": "Tank top",
+      "au": "singlet",
+      "us": "tank top",
+      "uk": "vest"
+    },
+    {
+      "concept": "Comforter",
+      "au": "doona",
+      "us": "comforter",
+      "uk": "duvet"
+    },
+    {
+      "concept": "Cooler",
+      "au": "esky",
+      "us": "cooler",
+      "uk": "cool box",
+      "note": "\"Esky\" is originally a brand name that became the everyday word."
+    },
+    {
+      "concept": "Liquor store",
+      "au": "bottle shop",
+      "us": "liquor store",
+      "uk": "off-licence"
+    },
+    {
+      "concept": "Bell pepper",
+      "au": "capsicum",
+      "us": "bell pepper",
+      "uk": "pepper"
+    },
+    {
+      "concept": "Cilantro",
+      "au": "coriander",
+      "us": "cilantro",
+      "uk": "coriander"
+    },
+    {
+      "concept": "Arugula",
+      "au": "rocket",
+      "us": "arugula",
+      "uk": "rocket"
+    },
+    {
+      "concept": "Eggplant",
+      "au": "eggplant",
+      "us": "eggplant",
+      "uk": "aubergine"
+    },
+    {
+      "concept": "Zucchini",
+      "au": "zucchini",
+      "us": "zucchini",
+      "uk": "courgette"
+    }
   ],
   "pron": [
-    {"word": "water", "au": "WAW-duh", "us": "WAW-dur", "uk": "WAW-tuh", "note": "Australian English drops the R at the end of a word. The T is often soft, like a quick D."},
-    {"word": "tomato", "au": "tuh-MAH-toh", "us": "tuh-MAY-toh", "uk": "tuh-MAH-toh"},
-    {"word": "schedule", "au": "SHED-yool", "us": "SKED-jool", "uk": "SHED-yool"},
-    {"word": "vitamin", "au": "VIT-uh-min", "us": "VY-tuh-min", "uk": "VIT-uh-min"},
-    {"word": "privacy", "au": "PRIV-uh-see", "us": "PRY-vuh-see", "uk": "PRIV-uh-see"},
-    {"word": "leisure", "au": "LEZH-uh", "us": "LEE-zhur", "uk": "LEZH-uh"},
-    {"word": "mobile", "au": "MOH-bile", "us": "MOH-bul", "uk": "MOH-bile"},
-    {"word": "basil", "au": "BAZ-il", "us": "BAY-zil", "uk": "BAZ-il"},
-    {"word": "herb", "au": "HERB (H sounded)", "us": "ERB (silent H)", "uk": "HERB (H sounded)"},
-    {"word": "advertisement", "au": "ad-VER-tis-ment", "us": "ad-ver-TIZE-ment", "uk": "ad-VER-tis-ment"},
-    {"word": "aluminium", "au": "al-yuh-MIN-ee-um", "us": "uh-LOO-muh-num (spelled aluminum)", "uk": "al-yuh-MIN-ee-um"},
-    {"word": "zed", "au": "zed (the letter Z)", "us": "zee", "uk": "zed"}
+    {
+      "word": "water",
+      "au": "WAW-duh",
+      "us": "WAW-dur",
+      "uk": "WAW-tuh",
+      "note": "Australian English drops the R at the end of a word. The T is often soft, like a quick D."
+    },
+    {
+      "word": "tomato",
+      "au": "tuh-MAH-toh",
+      "us": "tuh-MAY-toh",
+      "uk": "tuh-MAH-toh"
+    },
+    {
+      "word": "schedule",
+      "au": "SHED-yool",
+      "us": "SKED-jool",
+      "uk": "SHED-yool"
+    },
+    {
+      "word": "vitamin",
+      "au": "VIT-uh-min",
+      "us": "VY-tuh-min",
+      "uk": "VIT-uh-min"
+    },
+    {
+      "word": "privacy",
+      "au": "PRIV-uh-see",
+      "us": "PRY-vuh-see",
+      "uk": "PRIV-uh-see"
+    },
+    {
+      "word": "leisure",
+      "au": "LEZH-uh",
+      "us": "LEE-zhur",
+      "uk": "LEZH-uh"
+    },
+    {
+      "word": "mobile",
+      "au": "MOH-bile",
+      "us": "MOH-bul",
+      "uk": "MOH-bile"
+    },
+    {
+      "word": "basil",
+      "au": "BAZ-il",
+      "us": "BAY-zil",
+      "uk": "BAZ-il"
+    },
+    {
+      "word": "herb",
+      "au": "HERB (H sounded)",
+      "us": "ERB (silent H)",
+      "uk": "HERB (H sounded)"
+    },
+    {
+      "word": "advertisement",
+      "au": "ad-VER-tis-ment",
+      "us": "ad-ver-TIZE-ment",
+      "uk": "ad-VER-tis-ment"
+    },
+    {
+      "word": "aluminium",
+      "au": "al-yuh-MIN-ee-um",
+      "us": "uh-LOO-muh-num (spelled aluminum)",
+      "uk": "al-yuh-MIN-ee-um"
+    },
+    {
+      "word": "zed",
+      "au": "zed (the letter Z)",
+      "us": "zee",
+      "uk": "zed"
+    },
+    {
+      "word": "pasta",
+      "au": "PAS-tuh (short a)",
+      "us": "PAH-stuh",
+      "uk": "PAS-tuh (short a)"
+    },
+    {
+      "word": "banana",
+      "au": "buh-NAH-nuh",
+      "us": "buh-NAN-uh",
+      "uk": "buh-NAH-nuh"
+    },
+    {
+      "word": "yoghurt",
+      "au": "YOG-ut",
+      "us": "YOH-gurt",
+      "uk": "YOG-ut"
+    },
+    {
+      "word": "process",
+      "au": "PROH-ses",
+      "us": "PRAH-ses",
+      "uk": "PROH-ses"
+    },
+    {
+      "word": "lieutenant",
+      "au": "lef-TEN-ant",
+      "us": "loo-TEN-ant",
+      "uk": "lef-TEN-ant"
+    },
+    {
+      "word": "laboratory",
+      "au": "luh-BOR-uh-tree",
+      "us": "LAB-ruh-tor-ee",
+      "uk": "luh-BOR-uh-tree"
+    },
+    {
+      "word": "zebra",
+      "au": "ZEB-ruh",
+      "us": "ZEE-bruh",
+      "uk": "ZEB-ruh"
+    },
+    {
+      "word": "vase",
+      "au": "VAHZ",
+      "us": "VAYS",
+      "uk": "VAHZ"
+    },
+    {
+      "word": "oregano",
+      "au": "o-RIG-uh-no",
+      "us": "uh-REG-uh-no",
+      "uk": "varies"
+    },
+    {
+      "word": "patriot",
+      "au": "PAT-ree-ut",
+      "us": "PAY-tree-ut",
+      "uk": "PAT-ree-ut"
+    },
+    {
+      "word": "missile",
+      "au": "MIS-ile",
+      "us": "MIS-ul",
+      "uk": "MIS-ile"
+    },
+    {
+      "word": "fertile",
+      "au": "FER-tile",
+      "us": "FER-tul",
+      "uk": "FER-tile"
+    },
+    {
+      "word": "hostile",
+      "au": "HOS-tile",
+      "us": "HOS-tul",
+      "uk": "HOS-tile"
+    }
   ],
   "spell": [
-    {"au": "colour", "us": "color", "uk": "colour"},
-    {"au": "favourite", "us": "favorite", "uk": "favourite"},
-    {"au": "centre", "us": "center", "uk": "centre"},
-    {"au": "organise", "us": "organize", "uk": "organise"},
-    {"au": "realise", "us": "realize", "uk": "realise"},
-    {"au": "analyse", "us": "analyze", "uk": "analyse"},
-    {"au": "travelling", "us": "traveling", "uk": "travelling"},
-    {"au": "licence (noun) / license (verb)", "us": "license (noun and verb)", "uk": "licence (noun) / license (verb)"},
-    {"au": "cheque", "us": "check", "uk": "cheque", "note": "Cheque means the bank payment slip."},
-    {"au": "tyre", "us": "tire", "uk": "tyre"},
-    {"au": "kerb", "us": "curb", "uk": "kerb"},
-    {"au": "grey", "us": "gray", "uk": "grey"},
-    {"au": "defence", "us": "defense", "uk": "defence"},
-    {"au": "program", "us": "program", "uk": "programme", "note": "Australians use \"program\" for all meanings."},
-    {"au": "mum", "us": "mom", "uk": "mum"}
+    {
+      "au": "colour",
+      "us": "color",
+      "uk": "colour"
+    },
+    {
+      "au": "favourite",
+      "us": "favorite",
+      "uk": "favourite"
+    },
+    {
+      "au": "centre",
+      "us": "center",
+      "uk": "centre"
+    },
+    {
+      "au": "organise",
+      "us": "organize",
+      "uk": "organise"
+    },
+    {
+      "au": "realise",
+      "us": "realize",
+      "uk": "realise"
+    },
+    {
+      "au": "analyse",
+      "us": "analyze",
+      "uk": "analyse"
+    },
+    {
+      "au": "travelling",
+      "us": "traveling",
+      "uk": "travelling"
+    },
+    {
+      "au": "licence (noun) / license (verb)",
+      "us": "license (noun and verb)",
+      "uk": "licence (noun) / license (verb)"
+    },
+    {
+      "au": "cheque",
+      "us": "check",
+      "uk": "cheque",
+      "note": "Cheque means the bank payment slip."
+    },
+    {
+      "au": "tyre",
+      "us": "tire",
+      "uk": "tyre"
+    },
+    {
+      "au": "kerb",
+      "us": "curb",
+      "uk": "kerb"
+    },
+    {
+      "au": "grey",
+      "us": "gray",
+      "uk": "grey"
+    },
+    {
+      "au": "defence",
+      "us": "defense",
+      "uk": "defence"
+    },
+    {
+      "au": "program",
+      "us": "program",
+      "uk": "programme",
+      "note": "Australians use \"program\" for all meanings."
+    },
+    {
+      "au": "mum",
+      "us": "mom",
+      "uk": "mum"
+    }
   ]
 }

@@ -6,61 +6,9 @@ Reads   data/site.json, data/compare.json
 Writes  tools/, aussie-vs-us/, about/, contact/, privacy/  (each as <folder>/index.html)
 """
 import html, json, pathlib, urllib.parse
+from common import *
 
-ROOT = pathlib.Path(__file__).parent
-cfg = json.loads((ROOT / "data" / "site.json").read_text(encoding="utf-8"))
 compare = json.loads((ROOT / "data" / "compare.json").read_text(encoding="utf-8"))
-SITE, YT, EMAIL = cfg["site_url"], cfg["youtube_url"], cfg["contact_email"]
-e = html.escape
-
-NAV = [("Imitation Lab", "/lab/"), ("Phrases", "/phrases/"), ("Guides", "/guides/"),
-       ("Tools", "/tools/"), ("Episodes", "/episodes/"), ("Slang", "https://fairdinkumslang.au")]
-
-def page(folder, title, desc, body, nav_on="", head_extra="", script="", band=None):
-    nav = "".join(f'<a{" class=on" if href == nav_on else ""} href="{href}">{label}</a>' for label, href in NAV)
-    if band:  # (h1, subtitle) -> coloured band with crumbs, then main content
-        top = (f'<div class="band"><div class="wrap"><div class="crumbs" style="padding:0 0 10px;color:#B7CEDD">'
-               f'<a href="/">Home</a> › {e(band[2])}</div><h1>{band[0]}</h1><p>{band[1]}</p></div></div>')
-    else:
-        top = ""
-    out = f"""<!doctype html>
-<html lang="en-AU">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(title)}</title>
-<meta name="description" content="{e(desc, quote=True)}">
-<link rel="canonical" href="{SITE}/{folder}/">
-<meta property="og:title" content="{e(title, quote=True)}">
-<meta property="og:description" content="{e(desc, quote=True)}">
-<meta property="og:url" content="{SITE}/{folder}/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
-{head_extra}
-</head>
-<body>
-<header class="nav"><div class="wrap">
-<a class="brand" href="/">English <span>Down Under</span></a>
-<nav>{nav}</nav>
-</div></header>
-{top}
-{body}
-<footer><div class="wrap">
-<div>© English Down Under · Made with love in Australia</div>
-<div style="display:flex;gap:18px;flex-wrap:wrap"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="https://fairdinkumslang.au">Fair Dinkum</a></div>
-</div></footer>
-{script}
-</body>
-</html>
-"""
-    d = ROOT / folder
-    d.mkdir(parents=True, exist_ok=True)
-    (d / "index.html").write_text(out, encoding="utf-8")
-
-SISTER = ('<div class="sister"><div><strong>🦘 Want the slang meanings?</strong><br>'
-          '<span style="color:var(--muted)">Fair Dinkum has 600+ Aussie slang words with origin stories.</span></div>'
-          '<a class="btn" href="https://fairdinkumslang.au">Visit Fair Dinkum →</a></div>')
 
 # ───────────────────────── TOOLS HUB ─────────────────────────
 def tool_card(icon, name, text, href, tag, external=False, soon=False):
@@ -73,6 +21,8 @@ def tool_card(icon, name, text, href, tag, external=False, soon=False):
 live = "".join([
     tool_card("🎙️", "Imitation Lab", "A 20-minute daily session: echo Sam, shift perspective with Leo, then summarise. Includes a practice streak.", "/lab/", "Speaking"),
     tool_card("🎯", "Accent Checker", "Say a phrase and see which words come through clearly, with pace feedback.", "/accent-checker/", "Speaking"),
+    tool_card("✨", "Aussie-fy My Sentence", "Paste a sentence and see it in Australian English, with every change explained.", "/aussie-fy/", "Convert"),
+    tool_card("🦘", "Daily Accent Puzzle", "Five quick questions a day. Spot the Aussie way to say, name and spell things.", "/accent-puzzle/", "Daily game"),
     tool_card("🌏", "Aussie vs US vs UK", "Vocabulary, pronunciation and spelling side by side, with a quick quiz.", "/aussie-vs-us/", "Compare"),
     tool_card("📖", "Phrase Bank", "Phrases with audio, pronunciation notes, common mistakes and speaking practice.", "/phrases/", "Browse"),
     tool_card("🧭", "Situation Guides", "Cafés, job interviews, renting, small talk, phone calls, rhythm and vowels.", "/guides/", "Guides"),
@@ -83,8 +33,6 @@ fd = "".join([
     tool_card("🗣️", "Slang Translator", "Paste a sentence and decode the slang.", "https://fairdinkumslang.au/slang-translator", "Fair Dinkum ↗", external=True),
 ])
 soon = "".join([
-    tool_card("✨", "Aussie-fy My Sentence", "Paste standard English and get a natural Australian version.", "", "Coming soon", soon=True),
-    tool_card("🦘", "Daily Accent Puzzle", "Hear a word and spot the Aussie pronunciation.", "", "Coming soon", soon=True),
     tool_card("🧩", "Which Aussie Are You?", "A short quiz on how Aussie your English sounds.", "", "Coming soon", soon=True),
     tool_card("🏆", "Streak & Score Cards", "Make a shareable card of your streak or result.", "", "Coming soon", soon=True),
 ])
@@ -525,7 +473,7 @@ privacy_body = f"""<main class="wrap">
 <p>English Down Under (englishdownunder.au) is run by Danni, an Australian sole trader. This page explains in plain English what information the site handles. If you have questions, email <a href="mailto:{EMAIL}" style="text-decoration:underline">{EMAIL}</a>.</p>
 
 <h2>What stays on your device</h2>
-<p>The Imitation Lab saves your practice streak and the date of your last visit in your browser's local storage. This information stays on your device. We don't receive it. You can remove it at any time by clearing this site's data in your browser.</p>
+<p>The Imitation Lab saves your practice streak and the date of your last visit, and the Daily Accent Puzzle saves your results and streak, in your browser's local storage. This information stays on your device. We don't receive it. You can remove it at any time by clearing this site's data in your browser.</p>
 
 <h2>Speech practice</h2>
 <p>When you press a 🎙️ button, your browser's built-in speech recognition listens and turns your speech into text. In browsers such as Chrome and Edge, your audio may be sent to the browser maker's speech service (for example Google or Microsoft) to do this. We don't receive, record or store your audio or what you said.</p>
