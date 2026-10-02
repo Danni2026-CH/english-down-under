@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Streak &amp; Score Cards: Make a Shareable Card | English Down Under</title>
+<meta name="description" content="Turn your practice streak, Daily Accent Puzzle score or quiz result into a shareable image. It&#x27;s made on your device and nothing is uploaded.">
+<link rel="canonical" href="https://englishdownunder.au/score-card/">
+<meta property="og:title" content="Streak &amp; Score Cards: Make a Shareable Card | English Down Under">
+<meta property="og:description" content="Turn your practice streak, Daily Accent Puzzle score or quiz result into a shareable image. It&#x27;s made on your device and nothing is uploaded.">
+<meta property="og:url" content="https://englishdownunder.au/score-card/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 14px}
+.tabs button{font:inherit;font-weight:600;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer;color:var(--ink)}
+.tabs button[aria-pressed=true]{background:var(--ocean);border-color:var(--ocean);color:#fff}
+.cardwrap{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:22px;align-items:start}
+#cv{width:100%;height:auto;border-radius:16px;border:1px solid var(--line);box-shadow:0 6px 24px rgba(18,56,82,.12);background:#fff}
+#nm{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;margin-top:6px}
+.empty{background:#FFFBEA;border-left:5px solid var(--gold);padding:12px 14px;border-radius:10px;margin:0 0 12px}
+@media(max-width:760px){.cardwrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+<a class="brand" href="/">English <span>Down Under</span></a>
+<nav><a href="/lab/">Imitation Lab</a><a href="/phrases/">Phrases</a><a href="/guides/">Guides</a><a class=on href="/tools/">Tools</a><a href="/episodes/">Episodes</a><a href="https://fairdinkumslang.au">Slang</a></nav>
+</div></header>
+<div class="band"><div class="wrap"><div class="crumbs" style="padding:0 0 10px;color:#B7CEDD"><a href="/">Home</a> › Tools › Streak &amp; Score Cards</div><h1>Streak & Score Cards</h1><p>Turn your streak, puzzle score or quiz result into a card you can share.</p></div></div>
+<main class="wrap">
+<noscript><div class="card" style="margin-top:14px">This tool needs JavaScript. Please turn it on and reload.</div></noscript>
+<div class="tabs" role="group" aria-label="Card type">
+<button type="button" data-k="streak" aria-pressed="true">🔥 Streak</button>
+<button type="button" data-k="puzzle" aria-pressed="false">🦘 Puzzle score</button>
+<button type="button" data-k="type" aria-pressed="false">🧩 Which Aussie</button>
+</div>
+<div class="cardwrap">
+<canvas id="cv" width="1080" height="1080" role="img" aria-label="Your shareable card"></canvas>
+<div class="card">
+<div id="empty" class="empty" style="display:none"></div>
+<label for="nm"><strong>Add your name</strong> <span style="color:var(--muted)">(optional)</span></label>
+<input id="nm" maxlength="24" placeholder="e.g. Danni" autocomplete="off">
+<div class="row" style="margin-top:14px">
+<button class="btn" id="dl" type="button">⬇️ Download image</button>
+<button class="btn ghost" id="cp" type="button">📋 Copy text</button>
+</div>
+<div id="msg" style="color:var(--muted);min-height:1.4em;margin-top:10px" aria-live="polite"></div>
+<p style="color:var(--muted);font-size:.9rem;margin:10px 0 0">The card is drawn on your device from your saved progress. Nothing is uploaded. Your name isn't saved.</p>
+</div>
+</div>
+
+<h2>Where do the numbers come from?</h2>
+<div class="card">
+<p style="margin-top:0">Your cards use progress saved in this browser, so they only know what you've done on this device.</p>
+<div class="related">
+<a href="/lab/">Imitation Lab streak</a><a href="/accent-puzzle/">Daily Accent Puzzle</a><a href="/which-aussie-are-you/">Which Aussie Are You?</a>
+</div>
+</div>
+<div class="sister"><div><strong>🦘 Want the slang meanings?</strong><br><span style="color:var(--muted)">Fair Dinkum has 600+ Aussie slang words with origin stories.</span></div><a class="btn" href="https://fairdinkumslang.au">Visit Fair Dinkum →</a></div>
+</main>
+<footer><div class="wrap">
+<div>© English Down Under · Made with love in Australia</div>
+<div style="display:flex;gap:18px;flex-wrap:wrap"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="https://fairdinkumslang.au">Fair Dinkum</a></div>
+</div></footer>
+<script>
+var SITE='https://englishdownunder.au';
+function load(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}}
+function $(id){return document.getElementById(id)}
+function sydneyDate(){
+  try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Australia/Sydney',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
+  catch(e){return new Date().toISOString().slice(0,10)}
+}
+function dayBefore(d){var t=new Date(d+'T00:00:00Z');t.setUTCDate(t.getUTCDate()-1);return t.toISOString().slice(0,10)}
+function dateLabel(){
+  try{return new Intl.DateTimeFormat('en-AU',{timeZone:'Australia/Sydney',day:'numeric',month:'short',year:'numeric'}).format(new Date())}
+  catch(e){return sydneyDate()}
+}
+
+// ---- gather saved progress ----
+function info(){
+  var today=sydneyDate();
+  var lab=parseInt((function(){try{return localStorage.getItem('edu_streak')}catch(e){return null}})()||'0',10)||0;
+  var labLast=(function(){try{return localStorage.getItem('edu_last_visit')}catch(e){return null}})();
+  var ps=load('edu_puzzle_streak')||{last:'',count:0};
+  var pz=load('edu_puzzle');
+  var psCount=(ps.last===today||ps.last===dayBefore(today))?ps.count:0;
+  return {lab:lab,psCount:psCount,puzzle:pz&&pz.results&&pz.results.length?pz:null,type:load('edu_aussie_type')};
+}
+
+var kind='streak',I=info();
+function pick(){
+  // returns {big, label, sub, emoji, text} or null when nothing saved
+  if(kind==='streak'){
+    var best=Math.max(I.lab,I.psCount);
+    if(!best)return null;
+    var src=I.psCount>=I.lab?'Daily Accent Puzzle':'Imitation Lab';
+    return {emoji:'🔥',big:String(best),label:best===1?'day streak':'day streak',sub:src,
+      text:'🔥 '+best+'-day streak on English Down Under ('+src+')\n'+SITE+'/'};
+  }
+  if(kind==='puzzle'){
+    if(!I.puzzle)return null;
+    var r=I.puzzle.results,n=r.reduce(function(a,b){return a+b},0);
+    var em=r.map(function(x){return x?'🟩':'🟥'}).join('');
+    return {emoji:'🦘',big:n+'/'+r.length,label:'Daily Accent Puzzle',sub:I.puzzle.date,row:em,
+      text:'Daily Accent Puzzle 🦘 '+I.puzzle.date+' '+n+'/'+r.length+'\n'+em+'\n'+SITE+'/accent-puzzle/'};
+  }
+  if(!I.type)return null;
+  return {emoji:I.type.emoji,big:I.type.name,label:'Which Aussie Are You?',sub:'',small:true,
+    text:'I got '+I.type.emoji+' '+I.type.name+' on Which Aussie Are You?\n'+SITE+'/which-aussie-are-you/'};
+}
+
+// ---- drawing ----
+function wrap(ctx,t,x,y,maxW,lh){
+  var words=t.split(' '),line='',lines=[];
+  words.forEach(function(w){var test=line?line+' '+w:w;if(ctx.measureText(test).width>maxW&&line){lines.push(line);line=w}else line=test});
+  lines.push(line);lines.forEach(function(l,i){ctx.fillText(l,x,y+i*lh)});return lines.length;
+}
+function draw(){
+  var c=$('cv'),ctx=c.getContext('2d'),W=1080,H=1080,d=pick(),name=$('nm').value.trim();
+  var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#1B4F72');g.addColorStop(1,'#123852');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#F4D03F';ctx.fillRect(0,0,W,16);
+  ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  var serif='Fraunces, Georgia, serif',sans='Inter, system-ui, sans-serif';
+  ctx.font='800 52px '+serif;
+  var w1=ctx.measureText('English ').width,w2=ctx.measureText('Down Under').width,x0=W/2-(w1+w2)/2;
+  ctx.textAlign='left';ctx.fillStyle='#fff';ctx.fillText('English ',x0,110);
+  ctx.fillStyle='#F4D03F';ctx.fillText('Down Under',x0+w1,110);ctx.textAlign='center';
+  if(!d){
+    ctx.fillStyle='#D5E4EE';ctx.font='600 40px '+sans;
+    wrap(ctx,'Nothing saved yet. Finish a puzzle, quiz or lesson first.',W/2,500,820,56);
+  }else{
+    ctx.font='150px '+sans;ctx.fillStyle='#fff';ctx.fillText(d.emoji,W/2,400);
+    ctx.fillStyle='#F4D03F';
+    if(d.small){ctx.font='800 92px '+serif;var n=wrap(ctx,d.big,W/2,560,900,104);}
+    else{ctx.font='800 230px '+serif;ctx.fillText(d.big,W/2,620)}
+    ctx.fillStyle='#fff';ctx.font='700 52px '+sans;ctx.fillText(d.label,W/2,d.small?760:720);
+    if(d.row){ctx.font='64px '+sans;ctx.fillText(d.row,W/2,820)}
+    if(d.sub){ctx.fillStyle='#B7CEDD';ctx.font='500 38px '+sans;ctx.fillText(d.sub,W/2,d.row?890:810)}
+  }
+  if(name){ctx.fillStyle='#fff';ctx.font='600 44px '+sans;ctx.fillText(name,W/2,950)}
+  ctx.fillStyle='#B7CEDD';ctx.font='500 34px '+sans;ctx.fillText('englishdownunder.au · '+dateLabel(),W/2,1030);
+  var em=$('empty');
+  if(d){em.style.display='none'}
+  else{
+    em.style.display='';
+    em.innerHTML=kind==='streak'?'No streak yet. Try the <a href="/accent-puzzle/" style="text-decoration:underline">Daily Accent Puzzle</a> or the <a href="/lab/" style="text-decoration:underline">Imitation Lab</a>.':
+      kind==='puzzle'?'No puzzle score yet. <a href="/accent-puzzle/" style="text-decoration:underline">Play today\'s puzzle</a> first.':
+      'No result yet. <a href="/which-aussie-are-you/" style="text-decoration:underline">Take the quiz</a> first.';
+  }
+  $('dl').disabled=!d;$('cp').disabled=!d;
+}
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.onclick=function(){
+    kind=b.getAttribute('data-k');
+    document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    $('msg').textContent='';draw();
+  };
+});
+$('nm').oninput=draw;
+$('dl').onclick=function(){
+  var a=document.createElement('a');a.download='english-down-under-card.png';
+  try{a.href=$('cv').toDataURL('image/png')}catch(e){$('msg').textContent='Could not make the image. Try a screenshot instead.';return}
+  document.body.appendChild(a);a.click();document.body.removeChild(a);$('msg').textContent='Saved. Check your downloads.';
+};
+$('cp').onclick=function(){
+  var d=pick();if(!d)return;
+  function ok(){$('msg').textContent='Copied! Paste it anywhere.'}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(d.text).then(ok,function(){fb(d.text,ok)})}else fb(d.text,ok);
+};
+function fb(t,ok){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok()}catch(e){$('msg').textContent=t}document.body.removeChild(ta)}
+
+// open on the first card type that has data
+(function(){
+  var order=['streak','puzzle','type'];
+  for(var i=0;i<order.length;i++){kind=order[i];if(pick())break}
+  if(!pick())kind='streak';
+  document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x.getAttribute('data-k')===kind?'true':'false')});
+  draw();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+})();
+</script>
+</body>
+</html>

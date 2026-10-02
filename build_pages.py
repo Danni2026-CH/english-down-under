@@ -25,6 +25,8 @@ live = "".join([
     tool_card("🦘", "Daily Accent Puzzle", "Five quick questions a day. Spot the Aussie way to say, name and spell things.", "/accent-puzzle/", "Daily game"),
     tool_card("🌏", "Aussie vs US vs UK", "Vocabulary, pronunciation and spelling side by side, with a quick quiz.", "/aussie-vs-us/", "Compare"),
     tool_card("📖", "Phrase Bank", "Phrases with audio, pronunciation notes, common mistakes and speaking practice.", "/phrases/", "Browse"),
+    tool_card("🧩", "Which Aussie Are You?", "Eight quick questions. Find out which kind of Aussie your English sounds like.", "/which-aussie-are-you/", "Quiz"),
+    tool_card("🏆", "Streak & Score Cards", "Turn your streak, puzzle score or quiz result into a shareable card.", "/score-card/", "Share"),
     tool_card("🧭", "Situation Guides", "Cafés, job interviews, renting, small talk, phone calls, rhythm and vowels.", "/guides/", "Guides"),
 ])
 fd = "".join([
@@ -32,19 +34,13 @@ fd = "".join([
     tool_card("🧩", "Slang Connections", "Find the four hidden groups of slang.", "https://fairdinkumslang.au/slang-connections", "Fair Dinkum ↗", external=True),
     tool_card("🗣️", "Slang Translator", "Paste a sentence and decode the slang.", "https://fairdinkumslang.au/slang-translator", "Fair Dinkum ↗", external=True),
 ])
-soon = "".join([
-    tool_card("🧩", "Which Aussie Are You?", "A short quiz on how Aussie your English sounds.", "", "Coming soon", soon=True),
-    tool_card("🏆", "Streak & Score Cards", "Make a shareable card of your streak or result.", "", "Coming soon", soon=True),
-])
+soon = ""
 tools_body = f"""<main class="wrap wide" style="max-width:1100px">
 <h2>Ready to use</h2>
 <div class="grid g3">{live}</div>
 <h2>More from Fair Dinkum</h2>
 <p style="color:var(--muted);margin:0 0 12px">Our sister site has games and tools for Aussie slang.</p>
 <div class="grid g3">{fd}</div>
-<h2 id="coming">Coming soon</h2>
-<p style="color:var(--muted);margin:0 0 12px">Tools we're building next.</p>
-<div class="grid g3">{soon}</div>
 {SISTER}
 </main>"""
 page("tools", "Free Tools for Practising Australian English | English Down Under",
@@ -473,7 +469,7 @@ privacy_body = f"""<main class="wrap">
 <p>English Down Under (englishdownunder.au) is run by Danni, an Australian sole trader. This page explains in plain English what information the site handles. If you have questions, email <a href="mailto:{EMAIL}" style="text-decoration:underline">{EMAIL}</a>.</p>
 
 <h2>What stays on your device</h2>
-<p>The Imitation Lab saves your practice streak and the date of your last visit, and the Daily Accent Puzzle saves your results and streak, in your browser's local storage. This information stays on your device. We don't receive it. You can remove it at any time by clearing this site's data in your browser.</p>
+<p>The Imitation Lab saves your practice streak and the date of your last visit, and the Daily Accent Puzzle saves your results and streak, and Which Aussie Are You? saves your latest result, in your browser's local storage. This information stays on your device. We don't receive it. You can remove it at any time by clearing this site's data in your browser.</p>
 
 <h2>Speech practice</h2>
 <p>When you press a 🎙️ button, your browser's built-in speech recognition listens and turns your speech into text. In browsers such as Chrome and Edge, your audio may be sent to the browser maker's speech service (for example Google or Microsoft) to do this. We don't receive, record or store your audio or what you said.</p>

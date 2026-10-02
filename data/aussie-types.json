@@ -1,0 +1,42 @@
+{
+  "types": {
+    "larrikin": {"emoji": "😎", "name": "The Larrikin", "tag": "Slang first, grammar later",
+      "blurb": "You shorten everything, tease your mates and treat slang like a second language. If a word has three syllables, you've already made it two and added an -ie on the end.",
+      "say": ["Arvo barbie at mine?", "She'll be right.", "Yeah, nah, you legend."],
+      "learn": [["/phrases/no-worries/", "No worries"], ["/phrases/reckon/", "Reckon"], ["https://fairdinkumslang.au", "More slang on Fair Dinkum"]]},
+    "barista": {"emoji": "☕", "name": "The Flat White Local", "tag": "Calm, polite and coffee-sorted",
+      "blurb": "Your Aussie is relaxed and friendly. You know your coffee order by heart, say thanks to the bus driver and keep the slang gentle. People find you easy to talk to.",
+      "say": ["Can I grab a flat white, thanks?", "How ya going?", "No worries at all."],
+      "learn": [["/phrases/flat-white-please/", "Flat white, please"], ["/guides/cafe/", "Ordering at a café"], ["/phrases/how-ya-going/", "How ya going?"]]},
+    "yarner": {"emoji": "🛻", "name": "The Bush Yarner", "tag": "Storyteller with a ute",
+      "blurb": "You'd rather have a long chat than a short one. Your Aussie is dry, practical and full of stories, with a slow rhythm and a good sense of humour.",
+      "say": ["I reckon it'll rain.", "Not too bad, mate.", "Good on ya."],
+      "learn": [["/phrases/reckon/", "Reckon"], ["/guides/rhythm/", "Aussie rhythm"], ["/phrases/gday/", "G'day"]]},
+    "beachie": {"emoji": "🏖️", "name": "The Beach Local", "tag": "Thongs, sunscreen, zero stress",
+      "blurb": "Everything's easygoing with you. Your Aussie is loose and friendly with plenty of 'yeah' and 'nah'. You'd turn up to a wedding in your best thongs.",
+      "say": ["Heading down the beach.", "Yeah, nah, all good.", "G'day, how ya going?"],
+      "learn": [["/phrases/gday/", "G'day"], ["/guides/vowels/", "Aussie vowels"], ["/aussie-vs-us/", "Aussie vs US vs UK"]]},
+    "pro": {"emoji": "💼", "name": "The Office Legend", "tag": "Clear, friendly and professional",
+      "blurb": "You switch smoothly between work English and weekend English. You keep emails clear, make small talk before meetings and drop in a 'no worries' at the right moment.",
+      "say": ["Happy to chat, no worries.", "Can I book an inspection?", "Let's touch base in the arvo."],
+      "learn": [["/guides/job-interview/", "Job interviews"], ["/guides/small-talk/", "Small talk"], ["/guides/phone-calls/", "Phone calls"]]}
+  },
+  "questions": [
+    {"q": "A friend says \"How ya going?\" What do you say?",
+      "opts": [["\"Yeah, good. You?\"", "barista"], ["\"Not bad, can't complain.\"", "yarner"], ["\"Ripper, mate! You legend.\"", "larrikin"], ["\"Yeah, nah, all good.\"", "beachie"]]},
+    {"q": "It's Saturday morning. Where are you?",
+      "opts": [["At a café with a flat white", "barista"], ["Down at the beach", "beachie"], ["On a long drive somewhere", "yarner"], ["At a mate's place, planning a barbie", "larrikin"]]},
+    {"q": "What do you call this? 🩴",
+      "opts": [["Thongs", "beachie"], ["Flip-flops", "pro"], ["Thongs, obviously, and what's wrong with 'em?", "larrikin"], ["Whatever the shop calls them", "barista"]]},
+    {"q": "Your boss asks if you can stay late. You say:",
+      "opts": [["\"No worries, happy to help.\"", "pro"], ["\"She'll be right, I'll sort it.\"", "yarner"], ["\"Yeah, nah… alright then.\"", "beachie"], ["\"Only if there's a snack run.\"", "larrikin"]]},
+    {"q": "Which sentence sounds most like you?",
+      "opts": [["\"I reckon we should head off.\"", "yarner"], ["\"Let's catch up this arvo.\"", "larrikin"], ["\"Could I get a long black, please?\"", "barista"], ["\"Let me check my calendar and confirm.\"", "pro"]]},
+    {"q": "You're in a long queue. What do you do?",
+      "opts": [["Chat to the stranger behind me", "yarner"], ["Make a joke about how long it is", "larrikin"], ["Scroll my phone politely", "pro"], ["Enjoy the sun, it's all good", "beachie"]]},
+    {"q": "Pick a weekend snack:",
+      "opts": [["Meat pie with sauce", "yarner"], ["Avo smash on toast", "barista"], ["Fish and chips on the sand", "beachie"], ["Snags from the barbie", "larrikin"]]},
+    {"q": "Someone does you a favour. You say:",
+      "opts": [["\"Cheers, mate, I owe you one.\"", "larrikin"], ["\"Thanks so much, I really appreciate it.\"", "pro"], ["\"Good on ya, thanks.\"", "yarner"], ["\"Ta, you're a star.\"", "barista"]]}
+  ]
+}
