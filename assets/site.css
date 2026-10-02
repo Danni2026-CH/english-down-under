@@ -10,8 +10,8 @@ a{color:inherit;text-decoration:none}
 
 header.nav{background:var(--ocean-dark);position:sticky;top:0;z-index:20}
 .nav .wrap{max-width:1100px;display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-.brand{font-family:Fraunces,serif;font-weight:800;color:#fff;font-size:1.15rem}.brand span{color:var(--gold)}
-.nav nav{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
+.brand{white-space:nowrap;flex-shrink:0;font-family:Fraunces,serif;font-weight:800;color:#fff;font-size:1.15rem}.brand span{color:var(--gold)}
+.nav nav{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none;min-width:0}
 .nav nav a{color:#D5E4EE;font-size:.9rem;font-weight:500;white-space:nowrap}.nav nav a:hover,.nav nav a.on{color:var(--gold)}
 
 .crumbs{font-size:.85rem;color:var(--muted);padding:18px 0 0}.crumbs a:hover{color:var(--ocean)}
