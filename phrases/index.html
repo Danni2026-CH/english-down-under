@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aussie Phrase Bank — Pronunciation &amp; Meaning | English Down Under</title>
+<meta name="description" content="Browse Australian English phrases with pronunciation, meaning, common mistakes and speaking practice.">
+<link rel="canonical" href="https://englishdownunder.au/phrases/">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ocean:#1B4F72;--ocean-dark:#123852;--ocean-soft:#E8F1F7;--gold:#F4D03F;--ink:#14232E;--muted:#5B6B77;--bg:#FBFAF6;--line:#E3E8EC}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+a{color:inherit;text-decoration:none}.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header{background:var(--ocean-dark)}header .wrap{height:60px;display:flex;align-items:center;max-width:1100px}
+.brand{font-family:Fraunces,serif;font-weight:800;color:#fff;font-size:1.15rem}.brand span{color:var(--gold)}
+h1{font-family:Fraunces,serif;font-weight:800;color:var(--ocean-dark);font-size:clamp(2rem,5vw,2.8rem);margin:32px 0 6px}
+h2{font-family:Fraunces,serif;color:var(--ocean-dark);margin:30px 0 10px}
+input{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:1rem;margin:14px 0 6px}
+.list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:block}.item:hover{border-color:var(--ocean)}
+.item small{display:block;color:var(--muted);margin:4px 0 8px}
+.pill{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--ocean-soft);color:var(--ocean)}
+</style></head><body>
+<header><div class="wrap"><a class="brand" href="/">English <span>Down Under</span></a></div></header>
+<main class="wrap"><h1>Phrase Bank</h1>
+<p style="color:var(--muted);margin:0">6 phrases with pronunciation, meaning and practice. New ones added regularly.</p>
+<input id="f" type="search" placeholder="Filter phrases…" aria-label="Filter phrases">
+<h2>Café English</h2><div class="list"><a class="item" href="/phrases/flat-white-please/" data-s="flat white, please how to order a flat white, a popular espresso coffee with steamed milk, at an australian café."><strong>Flat white, please</strong><small>How to order a flat white, a popular espresso coffee with steamed milk, at an Australian…</small><span class="pill">Beginner</span></a></div><h2>Everyday replies</h2><div class="list"><a class="item" href="/phrases/no-worries/" data-s="no worries a relaxed way to say &quot;you&#x27;re welcome&quot;, &quot;that&#x27;s fine&quot; or &quot;don&#x27;t worry about it&quot;."><strong>No worries</strong><small>A relaxed way to say &quot;You&#x27;re welcome&quot;, &quot;That&#x27;s fine&quot; or &quot;Don&#x27;t worry about it&quot;.</small><span class="pill">Beginner</span></a></div><h2>Greetings</h2><div class="list"><a class="item" href="/phrases/gday/" data-s="g&#x27;day a casual greeting, short for &quot;good day&quot;. it can be used at any time of day."><strong>G&#x27;day</strong><small>A casual greeting, short for &quot;good day&quot;. It can be used at any time of day.</small><span class="pill">Beginner</span></a><a class="item" href="/phrases/how-ya-going/" data-s="how ya going? a friendly greeting meaning &quot;how are you?&quot; usually you answer &quot;good, thanks, you?&quot; rather than giving a long reply."><strong>How ya going?</strong><small>A friendly greeting meaning &quot;How are you?&quot; Usually you answer &quot;Good, thanks, you?&quot;…</small><span class="pill">Beginner</span></a></div><h2>Opinions</h2><div class="list"><a class="item" href="/phrases/reckon/" data-s="i reckon a casual way to say &quot;i think&quot; or &quot;i believe&quot;. often used to give an opinion."><strong>I reckon</strong><small>A casual way to say &quot;I think&quot; or &quot;I believe&quot;. Often used to give an opinion.</small><span class="pill">Intermediate</span></a></div><h2>Renting</h2><div class="list"><a class="item" href="/phrases/can-i-book-an-inspection/" data-s="can i book an inspection? a polite way to ask a real estate agent to arrange a time to view a rental property."><strong>Can I book an inspection?</strong><small>A polite way to ask a real estate agent to arrange a time to view a rental property.</small><span class="pill">Intermediate</span></a></div></main>
+<script>
+document.getElementById('f').addEventListener('input',function(){
+  var s=this.value.toLowerCase();
+  document.querySelectorAll('.item').forEach(function(a){a.style.display=a.dataset.s.indexOf(s)>-1?'':'none'});
+});
+</script></body></html>

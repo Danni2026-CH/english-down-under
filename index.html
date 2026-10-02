@@ -1,1216 +1,338 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-AU">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English Down Under — Imitation Lab</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦘</text></svg>">
-<meta name="description" content="Practice Australian English speaking with Sam & Leo in the 20-minute Imitation Lab. Daily shadowing, accent training, and instant voice feedback.">
-<meta property="og:title" content="English Down Under — Imitation Lab">
-<meta property="og:description" content="Master the Australian accent with 20 minutes of daily speaking practice. Speak out loud with Sam & Leo!">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://englishdownunder.au">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Down Under — Speak Australian English</title>
+<meta name="description" content="Practise real Australian English. Daily speaking drills, accent tools, phrase audio and situation guides for English learners.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+  :root{
+    --ocean:#1B4F72; --ocean-dark:#123852; --ocean-soft:#E8F1F7;
+    --gold:#F4D03F; --gold-dark:#C9A512;
+    --ink:#14232E; --muted:#5B6B77; --bg:#FBFAF6; --card:#fff; --line:#E3E8EC;
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  section{padding:56px 0}
+  .eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:8px}
+  h2{font-size:clamp(1.6rem,3.5vw,2.2rem);color:var(--ocean-dark);margin-bottom:8px}
+  .sub{color:var(--muted);max-width:620px;margin:0 0 28px}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Nav */
+  header.nav{background:var(--ocean-dark);position:sticky;top:0;z-index:20}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+  .brand{font-family:Fraunces,serif;font-weight:800;color:#fff;font-size:1.15rem}
+  .brand span{color:var(--gold)}
+  .nav nav{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
+  .nav nav a{color:#D5E4EE;font-size:.9rem;font-weight:500;white-space:nowrap}
+  .nav nav a:hover{color:var(--gold)}
 
-:root {
-  --ink: #12100e;
-  --cream: #f7f2e9;
-  --warm: #ede5d8;
-  --amber: #c8860a;
-  --amber-glow: rgba(200,134,10,0.15);
-  --amber-light: #f2c84b;
-  --sage: #3d7a52;
-  --sage-light: #e8f3ec;
-  --rust: #a83c18;
-  --rust-light: #faece8;
-  --muted: #7a6e60;
-  --card: #fdfaf4;
-  --border: #d6cab6;
-  --shadow: 0 2px 16px rgba(18,16,14,0.07);
-}
+  /* Hero */
+  .hero{background:linear-gradient(160deg,var(--ocean) 0%,var(--ocean-dark) 100%);color:#fff;padding:64px 0 72px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(244,208,63,.28),transparent 65%)}
+  .hero .eyebrow{color:var(--gold)}
+  .hero h1{font-size:clamp(2.1rem,6vw,3.6rem);font-weight:800;max-width:720px}
+  .hero h1 em{font-style:normal;color:var(--gold)}
+  .hero p{font-size:1.1rem;color:#CFE0EB;max-width:560px;margin:16px 0 28px}
+  .search{display:flex;gap:8px;max-width:600px;position:relative}
+  .search input{flex:1;padding:16px 18px;border-radius:12px;border:0;font:inherit;font-size:1rem;outline:none}
+  .search input:focus{box-shadow:0 0 0 3px var(--gold)}
+  .search button{background:var(--gold);border:0;border-radius:12px;padding:0 22px;font-weight:600;color:var(--ink);cursor:pointer}
+  #results{max-width:600px;margin-top:10px;display:none;background:#fff;color:var(--ink);border-radius:12px;overflow:hidden;position:relative;z-index:2}
+  #results a{display:block;padding:12px 16px;border-bottom:1px solid var(--line)}
+  #results a:last-child{border:0}
+  #results a:hover{background:var(--ocean-soft)}
+  #results small{color:var(--muted);display:block}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chip{background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:7px 14px;font-size:.85rem;border:1px solid rgba(255,255,255,.2)}
+  .chip:hover{background:rgba(255,255,255,.22)}
+  .stats{display:flex;gap:32px;margin-top:36px;flex-wrap:wrap}
+  .stats b{display:block;font-family:Fraunces,serif;font-size:1.8rem;color:var(--gold)}
+  .stats span{font-size:.85rem;color:#B7CEDD}
 
-html { scroll-behavior: smooth; }
+  /* Cards */
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:transform .15s,box-shadow .15s}
+  a.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(27,79,114,.12)}
+  .card .ico{font-size:1.6rem;margin-bottom:10px}
+  .card h3{font-size:1.15rem;margin-bottom:6px;color:var(--ocean-dark)}
+  .card p{margin:0;color:var(--muted);font-size:.93rem}
+  .tag{display:inline-block;font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--ocean-soft);color:var(--ocean);margin-top:12px}
+  .tag.new{background:var(--gold);color:var(--ink)}
 
-body {
-  background: var(--cream);
-  font-family: 'DM Sans', sans-serif;
-  color: var(--ink);
-  min-height: 100vh;
-  font-size: 15px;
-}
+  /* Daily row */
+  .daily{margin-top:-36px;position:relative;z-index:3;padding:0}
+  .daily .card{box-shadow:0 14px 34px rgba(18,56,82,.14)}
+  .streak{display:flex;align-items:center;gap:10px;margin-top:14px;font-weight:600;color:var(--ocean-dark)}
+  .btn{display:inline-block;background:var(--ocean);color:#fff;border:0;border-radius:10px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
+  .btn:hover{background:var(--ocean-dark)}
+  .btn.gold{background:var(--gold);color:var(--ink)}
+  .btn.gold:hover{background:var(--gold-dark)}
+  .btn.ghost{background:transparent;color:var(--ocean);border:1.5px solid var(--ocean)}
 
-/* ── LOADING SCREEN ── */
-#loadingScreen {
-  position: fixed; inset: 0;
-  background: var(--ink);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  z-index: 1000;
-  gap: 20px;
-  transition: opacity 0.5s;
-}
-#loadingScreen h2 {
-  font-family: 'Playfair Display', serif;
-  color: var(--cream); font-size: 1.6rem;
-}
-#loadingScreen h2 span { color: var(--amber-light); font-style: italic; }
-.loading-bar-track {
-  width: 220px; height: 4px;
-  background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;
-}
-.loading-bar-fill {
-  height: 100%; background: var(--amber);
-  border-radius: 2px;
-  animation: loadFill 1.4s ease-in-out forwards;
-}
-@keyframes loadFill { from{width:0} to{width:100%} }
-.loading-sub { color: var(--muted); font-size: 0.85rem; }
+  /* Phrase of the day */
+  .phrase{background:var(--ocean-soft);border-radius:var(--radius)}
+  .phrase .big{font-family:Fraunces,serif;font-size:clamp(1.6rem,4vw,2.4rem);color:var(--ocean-dark);font-weight:800}
+  .ipa{color:var(--muted);font-style:italic;margin:4px 0 14px}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+  .compare div{background:#fff;border-radius:12px;padding:12px 14px;font-size:.9rem}
+  .compare b{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
-/* ── HEADER ── */
-.header {
-  background: var(--ink);
-  padding: 14px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 3px solid var(--amber);
-  position: sticky; top: 0; z-index: 100;
-}
-.header-left { display: flex; flex-direction: column; gap: 3px; }
-.header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem; color: var(--cream); letter-spacing: 0.01em;
-}
-.header h1 span { color: var(--amber-light); font-style: italic; }
-.header-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.episode-pill {
-  display: inline-block;
-  background: var(--amber-glow);
-  border: 1px solid var(--amber);
-  color: var(--amber-light);
-  font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 3px 10px; border-radius: 20px;
-}
-.streak-pill {
-  background: rgba(255,255,255,0.08);
-  color: var(--cream);
-  font-size: 0.72rem; font-weight: 600;
-  padding: 3px 10px; border-radius: 20px;
-}
-.header-right { display: flex; align-items: center; gap: 14px; }
-.timer-ring {
-  position: relative; width: 48px; height: 48px;
-}
-.timer-ring svg { transform: rotate(-90deg); }
-.timer-ring circle { fill: none; stroke-width: 3; }
-.timer-track { stroke: rgba(255,255,255,0.1); }
-.timer-fill { stroke: var(--amber); stroke-linecap: round; transition: stroke-dashoffset 1s linear; }
-.timer-label {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 600; color: var(--cream);
-}
-.btn-icon-header {
-  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-  color: var(--cream); padding: 8px 10px; border-radius: 8px; cursor: pointer;
-  font-size: 0.85rem; display: flex; align-items: center; gap: 5px;
-  transition: all 0.2s;
-}
-.btn-icon-header:hover { background: rgba(255,255,255,0.18); border-color: var(--amber); }
+  /* Guides */
+  .guide{display:flex;gap:14px;align-items:flex-start}
+  .guide .ico{font-size:1.5rem;margin:0}
 
-/* ── PHASE NAV ── */
-.phase-nav {
-  display: flex; background: var(--warm);
-  border-bottom: 2px solid var(--border);
-  overflow-x: auto; scrollbar-width: none;
-}
-.phase-nav::-webkit-scrollbar { display: none; }
-.phase-tab {
-  padding: 12px 20px; cursor: pointer;
-  font-size: 0.82rem; font-weight: 500; color: var(--muted);
-  border: none; border-bottom: 3px solid transparent;
-  background: none; font-family: 'DM Sans', sans-serif;
-  white-space: nowrap; transition: all 0.2s;
-  display: flex; align-items: center; gap: 7px;
-}
-.phase-tab:hover { color: var(--ink); background: rgba(200,134,10,0.06); }
-.phase-tab.active {
-  color: var(--amber); border-bottom-color: var(--amber);
-  background: var(--card); font-weight: 600;
-}
-.phase-tab.done { color: var(--sage); }
-.tab-icon { font-size: 1rem; }
+  /* Video */
+  .video{aspect-ratio:16/9;border-radius:var(--radius);background:linear-gradient(135deg,var(--ocean),var(--ocean-dark));display:grid;place-items:center;color:#fff;text-align:center;padding:20px}
+  .video .play{width:64px;height:64px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-size:1.5rem;margin:0 auto 10px}
 
-/* ── MAIN CONTAINER ── */
-.main { max-width: 800px; margin: 0 auto; padding: 24px 18px 80px; }
+  /* Signup + PDF */
+  .signup{background:var(--ocean-dark);color:#fff;border-radius:var(--radius);padding:32px}
+  .signup h3{color:#fff;font-size:1.5rem}
+  .signup p{color:#B7CEDD;margin:8px 0 18px}
+  .signup form{display:flex;gap:8px;flex-wrap:wrap}
+  .signup input[type=email]{flex:1;min-width:200px;padding:13px 14px;border-radius:10px;border:0;font:inherit}
+  .pdf{border:2px dashed var(--gold);background:#FFFBEA}
+  .price{font-family:Fraunces,serif;font-size:2rem;color:var(--ocean-dark);font-weight:800}
+  .price small{font-size:.8rem;color:var(--muted);font-family:Inter,sans-serif;font-weight:400}
 
-/* ── PHASE HEADER ── */
-.phase-header {
-  display: flex; align-items: flex-start;
-  justify-content: space-between; gap: 12px;
-  margin-bottom: 16px;
-}
-.phase-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.55rem; color: var(--ink); line-height: 1.2;
-}
-.phase-title em { color: var(--amber); font-style: italic; }
-.badge {
-  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; padding: 5px 12px; border-radius: 4px;
-  flex-shrink: 0; margin-top: 4px;
-}
-.badge-easy   { background: #d4edda; color: #155724; }
-.badge-medium { background: #fff3cd; color: #856404; }
-.badge-hard   { background: #f8d7da; color: #721c24; }
-.badge-done   { background: #d1ecf1; color: #0c5460; }
+  /* Sister site */
+  .sister{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 
-.phase-desc {
-  font-size: 0.9rem; color: var(--muted); line-height: 1.65;
-  padding: 12px 18px; background: var(--warm);
-  border-left: 4px solid var(--amber);
-  border-radius: 0 6px 6px 0; margin-bottom: 20px;
-}
-
-/* ── PROGRESS DOTS ── */
-.progress-row { display: flex; gap: 6px; align-items: center; margin-bottom: 14px; }
-.p-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--border); transition: all 0.25s;
-}
-.p-dot.active { background: var(--amber); transform: scale(1.35); }
-.p-dot.done { background: var(--sage); }
-.p-label { font-size: 0.72rem; color: var(--muted); margin-left: 8px; font-weight: 600; }
-
-/* ── CARD ── */
-.card {
-  background: var(--card); border: 1.5px solid var(--border);
-  border-radius: 12px; padding: 22px;
-  margin-bottom: 16px; box-shadow: var(--shadow);
-}
-.card-label {
-  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-
-/* ── SENTENCE BOX ── */
-.sentence-box {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem; line-height: 1.7; font-style: italic;
-  color: var(--ink); padding: 16px 20px;
-  background: var(--warm); border-radius: 8px;
-  border: 1px solid var(--border); margin-bottom: 14px;
-  min-height: 64px; position: relative;
-}
-
-/* ── AUDIO PLAYER ── */
-.audio-player {
-  display: flex; align-items: center; gap: 12px;
-  background: var(--ink); border-radius: 10px;
-  padding: 12px 18px; margin-bottom: 14px;
-}
-.play-btn {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: var(--amber); border: none; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; transition: all 0.2s; font-size: 15px;
-  color: var(--ink);
-}
-.play-btn:hover { background: var(--amber-light); transform: scale(1.06); }
-.play-btn:disabled { background: #444; cursor: not-allowed; transform: none; }
-.audio-info { flex: 1; min-width: 0; }
-.audio-title {
-  font-size: 0.75rem; color: var(--amber-light);
-  font-weight: 600; letter-spacing: 0.06em;
-  text-transform: uppercase; margin-bottom: 5px;
-  display: flex; align-items: center; gap: 6px;
-}
-.waveform { display: flex; gap: 3px; align-items: center; height: 22px; }
-.w-bar {
-  width: 3px; border-radius: 2px; background: rgba(255,255,255,0.25);
-  transition: background 0.2s;
-}
-.waveform.playing .w-bar {
-  background: var(--amber-light);
-  animation: wavePulse 0.5s ease-in-out infinite alternate;
-}
-.w-bar:nth-child(1){height:6px;} .w-bar:nth-child(2){height:14px;animation-delay:.05s;}
-.w-bar:nth-child(3){height:10px;animation-delay:.1s;} .w-bar:nth-child(4){height:20px;animation-delay:.15s;}
-.w-bar:nth-child(5){height:8px;animation-delay:.07s;} .w-bar:nth-child(6){height:16px;animation-delay:.12s;}
-.w-bar:nth-child(7){height:12px;animation-delay:.03s;} .w-bar:nth-child(8){height:18px;animation-delay:.18s;}
-@keyframes wavePulse { from{opacity:.5;transform:scaleY(.5)} to{opacity:1;transform:scaleY(1)} }
-.audio-status {
-  font-size: 0.72rem; color: rgba(255,255,255,0.5);
-  margin-top: 4px;
-}
-.voice-tag {
-  font-size: 0.7rem; font-weight: 700;
-  padding: 3px 10px; border-radius: 20px; flex-shrink: 0;
-  letter-spacing: 0.05em;
-}
-.voice-sam { background: rgba(200,134,10,0.25); color: var(--amber-light); border: 1px solid rgba(242,200,75,0.4); }
-.voice-leo { background: rgba(61,122,82,0.3); color: #8ee2ae; border: 1px solid rgba(142,226,174,0.4); }
-
-/* ── CONTROLS ROW ── */
-.controls-row {
-  display: flex; gap: 10px; align-items: center;
-  flex-wrap: wrap; margin-bottom: 16px;
-}
-
-/* ── RECORDING & RESPONSE ── */
-.speech-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  background: var(--warm); border-radius: 8px; padding: 8px 14px;
-  margin-bottom: 10px; gap: 10px; flex-wrap: wrap;
-}
-.btn-mic {
-  background: #fff; color: var(--ink); border: 1.5px solid var(--border);
-  padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;
-  cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
-}
-.btn-mic:hover { border-color: var(--amber); background: #fffcf5; }
-.btn-mic.recording {
-  background: #ffebee; color: #c62828; border-color: #e53935;
-  animation: pulseRec 1s infinite alternate;
-}
-@keyframes pulseRec { from{transform:scale(1)} to{transform:scale(1.03);box-shadow:0 0 10px rgba(229,57,53,0.3)} }
-.rec-hint { font-size: 0.76rem; color: var(--muted); }
-
-.response-area {
-  width: 100%; min-height: 80px;
-  background: #fff; border: 1.5px solid var(--border);
-  border-radius: 8px; padding: 12px 16px;
-  font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-  color: var(--ink); outline: none; resize: vertical;
-  transition: border-color 0.2s; line-height: 1.6;
-}
-.response-area:focus { border-color: var(--amber); }
-
-/* ── BUTTONS ── */
-.btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 9px 16px; border-radius: 7px; border: none; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
-  transition: all 0.18s; letter-spacing: 0.02em; white-space: nowrap;
-}
-.btn-amber { background: var(--amber); color: var(--ink); }
-.btn-amber:hover { background: #b07408; color: #fff; }
-.btn-dark { background: var(--ink); color: var(--cream); }
-.btn-dark:hover { background: #2a2520; }
-.btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
-.btn-outline:hover { background: var(--warm); }
-.btn-sage { background: var(--sage); color: #fff; }
-.btn-sage:hover { background: #2d6040; }
-.btn-sm { padding: 6px 12px; font-size: 0.78rem; }
-.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-
-/* ── FEEDBACK & ACCURACY BOX ── */
-.feedback-wrap { margin-top: 14px; }
-.feedback-box {
-  display: none; border-radius: 8px; padding: 16px;
-  font-size: 0.88rem; line-height: 1.65;
-}
-.feedback-box.visible { display: block; }
-.feedback-box.result { background: #f0f7f2; border: 1.5px solid #a3d4b2; color: #1a4a28; }
-.feedback-box.loading { background: var(--warm); border: 1.5px solid var(--border); color: var(--muted); }
-.feedback-box.error { background: #fdf2f2; border: 1.5px solid #f0a8a8; color: #7a1c1c; }
-
-/* Match Words Pills */
-.match-display { margin: 10px 0; line-height: 2.2; }
-.word-pill {
-  display: inline-block; padding: 3px 8px; border-radius: 5px;
-  margin: 0 3px; font-size: 0.86rem; font-weight: 500;
-}
-.word-match { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-.word-missed { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; text-decoration: line-through; }
-.word-extra { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
-
-/* ── WARMUP & SUMMARY ── */
-.warmup-wrap { text-align: center; padding: 24px 12px; }
-.warmup-quote {
-  font-family: 'Playfair Display', serif; font-size: 1.25rem;
-  font-style: italic; color: var(--ink); margin: 14px 0 20px;
-  line-height: 1.6;
-}
-.tip-box {
-  background: var(--warm); border-left: 3px solid var(--amber);
-  border-radius: 0 6px 6px 0; padding: 12px 16px;
-  font-size: 0.82rem; color: var(--muted); line-height: 1.6;
-  margin-top: 14px;
-}
-.tip-box strong { color: var(--ink); }
-
-/* ── COMPLETION SCREEN ── */
-.complete-card { text-align: center; padding: 40px 24px; }
-.trophy { font-size: 3.5rem; margin-bottom: 12px; }
-.summary-table {
-  width: 100%; border-collapse: collapse; margin: 20px 0;
-  text-align: left; font-size: 0.85rem;
-}
-.summary-table th {
-  background: var(--ink); color: var(--cream);
-  padding: 8px 14px; font-weight: 600;
-}
-.summary-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
-.summary-table tr:nth-child(even) td { background: var(--warm); }
-
-.cross-promo-box {
-  background: #fff8e6; border: 1.5px solid var(--amber);
-  border-radius: 10px; padding: 16px 20px; margin: 22px 0;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap; text-align: left;
-}
-.cross-promo-text h4 { font-size: 0.95rem; color: var(--ink); margin-bottom: 4px; }
-.cross-promo-text p { font-size: 0.8rem; color: var(--muted); }
-
-/* ── MODALS ── */
-.modal-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.7); z-index: 2000;
-  align-items: center; justify-content: center; padding: 16px;
-}
-.modal-box {
-  background: #fdfaf4; border-radius: 14px; padding: 28px 24px;
-  max-width: 480px; width: 100%; border-top: 4px solid var(--amber);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-.modal-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; }
-
-.hidden { display: none !important; }
-@media (max-width: 600px) {
-  .header { padding: 12px 16px; }
-  .main { padding: 16px 12px 60px; }
-  .phase-tab { padding: 10px 14px; font-size: 0.78rem; }
-}
+  footer{background:var(--ocean-dark);color:#B7CEDD;padding:36px 0;font-size:.9rem;margin-top:24px}
+  footer .wrap{display:flex;gap:20px;justify-content:space-between;flex-wrap:wrap}
+  footer a:hover{color:var(--gold)}
+  @media (max-width:560px){section{padding:40px 0}.compare{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
-<div id="loadingScreen">
-  <h2>English <span>Down Under</span></h2>
-  <div class="loading-bar-track"><div class="loading-bar-fill"></div></div>
-  <p class="loading-sub" id="loadingMsg">Loading episode content…</p>
-</div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">English <span>Down Under</span></a>
+    <nav>
+      <a href="/lab">Imitation Lab</a>
+      <a href="/phrases">Phrases</a>
+      <a href="/guides">Guides</a>
+      <a href="/tools">Tools</a>
+      <a href="/episodes">Episodes</a>
+      <a href="https://fairdinkumslang.au">Slang</a>
+    </nav>
+  </div>
+</header>
 
-<!-- SETTINGS MODAL (OPTIONAL API KEYS) -->
-<div id="settingsModal" class="modal-overlay">
-  <div class="modal-box">
-    <div class="modal-title">⚙️ App Settings &amp; AI Feedback</div>
-    <p style="font-size:0.84rem;color:var(--muted);margin-bottom:16px;line-height:1.5;">
-      The Imitation Lab audio and speech matching are <strong>100% free and work offline</strong> without any keys!
-    </p>
-    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">
-      Optional: Anthropic API Key <span style="font-weight:400;text-transform:none;">(for in-depth AI coaching)</span>
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Real Australian English. Taught with passion.</div>
+    <h1>Don't just study English. <em>Speak it</em> like an Aussie.</h1>
+    <p>Daily speaking drills, accent tools and phrase audio for learners who want to sound natural in Australia.</p>
+    <form class="search" onsubmit="return false">
+      <input id="q" type="search" placeholder="Try “how to say water”, “job interview”, “g'day”…" autocomplete="off" aria-label="Search phrases and guides">
+      <button type="submit">Search</button>
+    </form>
+    <div id="results"></div>
+    <div class="chips">
+      <a class="chip" href="/guides/job-interview">💼 Job interview</a>
+      <a class="chip" href="/guides/cafe">☕ Ordering at a café</a>
+      <a class="chip" href="/guides/renting">🏠 Renting a flat</a>
+      <a class="chip" href="/guides/small-talk">💬 Small talk</a>
+      <a class="chip" href="/guides/phone-calls">📞 Phone calls</a>
     </div>
-    <input id="apiKeyInput" type="password" placeholder="sk-ant-api03-…"
-      style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:7px;font-size:0.88rem;outline:none;margin-bottom:16px;font-family:'DM Sans',sans-serif;">
-    <div style="display:flex;gap:10px;">
-      <button onclick="saveSettings()" class="btn btn-amber" style="flex:1;justify-content:center;">Save Settings</button>
-      <button onclick="closeSettingsModal()" class="btn btn-outline">Close</button>
+    <div class="stats">
+      <div><b>20 min</b><span>daily practice</span></div>
+      <div><b>100% free</b><span>no login needed</span></div>
+      <div><b>Sam &amp; Leo</b><span>your Aussie coaches</span></div>
     </div>
   </div>
 </div>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-left">
-    <h1>English <span>Down Under</span> — Imitation Lab</h1>
-    <div class="header-meta">
-      <div class="episode-pill" id="episodePill">Episode 1</div>
-      <div class="streak-pill" id="streakPill">🔥 Day 1</div>
+<!-- DAILY ROW -->
+<section class="daily">
+  <div class="wrap grid g3">
+    <a class="card" href="/lab">
+      <div class="ico">🎙️</div>
+      <h3>Today's Echo Lesson</h3>
+      <p>Listen to Sam, say it back, get instant feedback. 20 minutes, three levels.</p>
+      <div class="streak">🔥 <span id="streak">Start your streak today</span></div>
+    </a>
+    <a class="card" href="/accent-wordle">
+      <div class="ico">🦘</div>
+      <h3>Daily Accent Puzzle</h3>
+      <p>Hear a word. Spot the Aussie pronunciation. Six guesses.</p>
+      <span class="tag new">NEW</span>
+    </a>
+    <a class="card" href="/which-aussie-are-you">
+      <div class="ico">🧩</div>
+      <h3>Which Aussie Are You?</h3>
+      <p>8 questions. Find out how Aussie your English really sounds.</p>
+      <span class="tag">Quiz</span>
+    </a>
+  </div>
+</section>
+
+<!-- PHRASE OF THE DAY -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Phrase of the day</div>
+    <h2>Say it like you mean it</h2>
+    <p class="sub">One phrase, one sound to practise, one habit to fix. New every day.</p>
+    <div class="phrase card" style="padding:28px">
+      <div class="big" id="phrase">How ya going?</div>
+      <div class="ipa" id="ipa">/haʊ ə ˈɡoʊɪŋ/ — “how-uh-GOH-in”</div>
+      <button class="btn" id="play">🔊 Hear it (Aussie)</button>
+      <a class="btn ghost" href="/lab" style="margin-left:6px">Practise it →</a>
+      <div class="compare">
+        <div><b>🇦🇺 Aussie</b>“How ya going?” — friendly, quick, linked together</div>
+        <div><b>🇺🇸 Standard</b>“How are you doing?” — slower, every word clear</div>
+      </div>
+      <p style="margin:0;font-size:.9rem;color:var(--muted)"><strong>Common mistake:</strong> pronouncing every word separately. Aussies glide “ya” and “going” together.</p>
     </div>
   </div>
-  <div class="header-right">
-    <button class="btn-icon-header" onclick="openSettingsModal()" title="Settings &amp; Optional AI Key">⚙️ Settings</button>
-    <div class="timer-ring">
-      <svg width="48" height="48" viewBox="0 0 52 52">
-        <circle class="timer-track" cx="26" cy="26" r="22"/>
-        <circle class="timer-fill" id="timerCircle" cx="26" cy="26" r="22"
-          stroke-dasharray="138.2" stroke-dashoffset="0"/>
-      </svg>
-      <div class="timer-label" id="timerLabel">20:00</div>
+</section>
+
+<!-- TOOLS -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Tools</div>
+    <h2>Practise, check, compare</h2>
+    <p class="sub">Free tools that work in your browser — no sign-up.</p>
+    <div class="grid g3">
+      <a class="card" href="/lab"><div class="ico">🔁</div><h3>Imitation Lab</h3><p>Echo, Perspective Shift and Summary challenges with voice matching.</p><span class="tag">Speaking</span></a>
+      <a class="card" href="/accent-checker"><div class="ico">🎯</div><h3>Accent Checker</h3><p>Say a phrase and see how close you are to the Aussie version.</p><span class="tag new">NEW</span></a>
+      <a class="card" href="/aussie-fy"><div class="ico">✨</div><h3>Aussie-fy My Sentence</h3><p>Paste standard English and get a natural Australian version.</p><span class="tag new">NEW</span></a>
+      <a class="card" href="/aussie-vs-us"><div class="ico">🌏</div><h3>Aussie vs US vs UK</h3><p>Side-by-side pronunciation and vocabulary differences.</p><span class="tag">Compare</span></a>
+      <a class="card" href="/share-card"><div class="ico">🏆</div><h3>Score &amp; Streak Cards</h3><p>Make a shareable card of your streak or quiz result.</p><span class="tag">Share</span></a>
+      <a class="card" href="/phrases"><div class="ico">📖</div><h3>Phrase Bank</h3><p>Hundreds of phrases with audio, sounds and common mistakes.</p><span class="tag">Browse A–Z</span></a>
     </div>
   </div>
-</div>
+</section>
 
-<!-- PHASE NAV -->
-<div class="phase-nav">
-  <button class="phase-tab active" onclick="goPhase(0)"><span class="tab-icon">☀️</span>Warm-up</button>
-  <button class="phase-tab" onclick="goPhase(1)"><span class="tab-icon">🔁</span>Level 1 — Echo</button>
-  <button class="phase-tab" onclick="goPhase(2)"><span class="tab-icon">🔄</span>Level 2 — Perspective</button>
-  <button class="phase-tab" onclick="goPhase(3)"><span class="tab-icon">📝</span>Level 3 — Summary</button>
-</div>
-
-<div class="main">
-
-  <!-- ── PHASE 0: WARMUP ── -->
-  <div id="phase0">
-    <div class="phase-header">
-      <div class="phase-title">Warm-up &amp; <em>Mindset</em></div>
-      <div class="badge badge-easy">2 min</div>
+<!-- GUIDES -->
+<section style="background:#fff;border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="eyebrow">Situation guides</div>
+    <h2>English for real life in Australia</h2>
+    <p class="sub">What to say, how to say it, and what locals actually do.</p>
+    <div class="grid g2">
+      <a class="card guide" href="/guides/job-interview"><div class="ico">💼</div><div><h3>Job Interview English</h3><p>Answers, polite phrasing and the small talk before you sit down.</p></div></a>
+      <a class="card guide" href="/guides/cafe"><div class="ico">☕</div><div><h3>Ordering at a Café</h3><p>Flat white, long black, takeaway or sit-in — and how to ask.</p></div></a>
+      <a class="card guide" href="/guides/renting"><div class="ico">🏠</div><div><h3>Renting a Flat</h3><p>Inspections, agents, bond and lease language made simple.</p></div></a>
+      <a class="card guide" href="/guides/small-talk"><div class="ico">💬</div><div><h3>Small Talk &amp; Banter</h3><p>Weather, weekend plans and friendly teasing without confusion.</p></div></a>
+      <a class="card guide" href="/guides/rhythm"><div class="ico">🎵</div><div><h3>Rhythm &amp; Linking</h3><p>Why “g'day” and “how ya going” sound the way they do.</p></div></a>
+      <a class="card guide" href="/guides/vowels"><div class="ico">👄</div><div><h3>Aussie Vowel Sounds</h3><p>The sounds that make an accent sound Australian, one by one.</p></div></a>
     </div>
-    <div class="card">
-      <div class="warmup-wrap">
-        <div class="card-label" style="justify-content:center;">🎯 Core Principle — Read this aloud</div>
-        <div class="warmup-quote">"To improve English speaking, I must actually speak. Imitation is my bridge to fluency."</div>
-        <p style="font-size:0.88rem;color:var(--muted);margin-bottom:24px;line-height:1.6;">
-          Shift your mindset from <em>studying</em> to <em>performing</em>.<br>Today you are not a student — you are an actor rehearsing a role.
-        </p>
-        <button class="btn btn-amber" onclick="goPhase(1)" style="font-size:0.92rem;padding:11px 22px;">I'm ready — Begin Level 1 →</button>
-      </div>
+    <p style="margin:24px 0 0"><a class="btn ghost" href="/guides">All guides →</a></p>
+  </div>
+</section>
+
+<!-- VIDEO + EPISODES -->
+<section>
+  <div class="wrap grid g2" style="align-items:center">
+    <div>
+      <div class="eyebrow">Watch &amp; learn</div>
+      <h2>Episodes with Sam &amp; Leo</h2>
+      <p class="sub">Every episode has a video, a transcript and matching practice exercises, all on one page.</p>
+      <a class="btn" href="/episodes">Browse episodes</a>
+      <a class="btn ghost" href="https://www.youtube.com/@Downunderenglish-jb1dm" style="margin-left:6px">YouTube ↗</a>
+    </div>
+    <!-- Swap this block for a youtube-nocookie.com embed once you pick the featured video -->
+    <div class="video">
+      <div><div class="play">▶</div><strong>Featured episode</strong><br><small>Embed your YouTube video here</small></div>
     </div>
   </div>
+</section>
 
-  <!-- ── PHASE 1: ECHO ── -->
-  <div id="phase1" class="hidden">
-    <div class="phase-header">
-      <div class="phase-title">Level 1 — <em>The Echo</em></div>
-      <div class="badge badge-easy">Easy · 3 min</div>
+<!-- SIGNUP + PDF -->
+<section style="padding-top:0">
+  <div class="wrap grid g2">
+    <div class="signup">
+      <h3>One Aussie phrase a day</h3>
+      <p>Free email with the phrase, the audio and one sound to practise. No spam.</p>
+      <!-- TODO: point action at your email provider's form endpoint -->
+      <form action="#" method="post">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">
+        <button class="btn gold" type="submit">Sign me up</button>
+      </form>
     </div>
-    <div class="phase-desc">
-      Listen to Sam read the sentence. Then press <strong>🎙️ Speak Your Echo</strong> and say it back aloud — same speed, same rhythm!
-    </div>
-    <div class="progress-row" id="echoProg"></div>
-    <div class="card">
-      <div class="card-label"><span>🔊 Sentence to Echo</span><span id="echoVoiceLabel">Sam (Aussie Voice)</span></div>
-      <div class="sentence-box" id="echoText">Press "Next Sentence" to begin.</div>
-
-      <div class="audio-player">
-        <button class="play-btn" id="echoPlayBtn" onclick="playAudio('echo')">▶</button>
-        <div class="audio-info">
-          <div class="audio-title">Sam's Voice</div>
-          <div class="waveform" id="echoWave">
-            <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
-            <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
-            <div class="w-bar"></div><div class="w-bar"></div>
-          </div>
-          <div class="audio-status" id="echoStatus">Ready — press play to listen</div>
-        </div>
-        <span class="voice-tag voice-sam">SAM</span>
-      </div>
-
-      <div class="controls-row">
-        <button class="btn btn-amber" onclick="nextEcho()">🎲 Next Sentence</button>
-        <button class="btn btn-outline btn-sm" onclick="replayAudio('echo')">↩ Replay</button>
-      </div>
-
-      <div class="card-label">
-        <span>🎙️ Speak or Type Your Echo</span>
-      </div>
-      <div class="speech-bar">
-        <button class="btn-mic" id="echoMicBtn" onclick="toggleSpeechRecognition('echo')">
-          <span>🎙️</span> <span id="echoMicLabel">Speak Your Echo</span>
-        </button>
-        <span class="rec-hint" id="echoRecHint">Tap mic to speak aloud (en-AU)</span>
-      </div>
-      <textarea class="response-area" id="echoResp" placeholder="Your spoken words will appear here, or you can type…"></textarea>
-      
-      <div class="btn-row">
-        <button class="btn btn-amber" onclick="checkEchoAccuracy()">🎯 Check Echo Match</button>
-        <button class="btn btn-dark" onclick="getFeedback('echo')">✨ In-Depth AI Feedback</button>
-        <button class="btn btn-outline" onclick="goPhase(2)">Next Level →</button>
-      </div>
-      <div class="feedback-wrap"><div class="feedback-box" id="echoFB"></div></div>
-    </div>
-    <div class="tip-box"><strong>💡 Sam's Tip:</strong> Don't write the sentence first — speak immediately after hearing it. This trains your ear-to-mouth reflex, which is the real secret to natural speech.</div>
-  </div>
-
-  <!-- ── PHASE 2: PERSPECTIVE ── -->
-  <div id="phase2" class="hidden">
-    <div class="phase-header">
-      <div class="phase-title">Level 2 — <em>Perspective Shift</em></div>
-      <div class="badge badge-medium">Medium · 7 min</div>
-    </div>
-    <div class="phase-desc">
-      Leo reads a thought in the first person ("I"). Your challenge: speak or rewrite it using <strong>He / She / They</strong> — and watch the verbs shift!
-    </div>
-    <div class="progress-row" id="perspProg"></div>
-    <div class="card">
-      <div class="card-label"><span>🔊 Two-Sentence Thought</span><span>Leo (Aussie Voice)</span></div>
-      <div class="sentence-box" id="perspText">Press "Next Thought" to begin.</div>
-
-      <div class="audio-player">
-        <button class="play-btn" id="perspPlayBtn" onclick="playAudio('persp')">▶</button>
-        <div class="audio-info">
-          <div class="audio-title">Leo's Voice</div>
-          <div class="waveform" id="perspWave">
-            <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
-            <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
-            <div class="w-bar"></div><div class="w-bar"></div>
-          </div>
-          <div class="audio-status" id="perspStatus">Ready — press play to listen</div>
-        </div>
-        <span class="voice-tag voice-leo">LEO</span>
-      </div>
-
-      <div class="controls-row">
-        <button class="btn btn-amber" onclick="nextPersp()">🎲 Next Thought</button>
-        <button class="btn btn-outline btn-sm" onclick="replayAudio('persp')">↩ Replay</button>
-      </div>
-
-      <div class="card-label">
-        <span>🎙️ Speak or Type Your Perspective Shift</span>
-      </div>
-      <div class="speech-bar">
-        <button class="btn-mic" id="perspMicBtn" onclick="toggleSpeechRecognition('persp')">
-          <span>🎙️</span> <span id="perspMicLabel">Speak Your Shift</span>
-        </button>
-        <span class="rec-hint" id="perspRecHint">Shift: "I went..." → "She went..."</span>
-      </div>
-      <textarea class="response-area" id="perspResp" placeholder="e.g. She loves traveling because it opens her mind. Last year she went to Japan…"></textarea>
-      
-      <div class="btn-row">
-        <button class="btn btn-amber" onclick="checkPerspectiveShift()">⚡ Quick Grammar Check</button>
-        <button class="btn btn-dark" onclick="getFeedback('persp')">✨ In-Depth AI Feedback</button>
-        <button class="btn btn-outline" onclick="goPhase(3)">Next Level →</button>
-      </div>
-      <div class="feedback-wrap"><div class="feedback-box" id="perspFB"></div></div>
-    </div>
-    <div class="tip-box"><strong>💡 Leo's Tip:</strong> Watch for the sneaky verb changes — "I <em>am</em>" → "He <em>is</em>", "I <em>have</em>" → "She <em>has</em>". Tense consistency is the number one error at this level.</div>
-  </div>
-
-  <!-- ── PHASE 3: SUMMARY ── -->
-  <div id="phase3" class="hidden">
-    <div class="phase-header">
-      <div class="phase-title">Level 3 — <em>Summary Challenge</em></div>
-      <div class="badge badge-hard">Hard · 8 min</div>
-    </div>
-    <div class="phase-desc">
-      Listen to the full idea without pausing. Then speak or write a summary in your own words using at least <strong>3 connected sentences</strong>.
-    </div>
-    <div class="progress-row" id="summProg"></div>
-    <div class="card">
-      <div class="card-label"><span>🔊 Full Idea — Listen Once</span><span>Sam &amp; Leo</span></div>
-      <div class="sentence-box" id="summText" style="font-size:1.05rem;line-height:1.75;">Press "Next Idea" to begin.</div>
-
-      <div class="audio-player">
-        <button class="play-btn" id="summPlayBtn" onclick="playAudio('summ')">▶</button>
-        <div class="audio-info">
-          <div class="audio-title">Sam's Voice — Full Passage</div>
-          <div class="waveform" id="summWave">
-            <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
-            <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
-            <div class="w-bar"></div><div class="w-bar"></div>
-          </div>
-          <div class="audio-status" id="summStatus">Ready — press play to listen</div>
-        </div>
-        <span class="voice-tag voice-sam">SAM</span>
-      </div>
-
-      <div class="controls-row">
-        <button class="btn btn-amber" onclick="nextSumm()">🎲 Next Idea</button>
-        <button class="btn btn-outline btn-sm" onclick="replayAudio('summ')">↩ Replay</button>
-      </div>
-
-      <div class="card-label">
-        <span>🎙️ Speak or Type Your Summary</span>
-      </div>
-      <div class="speech-bar">
-        <button class="btn-mic" id="summMicBtn" onclick="toggleSpeechRecognition('summ')">
-          <span>🎙️</span> <span id="summMicLabel">Speak Your Summary</span>
-        </button>
-        <span class="rec-hint" id="summRecHint">Use linking words: because, however, therefore…</span>
-      </div>
-      <textarea class="response-area" id="summResp" style="min-height:110px;" placeholder="Speak or write your summary here…"></textarea>
-      
-      <div class="btn-row">
-        <button class="btn btn-amber" onclick="checkSummaryFlow()">⚡ Flow &amp; Length Check</button>
-        <button class="btn btn-dark" onclick="getFeedback('summ')">✨ In-Depth AI Feedback</button>
-        <button class="btn btn-sage" onclick="goPhase(4)">🏁 Complete Lesson</button>
-      </div>
-      <div class="feedback-wrap"><div class="feedback-box" id="summFB"></div></div>
-    </div>
-    <div class="tip-box"><strong>💡 Pro-Tip:</strong> The goal isn't to memorize word-for-word — it is to capture the main concept and express it cleanly in your own words.</div>
-  </div>
-
-  <!-- ── PHASE 4: COMPLETE ── -->
-  <div id="phase4" class="hidden">
-    <div class="phase-header">
-      <div class="phase-title">Lesson <em>Complete!</em></div>
-      <div class="badge badge-done">Well done</div>
-    </div>
-    <div class="card complete-card">
-      <div class="trophy">🏆</div>
-      <p style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:6px;">Sensational work! You finished today's Imitation Lesson.</p>
-      <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Every repetition builds muscle memory for natural Australian rhythm and pronunciation.</p>
-      
-      <table class="summary-table">
-        <thead><tr><th>Stage</th><th>Duration</th><th>Skill</th><th>Focus</th></tr></thead>
-        <tbody>
-          <tr><td>Level 1 — Echo</td><td>3 mins</td><td>Pronunciation</td><td>Rhythm, stress &amp; speed match</td></tr>
-          <tr><td>Level 2 — Perspective</td><td>7 mins</td><td>Grammar Shift</td><td>Pronoun &amp; verb consistency</td></tr>
-          <tr><td>Level 3 — Summary</td><td>8 mins</td><td>Fluency Flow</td><td>Connecting ideas in your own words</td></tr>
-        </tbody>
-      </table>
-
-      <div class="cross-promo-box">
-        <div class="cross-promo-text">
-          <h4>🦘 Love Aussie Slang? Test Yourself!</h4>
-          <p>Play today's daily <strong>Slangle</strong> puzzle on our sister site: Fair Dinkum Slang.</p>
-        </div>
-        <a href="https://fairdinkumslang.au" target="_blank" class="btn btn-amber">Play Slangle Free →</a>
-      </div>
-
-      <div class="btn-row" style="justify-content:center;margin-top:20px;">
-        <button class="btn btn-amber" onclick="shareStreak()">📋 Share Practice Streak</button>
-        <button class="btn btn-outline" onclick="restartLesson()">🔄 Practice Again</button>
-        <a href="https://www.youtube.com/@EnglishDownUnder" target="_blank" class="btn btn-dark">📺 Watch Lessons on YouTube</a>
-      </div>
+    <div class="card pdf">
+      <div class="eyebrow">Digital pack</div>
+      <h3>50 Aussie Phrases with Audio</h3>
+      <p style="margin:8px 0 16px">Printable workbook plus MP3s for shadowing practice. Learn offline, any time.</p>
+      <div class="price">A$9 <small>one-time</small></div>
+      <p style="margin:14px 0 0"><a class="btn gold" href="https://downunderenglish.gumroad.com">Get the pack</a></p>
     </div>
   </div>
+</section>
 
-</div><!-- /main -->
+<!-- SISTER SITE -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sister">
+      <div>
+        <h3 style="font-size:1.25rem">🦘 Curious what the slang means?</h3>
+        <p style="margin:6px 0 0;color:var(--muted)">Our sister site, Fair Dinkum, is a dictionary of 600+ Aussie slang words with origin stories.</p>
+      </div>
+      <a class="btn" href="https://fairdinkumslang.au">Visit Fair Dinkum →</a>
+    </div>
+  </div>
+</section>
 
-<audio id="audioPlayer" style="display:none"></audio>
+<footer>
+  <div class="wrap">
+    <div>© English Down Under · Made with love in Australia</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap">
+      <a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a>
+      <a href="https://fairdinkumslang.au">Fair Dinkum</a>
+    </div>
+  </div>
+</footer>
 
 <script>
-// ═══════════════════════════════════════════════════════════
-//  EPISODE DATA (DEFAULT OFFLINE EPISODE 1)
-// ═══════════════════════════════════════════════════════════
-const FALLBACK = {
-  episode: 'Episode 1 — Everyday Aussie Life',
-  theme: '🌏 Everyday Conversations & Coffee',
-  echo: [
-    { text: "She's already left for the station.", audio: 'audio/ep01/ep01_echo_01.mp3' },
-    { text: "The weather here changes every single hour.", audio: 'audio/ep01/ep01_echo_02.mp3' },
-    { text: "Could you pass me the salt, please?", audio: 'audio/ep01/ep01_echo_03.mp3' },
-    { text: "I haven't seen anything like this before.", audio: 'audio/ep01/ep01_echo_04.mp3' },
-    { text: "He decided to take the longer route home.", audio: 'audio/ep01/ep01_echo_05.mp3' },
-    { text: "They've been waiting for over an hour.", audio: 'audio/ep01/ep01_echo_06.mp3' },
-  ],
-  persp: [
-    { text: "I love traveling because it opens my mind. Last year, I went to Japan and it changed my life.", audio: 'audio/ep01/ep01_persp_01.mp3' },
-    { text: "I am exhausted. I stayed up too late finishing my project.", audio: 'audio/ep01/ep01_persp_02.mp3' },
-    { text: "I exercise every morning before breakfast. It gives me energy for the whole day.", audio: 'audio/ep01/ep01_persp_03.mp3' },
-    { text: "I moved to a new city last month. I am still trying to find my way around.", audio: 'audio/ep01/ep01_persp_04.mp3' },
-  ],
-  summ: [
-    { text: "Learning a new language takes a lot of patience. You will make mistakes every single day. But every mistake is actually a lesson. Over time, those small lessons add up to real fluency.", audio: 'audio/ep01/ep01_summ_01.mp3' },
-    { text: "Exercise is not just about looking good. It improves your mood, your sleep, and your memory. Even a 20-minute walk can reduce stress significantly. The key is to make it a daily habit.", audio: 'audio/ep01/ep01_summ_02.mp3' },
-    { text: "Sleep is one of the most important things for your brain. When you sleep, your brain processes everything you learned that day. Without enough sleep, it is hard to concentrate or remember new things.", audio: 'audio/ep01/ep01_summ_03.mp3' },
-  ]
-};
-
-// ── STATE ──
-let data = FALLBACK;
-let idx = { echo: -1, persp: -1, summ: -1 };
-let currentPhase = 0;
-let timerSecs = 20 * 60;
-let timerStarted = false;
-let timerInterval = null;
-
-// Speech Recognition instance
-let activeRecognition = null;
-let activeMicKey = null;
-
-// ── INIT ──
-window.addEventListener('load', () => {
-  document.getElementById('loadingMsg').textContent = 'Loading Imitation Lab…';
-  initStreak();
-  nextEcho();
-  nextPersp();
-  nextSumm();
-  setTimeout(() => {
-    const ls = document.getElementById('loadingScreen');
-    ls.style.opacity = '0';
-    setTimeout(() => ls.style.display = 'none', 400);
-  }, 900);
+// Phrase search (sample data — replace with your Google Sheet / JSON phrase bank)
+var PHRASES=[
+  {t:"How ya going?",d:"Greeting · linking & rhythm",u:"/phrases/how-ya-going"},
+  {t:"G'day",d:"Greeting · the 'ay' vowel",u:"/phrases/gday"},
+  {t:"No worries",d:"Reply · relaxed stress pattern",u:"/phrases/no-worries"},
+  {t:"Water",d:"Aussie vs US pronunciation",u:"/aussie-vs-us/water"},
+  {t:"Job interview: tell me about yourself",d:"Guide · work English",u:"/guides/job-interview"},
+  {t:"Flat white, please",d:"Guide · ordering at a café",u:"/guides/cafe"},
+  {t:"Can I book an inspection?",d:"Guide · renting a flat",u:"/guides/renting"},
+  {t:"Reckon",d:"Everyday word · casual opinion",u:"/phrases/reckon"}
+];
+// Load the live phrase index (built by build_phrases.py); keep sample data if it fails
+fetch('/data/phrase-index.json').then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.length)PHRASES=d}).catch(function(){});
+var q=document.getElementById('q'),res=document.getElementById('results');
+q.addEventListener('input',function(){
+  var s=q.value.trim().toLowerCase();
+  if(!s){res.style.display='none';return}
+  var hits=PHRASES.filter(function(p){return (p.t+' '+p.d).toLowerCase().indexOf(s)>-1}).slice(0,5);
+  res.innerHTML=hits.length?hits.map(function(p){return '<a href="'+p.u+'">'+p.t+'<small>'+p.d+'</small></a>'}).join(''):'<a href="/phrases">No match yet — browse the phrase bank<small>We add new phrases every week</small></a>';
+  res.style.display='block';
 });
 
-// ── STREAK COUNTER ──
-function initStreak() {
-  const today = new Date().toISOString().slice(0, 10);
-  const lastVisit = localStorage.getItem('edu_last_visit');
-  let streak = parseInt(localStorage.getItem('edu_streak') || '1', 10);
-  if (lastVisit && lastVisit !== today) {
-    const lastDate = new Date(lastVisit);
-    const diffDays = Math.round((new Date(today) - lastDate) / (1000 * 60 * 60 * 24));
-    if (diffDays === 1) streak += 1;
-    else if (diffDays > 1) streak = 1;
-  }
-  localStorage.setItem('edu_last_visit', today);
-  localStorage.setItem('edu_streak', streak);
-  document.getElementById('streakPill').textContent = `🔥 Day ${streak} Streak`;
-}
+// Hear phrase in an en-AU browser voice (swap for recorded MP3 when ready)
+document.getElementById('play').addEventListener('click',function(){
+  if(!('speechSynthesis' in window))return;
+  var u=new SpeechSynthesisUtterance(document.getElementById('phrase').textContent);
+  u.lang='en-AU';u.rate=.9;
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+});
 
-// ── TIMER ──
-function startTimer() {
-  if (timerStarted) return;
-  timerStarted = true;
-  const total = 20 * 60;
-  const circ = 138.2;
-  timerInterval = setInterval(() => {
-    timerSecs--;
-    if (timerSecs < 0) { clearInterval(timerInterval); return; }
-    const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
-    const s = String(timerSecs % 60).padStart(2, '0');
-    document.getElementById('timerLabel').textContent = m + ':' + s;
-    const offset = circ * (1 - timerSecs / total);
-    document.getElementById('timerCircle').style.strokeDashoffset = offset;
-  }, 1000);
-}
-
-// ── NAVIGATION ──
-function goPhase(n) {
-  stopCurrentAudio();
-  stopSpeechRecognition();
-  document.getElementById('phase' + currentPhase).classList.add('hidden');
-  document.getElementById('phase' + n).classList.remove('hidden');
-  document.querySelectorAll('.phase-tab').forEach((t, i) => {
-    t.classList.remove('active', 'done');
-    if (i === n) t.classList.add('active');
-    else if (i < n) t.classList.add('done');
-  });
-  currentPhase = n;
-  if (n >= 1) startTimer();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ── PROGRESS INDICATOR ──
-function buildDots(id, total, current) {
-  const el = document.getElementById(id);
-  el.innerHTML = '';
-  for (let i = 0; i < total; i++) {
-    const d = document.createElement('div');
-    d.className = 'p-dot' + (i === current ? ' active' : i < current ? ' done' : '');
-    el.appendChild(d);
-  }
-  const lbl = document.createElement('span');
-  lbl.className = 'p-label';
-  lbl.textContent = (current + 1) + ' / ' + total;
-  el.appendChild(lbl);
-}
-
-// ── NEXT ITEM LOADERS ──
-function nextEcho() {
-  idx.echo = (idx.echo + 1) % data.echo.length;
-  const item = data.echo[idx.echo];
-  document.getElementById('echoText').textContent = item.text;
-  document.getElementById('echoResp').value = '';
-  hideFeedback('echoFB');
-  buildDots('echoProg', data.echo.length, idx.echo);
-}
-
-function nextPersp() {
-  idx.persp = (idx.persp + 1) % data.persp.length;
-  const item = data.persp[idx.persp];
-  document.getElementById('perspText').textContent = item.text;
-  document.getElementById('perspResp').value = '';
-  hideFeedback('perspFB');
-  buildDots('perspProg', data.persp.length, idx.persp);
-}
-
-function nextSumm() {
-  idx.summ = (idx.summ + 1) % data.summ.length;
-  const item = data.summ[idx.summ];
-  document.getElementById('summText').textContent = item.text;
-  document.getElementById('summResp').value = '';
-  hideFeedback('summFB');
-  buildDots('summProg', data.summ.length, idx.summ);
-}
-
-// ── AUDIO SYSTEM (PRE-HOSTED WITH BROWSER SYNTHESIS FALLBACK) ──
-function stopCurrentAudio() {
-  const player = document.getElementById('audioPlayer');
-  player.pause();
-  player.src = '';
-  if (window.speechSynthesis) window.speechSynthesis.cancel();
-  ['echo', 'persp', 'summ'].forEach(k => {
-    const w = document.getElementById(k + 'Wave');
-    if (w) w.classList.remove('playing');
-    const s = document.getElementById(k + 'Status');
-    const b = document.getElementById(k + 'PlayBtn');
-    if (b) b.textContent = '▶';
-    if (s) s.textContent = 'Ready — press play to listen';
-  });
-}
-
-function playAudio(key) {
-  const btn = document.getElementById(key + 'PlayBtn');
-  const wave = document.getElementById(key + 'Wave');
-  const status = document.getElementById(key + 'Status');
-  const player = document.getElementById('audioPlayer');
-
-  if (btn.textContent === '⏸') {
-    stopCurrentAudio();
-    return;
-  }
-
-  stopCurrentAudio();
-
-  let item = null;
-  if (key === 'echo') item = data.echo[idx.echo];
-  else if (key === 'persp') item = data.persp[idx.persp];
-  else item = data.summ[idx.summ];
-
-  if (!item) return;
-
-  // Try static pre-hosted MP3 first
-  if (item.audio) {
-    player.src = item.audio;
-    status.textContent = 'Playing audio…';
-    btn.textContent = '⏸';
-    wave.classList.add('playing');
-
-    player.play().then(() => {
-      player.onended = () => {
-        wave.classList.remove('playing');
-        btn.textContent = '▶';
-        status.textContent = 'Done — now repeat aloud!';
-      };
-    }).catch(() => {
-      // If MP3 file is not found (e.g. before files are uploaded), fall back to SpeechSynthesis
-      fallbackSpeechSynthesis(key, item.text);
-    });
-  } else {
-    fallbackSpeechSynthesis(key, item.text);
-  }
-}
-
-function replayAudio(key) {
-  stopCurrentAudio();
-  playAudio(key);
-}
-
-// Seamless speech synthesis fallback with Australian voice preference
-function fallbackSpeechSynthesis(key, text) {
-  if (!('speechSynthesis' in window)) {
-    alert('Audio playback not supported in this browser.');
-    return;
-  }
-  const btn = document.getElementById(key + 'PlayBtn');
-  const wave = document.getElementById(key + 'Wave');
-  const status = document.getElementById(key + 'Status');
-
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.rate = 0.92; // learner pace
-
-  // Try to find an Australian English voice
-  const voices = window.speechSynthesis.getVoices();
-  const auVoice = voices.find(v => v.lang === 'en-AU' || v.lang.startsWith('en-AU'));
-  if (auVoice) {
-    utter.voice = auVoice;
-    status.textContent = `Playing (${auVoice.name} - Aussie Voice)…`;
-  } else {
-    status.textContent = 'Playing voice preview…';
-  }
-
-  btn.textContent = '⏸';
-  wave.classList.add('playing');
-
-  utter.onend = () => {
-    wave.classList.remove('playing');
-    btn.textContent = '▶';
-    status.textContent = 'Done — now repeat aloud!';
-  };
-  utter.onerror = () => {
-    wave.classList.remove('playing');
-    btn.textContent = '▶';
-    status.textContent = 'Audio ready';
-  };
-
-  window.speechSynthesis.speak(utter);
-}
-
-// ── NATIVE MICROPHONE SPEECH RECOGNITION (WEB SPEECH API) ──
-function toggleSpeechRecognition(key) {
-  if (activeRecognition && activeMicKey === key) {
-    stopSpeechRecognition();
-    return;
-  }
-  stopSpeechRecognition();
-  startSpeechRecognition(key);
-}
-
-function startSpeechRecognition(key) {
-  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRec) {
-    alert('Voice recording is supported in Google Chrome, Safari, and Edge. Please type your response or switch browsers.');
-    return;
-  }
-
-  const micBtn = document.getElementById(key + 'MicBtn');
-  const micLabel = document.getElementById(key + 'MicLabel');
-  const recHint = document.getElementById(key + 'RecHint');
-  const textarea = document.getElementById(key + 'Resp');
-
-  const recognition = new SpeechRec();
-  recognition.lang = 'en-AU'; // Australian English locale!
-  recognition.interimResults = true;
-  recognition.continuous = false;
-
-  activeRecognition = recognition;
-  activeMicKey = key;
-
-  micBtn.classList.add('recording');
-  micLabel.textContent = 'Stop Recording';
-  recHint.textContent = '🔴 Listening... speak aloud!';
-
-  let finalTranscript = textarea.value ? textarea.value + ' ' : '';
-
-  recognition.onresult = (event) => {
-    let interim = '';
-    for (let i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        finalTranscript += event.results[i][0].transcript;
-      } else {
-        interim += event.results[i][0].transcript;
-      }
-    }
-    textarea.value = (finalTranscript + ' ' + interim).trim();
-  };
-
-  recognition.onerror = (e) => {
-    recHint.textContent = '⚠️ Mic error: ' + (e.error || 'Please grant permission');
-    stopSpeechRecognition();
-  };
-
-  recognition.onend = () => {
-    stopSpeechRecognition();
-    recHint.textContent = '✅ Recorded! Check your match below.';
-    // If on Echo, auto-run accuracy check
-    if (key === 'echo' && textarea.value.trim().length > 0) {
-      checkEchoAccuracy();
-    }
-  };
-
-  recognition.start();
-}
-
-function stopSpeechRecognition() {
-  if (activeRecognition) {
-    try { activeRecognition.stop(); } catch(e) {}
-    activeRecognition = null;
-  }
-  ['echo', 'persp', 'summ'].forEach(k => {
-    const btn = document.getElementById(k + 'MicBtn');
-    const lbl = document.getElementById(k + 'MicLabel');
-    if (btn) btn.classList.remove('recording');
-    if (lbl) {
-      if (k === 'echo') lbl.textContent = 'Speak Your Echo';
-      else if (k === 'persp') lbl.textContent = 'Speak Your Shift';
-      else lbl.textContent = 'Speak Your Summary';
-    }
-  });
-  activeMicKey = null;
-}
-
-// ── INSTANT ACCURACY & GRAMMAR CHECKERS (100% FREE & INSTANT) ──
-
-function cleanWords(str) {
-  return str.toLowerCase().replace(/[^a-z0-9\s']/g, '').split(/\s+/).filter(Boolean);
-}
-
-// Level 1: Word-by-Word Match
-function checkEchoAccuracy() {
-  const target = document.getElementById('echoText').textContent.trim();
-  const user = document.getElementById('echoResp').value.trim();
-  const fb = document.getElementById('echoFB');
-
-  if (!user) {
-    showFeedback('echoFB', 'error', '⚠️ Please speak or type your echo first.');
-    return;
-  }
-
-  const targetWords = cleanWords(target);
-  const userWords = cleanWords(user);
-
-  let matchCount = 0;
-  let wordPills = targetWords.map(tw => {
-    if (userWords.includes(tw)) {
-      matchCount++;
-      return `<span class="word-pill word-match">${tw} ✓</span>`;
-    } else {
-      return `<span class="word-pill word-missed">${tw} ✗</span>`;
-    }
-  });
-
-  const accuracy = Math.round((matchCount / Math.max(targetWords.length, 1)) * 100);
-
-  let verdict = '';
-  if (accuracy === 100) {
-    verdict = '🌟 <strong>Bloody spot on! Fair dinkum 100% match!</strong> Excellent rhythm and pronunciation.';
-  } else if (accuracy >= 75) {
-    verdict = `👏 <strong>Great echo! ${accuracy}% match.</strong> Notice the words in red above and give it one more repeat.`;
-  } else {
-    verdict = `💪 <strong>Good crack! ${accuracy}% match.</strong> Listen to Sam once more and try speaking right after her.`;
-  }
-
-  const html = `
-    <div style="font-size:1.05rem;font-weight:700;margin-bottom:6px;">Echo Accuracy: ${accuracy}%</div>
-    <div class="match-display">${wordPills.join(' ')}</div>
-    <div>${verdict}</div>
-  `;
-  showFeedback('echoFB', 'result', html);
-}
-
-// Level 2: Perspective Shift Grammar Check
-function checkPerspectiveShift() {
-  const user = document.getElementById('perspResp').value.trim();
-  if (!user) {
-    showFeedback('perspFB', 'error', '⚠️ Please speak or write your perspective shift first.');
-    return;
-  }
-
-  const words = cleanWords(user);
-  const containsI = words.includes('i') || words.includes('me') || words.includes('my');
-  const containsShift = words.some(w => ['he', 'she', 'they', 'his', 'her', 'their', "he's", "she's", "they're"].includes(w));
-
-  let html = '';
-  if (containsI) {
-    html = '⚠️ <strong>Watch out:</strong> We still spotted "I" or "my" in your response! Remember to flip everything to <em>He, She, or They</em>.';
-    showFeedback('perspFB', 'error', html);
-  } else if (containsShift) {
-    html = '✅ <strong>Pronoun Shift Detected!</strong> You successfully swapped the first-person perspective. Ensure your verbs match (e.g. <em>has</em> instead of <em>have</em>, <em>is</em> instead of <em>am</em>).';
-    showFeedback('perspFB', 'result', html);
-  } else {
-    html = '💡 Good effort! Make sure you use <em>He</em> or <em>She</em> to tell the story from someone else\'s viewpoint.';
-    showFeedback('perspFB', 'result', html);
-  }
-}
-
-// Level 3: Summary Flow & Connectors
-function checkSummaryFlow() {
-  const user = document.getElementById('summResp').value.trim();
-  if (!user) {
-    showFeedback('summFB', 'error', '⚠️ Please speak or write your summary first.');
-    return;
-  }
-
-  const sentences = user.split(/[.!?]+/).filter(s => s.trim().length > 5);
-  const words = cleanWords(user);
-  const connectors = ['because', 'however', 'although', 'so', 'therefore', 'which', 'and', 'but', 'since', 'also', 'in fact'];
-  const foundConnectors = connectors.filter(c => words.includes(c));
-
-  let html = `<strong>Summary Stats:</strong> ${sentences.length} sentences, ${words.length} words.<br>`;
-  if (sentences.length >= 3) {
-    html += '✅ <strong>Sentence Target Hit:</strong> You used 3+ complete sentences!<br>';
-  } else {
-    html += '💡 <strong>Goal:</strong> Try to form at least 3 connected sentences.<br>';
-  }
-
-  if (foundConnectors.length > 0) {
-    html += `🔗 <strong>Linking words used:</strong> <em>${foundConnectors.join(', ')}</em>. Great natural flow!`;
-  } else {
-    html += '💡 <strong>Tip:</strong> Use linking words like <em>because</em>, <em>however</em>, or <em>as a result</em> to glue thoughts together.';
-  }
-
-  showFeedback('summFB', 'result', html);
-}
-
-// ── OPTIONAL CLAUDE AI FEEDBACK ──
-async function getFeedback(key) {
-  const fbId = key + 'FB';
-  const respId = key + 'Resp';
-  const response = document.getElementById(respId).value.trim();
-  if (!response) {
-    showFeedback(fbId, 'error', '⚠️ Please speak or write your response first.');
-    return;
-  }
-
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    openSettingsModal();
-    return;
-  }
-
-  let original = '';
-  if (key === 'echo') original = document.getElementById('echoText').textContent;
-  else if (key === 'persp') original = document.getElementById('perspText').textContent;
-  else original = document.getElementById('summText').textContent;
-
-  showFeedback(fbId, 'loading', '⏳ Sam & Leo are reviewing your response with AI…');
-
-  const prompts = {
-    echo: `You are a warm, encouraging Australian English coach for "English Down Under". Learner echoed: "${response}" for original sentence: "${original}". Give 3 short bullet points under 70 words: 1. Pronunciation accuracy 2. Missed nuances 3. One tip.`,
-    persp: `You are an English coach for "English Down Under". Learner converted: "${original}" into third person: "${response}". Check pronoun shifts (I -> He/She) and verb tenses (am->is). Give 3 short bullet points under 80 words.`,
-    summ: `You are a fluency coach for "English Down Under". Learner summarized: "${original}" with: "${response}". Evaluate main idea and flow under 80 words in 3 bullet points.`
-  };
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-3-5-haiku-20241022',
-        max_tokens: 300,
-        messages: [{ role: 'user', content: prompts[key] }]
-      })
-    });
-    const result = await resp.json();
-    if (result.error) throw new Error(result.error.message);
-    const text = (result.content || []).map(b => b.text || '').join('');
-    showFeedback(fbId, 'result', text.replace(/\n/g, '<br>'));
-  } catch (e) {
-    showFeedback(fbId, 'error', '⚠️ AI error: ' + e.message);
-  }
-}
-
-function showFeedback(id, type, html) {
-  const el = document.getElementById(id);
-  el.className = 'feedback-box ' + type + ' visible';
-  el.innerHTML = html;
-}
-function hideFeedback(id) {
-  document.getElementById(id).className = 'feedback-box';
-}
-
-// ── SETTINGS MODAL ──
-function openSettingsModal() {
-  document.getElementById('settingsModal').style.display = 'flex';
-  document.getElementById('apiKeyInput').value = getApiKey();
-}
-function closeSettingsModal() {
-  document.getElementById('settingsModal').style.display = 'none';
-}
-function saveSettings() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (key) sessionStorage.setItem('anthro_key', key);
-  else sessionStorage.removeItem('anthro_key');
-  closeSettingsModal();
-}
-function getApiKey() {
-  return sessionStorage.getItem('anthro_key') || '';
-}
-
-// ── SHARE STREAK ──
-function shareStreak() {
-  const streak = localStorage.getItem('edu_streak') || '1';
-  const shareText = `🦘 English Down Under — Imitation Lab\n🔥 I just completed Day ${streak} of 20-minute Aussie speaking practice!\n\nPractice free at: https://englishdownunder.au`;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(shareText).then(() => {
-      alert('Copied streak summary to clipboard! Paste it into WhatsApp, Reddit, or Facebook.');
-    });
-  } else {
-    prompt('Copy your practice streak:', shareText);
-  }
-}
-
-// ── RESTART ──
-function restartLesson() {
-  clearInterval(timerInterval);
-  timerStarted = false;
-  timerSecs = 20 * 60;
-  document.getElementById('timerLabel').textContent = '20:00';
-  document.getElementById('timerCircle').style.strokeDashoffset = '0';
-  idx = { echo: -1, persp: -1, summ: -1 };
-  stopCurrentAudio();
-  nextEcho();
-  nextPersp();
-  nextSumm();
-  goPhase(0);
-}
+// Streak display (placeholder: the Lab page should write these values)
+try{
+  var n=parseInt(localStorage.getItem('edu_streak')||'0',10);
+  if(n>0)document.getElementById('streak').textContent='Day '+n+' streak — keep it going!';
+}catch(e){}
 </script>
 </body>
 </html>
