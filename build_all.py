@@ -10,7 +10,7 @@ for script in ("build_phrases.py", "build_guides.py", "build_episodes.py", "buil
 
 # Sitemap: homepage, lab, and every generated index.html under the section folders
 urls = [f"{SITE}/", f"{SITE}/lab/"]
-for section in ("phrases", "guides", "episodes", "tools", "aussie-vs-us", "about", "contact", "privacy"):
+for section in ("phrases", "guides", "episodes", "tools", "accent-checker", "aussie-vs-us", "about", "contact", "privacy"):
     for f in sorted((ROOT / section).rglob("index.html")):
         rel = f.parent.relative_to(ROOT).as_posix()
         urls.append(f"{SITE}/{rel}/")

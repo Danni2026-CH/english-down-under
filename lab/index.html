@@ -1107,6 +1107,9 @@ function checkSummaryFlow() {
 }
 
 // ── OPTIONAL CLAUDE AI FEEDBACK ──
+// Claude model used for the optional AI feedback. Change this one line to switch models.
+const AI_MODEL = 'claude-haiku-4-5-20251001';
+
 async function getFeedback(key) {
   const fbId = key + 'FB';
   const respId = key + 'Resp';
@@ -1145,7 +1148,7 @@ async function getFeedback(key) {
         'anthropic-dangerous-direct-browser-access': 'true'
       },
       body: JSON.stringify({
-        model: 'claude-3-5-haiku-20241022',
+        model: AI_MODEL,
         max_tokens: 300,
         messages: [{ role: 'user', content: prompts[key] }]
       })

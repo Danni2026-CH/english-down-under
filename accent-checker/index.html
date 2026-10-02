@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accent Checker: Practise Speaking Australian English | English Down Under</title>
+<meta name="description" content="Say a phrase out loud and see which words come through clearly. Free speaking practice with an Australian English speech model.">
+<link rel="canonical" href="https://englishdownunder.au/accent-checker/">
+<meta property="og:title" content="Accent Checker: Practise Speaking Australian English | English Down Under">
+<meta property="og:description" content="Say a phrase out loud and see which words come through clearly. Free speaking practice with an Australian English speech model.">
+<meta property="og:url" content="https://englishdownunder.au/accent-checker/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.target{font-family:Fraunces,Georgia,serif;font-size:clamp(1.6rem,5vw,2.4rem);color:var(--ocean-dark);font-weight:800;line-height:1.2}
+#sel{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:1rem;background:#fff}
+.mic{width:88px;height:88px;border-radius:50%;font-size:2rem;background:var(--gold);border:0;cursor:pointer;box-shadow:0 6px 16px rgba(18,56,82,.18)}
+.mic:disabled{opacity:.5;cursor:not-allowed}
+.mic.rec{background:#E85D5D;animation:pulse 1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,93,93,.5)}100%{box-shadow:0 0 0 18px rgba(232,93,93,0)}}
+.w{display:inline-block;margin:3px;padding:6px 11px;border-radius:10px;font-weight:600}
+.w.ok{background:#E6F6EA;color:#1E7A41}.w.no{background:#FDECEC;color:#B53030}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stat{background:var(--ocean-soft);border-radius:12px;padding:12px 8px;text-align:center}
+.stat b{display:block;font-family:Fraunces,serif;font-size:1.5rem;color:var(--ocean-dark)}
+.stat small{color:var(--muted);font-size:.78rem}
+#result{display:none}
+.hist{margin:0;padding-left:20px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+<a class="brand" href="/">English <span>Down Under</span></a>
+<nav><a href="/lab/">Imitation Lab</a><a href="/phrases/">Phrases</a><a href="/guides/">Guides</a><a class=on href="/tools/">Tools</a><a href="/episodes/">Episodes</a><a href="https://fairdinkumslang.au">Slang</a></nav>
+</div></header>
+<div class="band"><div class="wrap"><div class="crumbs" style="padding:0 0 10px;color:#B7CEDD"><a href="/">Home</a> › Tools › Accent Checker</div><h1>Accent Checker</h1><p>Say a phrase out loud and see how clearly it comes through.</p></div></div>
+<main class="wrap">
+<h2 style="margin-top:28px">1. Choose something to say</h2>
+<div class="card">
+<label for="sel" style="font-weight:600;display:block;margin-bottom:6px">Phrase or sentence</label>
+<select id="sel"><optgroup label="Greetings"><option value="0">How ya going?</option><option value="1">G&#x27;day</option></optgroup><optgroup label="Everyday replies"><option value="2">No worries</option></optgroup><optgroup label="Opinions"><option value="3">I reckon</option></optgroup><optgroup label="Café English"><option value="4">Flat white, please</option></optgroup><optgroup label="Renting"><option value="5">Can I book an inspection?</option></optgroup><optgroup label="Sentences: Greetings"><option value="6">How ya going, mate?</option><option value="7">Hey Sam, how ya going?</option><option value="8">Good morning! How ya going today?</option><option value="9">G&#x27;day, how&#x27;s it going?</option><option value="10">G&#x27;day mate!</option><option value="11">G&#x27;day, I&#x27;m Sam.</option></optgroup><optgroup label="Sentences: Everyday replies"><option value="12">Thanks for your help! — No worries.</option><option value="13">Sorry I&#x27;m late. — No worries.</option><option value="14">Can you send that today? — No worries.</option></optgroup><optgroup label="Sentences: Opinions"><option value="15">I reckon we should leave now.</option><option value="16">Do you reckon it&#x27;s worth it?</option><option value="17">I reckon you&#x27;ll love it.</option></optgroup><optgroup label="Sentences: Café English"><option value="18">Flat white, please.</option><option value="19">Can I get a large flat white to go?</option><option value="20">A flat white and a banana bread, thanks.</option></optgroup><optgroup label="Sentences: Renting"><option value="21">Can I book an inspection for Saturday?</option><option value="22">Is there an inspection open this week?</option><option value="23">I&#x27;d like to book an inspection, please.</option></optgroup></select>
+<div class="row" style="margin-top:10px"><button class="btn ghost sm" id="rand" type="button">🎲 Random</button></div>
+</div>
+
+<div class="card" style="margin-top:14px">
+<div class="target" id="target"></div>
+<div style="color:var(--muted);font-style:italic;margin:6px 0 12px;min-height:1.4em" id="respell"></div>
+<div class="row"><button class="btn" id="hear" type="button">🔊 Hear it (Aussie)</button><button class="btn ghost" id="slow" type="button">🐢 Slow</button></div>
+<div class="tipbox" id="tipbox"><strong>Try this:</strong> <span id="tip"></span></div>
+</div>
+
+<h2>2. Say it out loud</h2>
+<div class="card" style="text-align:center">
+<button class="mic" id="mic" type="button" aria-label="Start listening">🎙️</button>
+<div id="status" style="margin-top:10px;color:var(--muted)" aria-live="polite">Press the mic, then say the phrase.</div>
+</div>
+
+<div id="result" class="card" style="margin-top:14px" aria-live="polite">
+<div id="chips"></div>
+<div style="color:var(--muted);margin-top:8px">We heard: <em id="heard"></em></div>
+<div class="stats3">
+<div class="stat"><b id="s-match">–</b><small>Words matched</small></div>
+<div class="stat"><b id="s-conf">–</b><small>Recogniser confidence</small></div>
+<div class="stat"><b id="s-pace">–</b><small>Pace</small></div>
+</div>
+<div id="verdict" style="font-weight:600;color:var(--ocean-dark)"></div>
+<div id="pacenote" style="color:var(--muted);margin-top:4px"></div>
+<div class="row" style="margin-top:14px"><button class="btn gold" id="again" type="button">Try again</button><a class="btn ghost" id="plink" href="/phrases/">About this phrase →</a></div>
+</div>
+
+<div class="card" id="histbox" style="margin-top:14px;display:none"><strong>This session</strong><ol class="hist" id="hist"></ol></div>
+
+<h2>What this tool does (and doesn't)</h2>
+<div class="card">
+<p style="margin-top:0">Your browser's speech recogniser listens in <strong>Australian English</strong> and turns your voice into text. We then compare that text with the phrase, word by word. If the right words come through, you were clear. This is a useful practice guide, but it does <strong>not</strong> judge how Australian your accent sounds. For that, listen carefully to real speakers and compare.</p>
+<p>Casual sounds can be written differently: "ya" is treated as "you", but other informal forms may be spelled differently by the recogniser. Your voice goes to your browser's speech service, not to us. See the <a href="/privacy/" style="text-decoration:underline">privacy policy</a>. This works in Chrome, Edge and Safari.</p>
+<a class="btn ghost" href="/lab/">Do the full 20-minute lesson →</a>
+</div>
+<div class="sister"><div><strong>🦘 Want the slang meanings?</strong><br><span style="color:var(--muted)">Fair Dinkum has 600+ Aussie slang words with origin stories.</span></div><a class="btn" href="https://fairdinkumslang.au">Visit Fair Dinkum →</a></div>
+</main>
+<footer><div class="wrap">
+<div>© English Down Under · Made with love in Australia</div>
+<div style="display:flex;gap:18px;flex-wrap:wrap"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="https://fairdinkumslang.au">Fair Dinkum</a></div>
+</div></footer>
+<script>
+var ITEMS=[{"text": "How ya going?", "group": "Greetings", "respell": "how-yuh-GOH-in", "tip": "Say it as one smooth chunk of four beats. Put the strongest stress on GO.", "slug": "how-ya-going"}, {"text": "G'day", "group": "Greetings", "respell": "guh-DYE", "tip": "Make the first sound almost silent, then open your mouth wide and glide on the second syllable.", "slug": "gday"}, {"text": "No worries", "group": "Everyday replies", "respell": "noh WUH-reez", "tip": "Think of it as two beats: noh-WUR-ries, with a soft ending.", "slug": "no-worries"}, {"text": "I reckon", "group": "Opinions", "respell": "eye REK-un", "tip": "Stress the first syllable of reckon: REK-n.", "slug": "reckon"}, {"text": "Flat white, please", "group": "Café English", "respell": "flat WHITE pleez", "tip": "Stress WHITE and keep \"please\" light.", "slug": "flat-white-please"}, {"text": "Can I book an inspection?", "group": "Renting", "respell": "kn eye BOOK un in-SPEK-shun", "tip": "Link the first three words: kn-eye-BOOK. Stress SPEC in inspection.", "slug": "can-i-book-an-inspection"}, {"text": "How ya going, mate?", "group": "Sentences: Greetings", "respell": "", "tip": "Say it as one smooth chunk of four beats. Put the strongest stress on GO.", "slug": "how-ya-going"}, {"text": "Hey Sam, how ya going?", "group": "Sentences: Greetings", "respell": "", "tip": "Say it as one smooth chunk of four beats. Put the strongest stress on GO.", "slug": "how-ya-going"}, {"text": "Good morning! How ya going today?", "group": "Sentences: Greetings", "respell": "", "tip": "Say it as one smooth chunk of four beats. Put the strongest stress on GO.", "slug": "how-ya-going"}, {"text": "G'day, how's it going?", "group": "Sentences: Greetings", "respell": "", "tip": "Make the first sound almost silent, then open your mouth wide and glide on the second syllable.", "slug": "gday"}, {"text": "G'day mate!", "group": "Sentences: Greetings", "respell": "", "tip": "Make the first sound almost silent, then open your mouth wide and glide on the second syllable.", "slug": "gday"}, {"text": "G'day, I'm Sam.", "group": "Sentences: Greetings", "respell": "", "tip": "Make the first sound almost silent, then open your mouth wide and glide on the second syllable.", "slug": "gday"}, {"text": "Thanks for your help! — No worries.", "group": "Sentences: Everyday replies", "respell": "", "tip": "Think of it as two beats: noh-WUR-ries, with a soft ending.", "slug": "no-worries"}, {"text": "Sorry I'm late. — No worries.", "group": "Sentences: Everyday replies", "respell": "", "tip": "Think of it as two beats: noh-WUR-ries, with a soft ending.", "slug": "no-worries"}, {"text": "Can you send that today? — No worries.", "group": "Sentences: Everyday replies", "respell": "", "tip": "Think of it as two beats: noh-WUR-ries, with a soft ending.", "slug": "no-worries"}, {"text": "I reckon we should leave now.", "group": "Sentences: Opinions", "respell": "", "tip": "Stress the first syllable of reckon: REK-n.", "slug": "reckon"}, {"text": "Do you reckon it's worth it?", "group": "Sentences: Opinions", "respell": "", "tip": "Stress the first syllable of reckon: REK-n.", "slug": "reckon"}, {"text": "I reckon you'll love it.", "group": "Sentences: Opinions", "respell": "", "tip": "Stress the first syllable of reckon: REK-n.", "slug": "reckon"}, {"text": "Flat white, please.", "group": "Sentences: Café English", "respell": "", "tip": "Stress WHITE and keep \"please\" light.", "slug": "flat-white-please"}, {"text": "Can I get a large flat white to go?", "group": "Sentences: Café English", "respell": "", "tip": "Stress WHITE and keep \"please\" light.", "slug": "flat-white-please"}, {"text": "A flat white and a banana bread, thanks.", "group": "Sentences: Café English", "respell": "", "tip": "Stress WHITE and keep \"please\" light.", "slug": "flat-white-please"}, {"text": "Can I book an inspection for Saturday?", "group": "Sentences: Renting", "respell": "", "tip": "Link the first three words: kn-eye-BOOK. Stress SPEC in inspection.", "slug": "can-i-book-an-inspection"}, {"text": "Is there an inspection open this week?", "group": "Sentences: Renting", "respell": "", "tip": "Link the first three words: kn-eye-BOOK. Stress SPEC in inspection.", "slug": "can-i-book-an-inspection"}, {"text": "I'd like to book an inspection, please.", "group": "Sentences: Renting", "respell": "", "tip": "Link the first three words: kn-eye-BOOK. Stress SPEC in inspection.", "slug": "can-i-book-an-inspection"}];
+var cur=ITEMS[0],sel=document.getElementById('sel');
+
+// ---- text analysis (kept as plain functions so it can be tested) ----
+function norm(s){
+  return s.toLowerCase().replace(/['’]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+}
+function words(s){
+  var n=norm(s);if(!n)return [];
+  var t=n.split(' ').map(function(w){return w==='ya'?'you':w}),out=[],i;
+  for(i=0;i<t.length;i++){          // recognisers often write "g'day" as "good day"
+    if(t[i]==='good'&&t[i+1]==='day'){out.push('gday');i++}else out.push(t[i]);
+  }
+  return out;
+}
+function matchInOrder(t,h){            // longest common subsequence -> which target words were heard, in order
+  var m=t.length,n=h.length,dp=[],i,j;
+  for(i=0;i<=m;i++){dp.push(new Array(n+1).fill(0))}
+  for(i=1;i<=m;i++)for(j=1;j<=n;j++)
+    dp[i][j]=t[i-1]===h[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
+  var ok=new Array(m).fill(false);i=m;j=n;
+  while(i>0&&j>0){
+    if(t[i-1]===h[j-1]){ok[i-1]=true;i--;j--}
+    else if(dp[i-1][j]>=dp[i][j-1])i--;else j--;
+  }
+  return ok;
+}
+function analyse(target,heard,conf,secs){
+  var t=words(target),h=words(heard),ok=matchInOrder(t,h);
+  var hit=ok.filter(Boolean).length;
+  return {
+    words:t,ok:ok,hit:hit,pct:t.length?Math.round(hit/t.length*100):0,
+    heard:heard,conf:(conf>0?Math.round(conf*100):null),
+    wps:(secs>0&&h.length>=4)?h.length/secs:null
+  };
+}
+
+// ---- show a phrase ----
+function show(i){
+  cur=ITEMS[i];sel.value=i;
+  document.getElementById('target').textContent=cur.text;
+  document.getElementById('respell').textContent=cur.respell?'Say it: “'+cur.respell+'”':'';
+  document.getElementById('tip').textContent=cur.tip||'';
+  document.getElementById('tipbox').style.display=cur.tip?'':'none';
+  document.getElementById('plink').href='/phrases/'+cur.slug+'/';
+  document.getElementById('result').style.display='none';
+  document.getElementById('status').textContent='Press the mic, then say the phrase.';
+}
+sel.onchange=function(){show(+sel.value)};
+document.getElementById('rand').onclick=function(){show(Math.floor(Math.random()*ITEMS.length))};
+document.getElementById('again').onclick=function(){document.getElementById('result').style.display='none';window.scrollTo({top:0,behavior:'smooth'})};
+
+// ---- hear it ----
+function voiceFor(lang){
+  var vs=window.speechSynthesis?speechSynthesis.getVoices():[];
+  return vs.filter(function(v){return v.lang.replace('_','-').toLowerCase()===lang.toLowerCase()})[0]||null;
+}
+function say(rate){
+  if(!window.speechSynthesis)return;
+  var u=new SpeechSynthesisUtterance(cur.text);u.lang='en-AU';var v=voiceFor('en-AU');if(v)u.voice=v;u.rate=rate;
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+document.getElementById('hear').onclick=function(){say(.95)};
+document.getElementById('slow').onclick=function(){say(.6)};
+
+// ---- listen ----
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,t0=0,t1=0;
+var mic=document.getElementById('mic'),statusEl=document.getElementById('status'),hist=[];
+if(!SR){mic.disabled=true;statusEl.textContent="Speech recognition isn't available in this browser. Try Chrome, Edge or Safari."}
+
+function render(a){
+  var chips=document.getElementById('chips');chips.innerHTML='';
+  a.words.forEach(function(w,i){
+    var s=document.createElement('span');s.className='w '+(a.ok[i]?'ok':'no');s.textContent=(a.ok[i]?'✓ ':'✗ ')+w;chips.appendChild(s);
+  });
+  document.getElementById('heard').textContent='“'+a.heard+'”';
+  document.getElementById('s-match').textContent=a.pct+'%';
+  document.getElementById('s-conf').textContent=a.conf===null?'–':a.conf+'%';
+  document.getElementById('s-pace').textContent=a.wps===null?'–':a.wps.toFixed(1)+'/s';
+  var v=a.pct>=90?'Excellent! Clear and complete. 🎉':a.pct>=70?'Good. Most of your words came through.':a.pct>=40?'Getting there. Try again a little more slowly.':"Let's try again. Check your mic and speak a bit louder.";
+  document.getElementById('verdict').textContent=v;
+  var pn='';
+  if(a.wps!==null){pn=a.wps<1.5?'Your pace was a little slow. Natural conversation is about 2 to 3 words per second, so try linking the words.':a.wps>4?'Your pace was quite fast. Slow down slightly so every word is clear.':'Your pace is in a natural range.'}
+  document.getElementById('pacenote').textContent=pn;
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth',block:'nearest'});
+  hist.unshift(cur.text+' — '+a.pct+'%');hist=hist.slice(0,5);
+  var ol=document.getElementById('hist');ol.innerHTML='';
+  hist.forEach(function(x){var li=document.createElement('li');li.textContent=x;ol.appendChild(li)});
+  document.getElementById('histbox').style.display='block';
+}
+
+mic.onclick=function(){
+  if(!SR)return;
+  if(rec){rec.stop();return}
+  rec=new SR();rec.lang='en-AU';rec.interimResults=false;rec.maxAlternatives=1;rec.continuous=false;
+  t0=0;t1=0;
+  rec.onstart=function(){mic.classList.add('rec');statusEl.textContent='Listening… say it now.'};
+  rec.onspeechstart=function(){t0=Date.now()};
+  rec.onspeechend=function(){t1=Date.now()};
+  rec.onresult=function(e){
+    var r=e.results[0][0],secs=(t0&&t1&&t1>t0)?(t1-t0)/1000:0;
+    statusEl.textContent='Done. See your result below.';
+    render(analyse(cur.text,r.transcript,r.confidence,secs));
+  };
+  rec.onerror=function(e){
+    statusEl.textContent=e.error==='not-allowed'?'The microphone is blocked. Allow it for this site and try again.':
+      e.error==='no-speech'?"We didn't hear anything. Check your mic and try again.":
+      'Something went wrong ('+e.error+'). Please try again.';
+  };
+  rec.onend=function(){mic.classList.remove('rec');rec=null;if(statusEl.textContent.indexOf('Listening')===0)statusEl.textContent='Press the mic and try again.'};
+  rec.start();
+};
+show(0);
+</script>
+</body>
+</html>

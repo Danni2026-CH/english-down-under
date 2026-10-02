@@ -72,6 +72,7 @@ def tool_card(icon, name, text, href, tag, external=False, soon=False):
 
 live = "".join([
     tool_card("🎙️", "Imitation Lab", "A 20-minute daily session: echo Sam, shift perspective with Leo, then summarise. Includes a practice streak.", "/lab/", "Speaking"),
+    tool_card("🎯", "Accent Checker", "Say a phrase and see which words come through clearly, with pace feedback.", "/accent-checker/", "Speaking"),
     tool_card("🌏", "Aussie vs US vs UK", "Vocabulary, pronunciation and spelling side by side, with a quick quiz.", "/aussie-vs-us/", "Compare"),
     tool_card("📖", "Phrase Bank", "Phrases with audio, pronunciation notes, common mistakes and speaking practice.", "/phrases/", "Browse"),
     tool_card("🧭", "Situation Guides", "Cafés, job interviews, renting, small talk, phone calls, rhythm and vowels.", "/guides/", "Guides"),
@@ -82,7 +83,6 @@ fd = "".join([
     tool_card("🗣️", "Slang Translator", "Paste a sentence and decode the slang.", "https://fairdinkumslang.au/slang-translator", "Fair Dinkum ↗", external=True),
 ])
 soon = "".join([
-    tool_card("🎯", "Accent Checker", "Say a phrase and see how close you are to the Aussie version.", "", "Coming soon", soon=True),
     tool_card("✨", "Aussie-fy My Sentence", "Paste standard English and get a natural Australian version.", "", "Coming soon", soon=True),
     tool_card("🦘", "Daily Accent Puzzle", "Hear a word and spot the Aussie pronunciation.", "", "Coming soon", soon=True),
     tool_card("🧩", "Which Aussie Are You?", "A short quiz on how Aussie your English sounds.", "", "Coming soon", soon=True),
@@ -247,6 +247,211 @@ page("aussie-vs-us", "Aussie vs US vs UK English: Vocabulary, Pronunciation & Sp
      "Compare Australian, American and British English: everyday vocabulary, pronunciation and spelling side by side, with audio and a quick quiz.",
      compare_body, nav_on="/tools/", head_extra=compare_css, script=compare_script,
      band=("Aussie vs US vs UK English", "The same language, different words. Compare vocabulary, pronunciation and spelling.", "Tools › Aussie vs US vs UK"))
+
+# ───────────────────────── ACCENT CHECKER ─────────────────────────
+phrases_data = json.loads((ROOT / "data" / "phrases.json").read_text(encoding="utf-8"))
+ac_items = []
+for ph in phrases_data:
+    ac_items.append({"text": ph["phrase"], "group": ph["category"], "respell": ph["respell"], "tip": ph["tip"], "slug": ph["slug"]})
+for ph in phrases_data:
+    for ex in ph["examples"]:
+        ac_items.append({"text": ex, "group": "Sentences: " + ph["category"], "respell": "", "tip": ph["tip"], "slug": ph["slug"]})
+groups = []
+for i, it in enumerate(ac_items):
+    if it["group"] not in groups:
+        groups.append(it["group"])
+ac_options = ""
+for g in groups:
+    ac_options += f'<optgroup label="{e(g, quote=True)}">'
+    for i, it in enumerate(ac_items):
+        if it["group"] == g:
+            ac_options += f'<option value="{i}">{e(it["text"])}</option>'
+    ac_options += "</optgroup>"
+ac_json = json.dumps(ac_items, ensure_ascii=False).replace("</", "<\\/")
+
+ac_css = """<style>
+.target{font-family:Fraunces,Georgia,serif;font-size:clamp(1.6rem,5vw,2.4rem);color:var(--ocean-dark);font-weight:800;line-height:1.2}
+#sel{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:1rem;background:#fff}
+.mic{width:88px;height:88px;border-radius:50%;font-size:2rem;background:var(--gold);border:0;cursor:pointer;box-shadow:0 6px 16px rgba(18,56,82,.18)}
+.mic:disabled{opacity:.5;cursor:not-allowed}
+.mic.rec{background:#E85D5D;animation:pulse 1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,93,93,.5)}100%{box-shadow:0 0 0 18px rgba(232,93,93,0)}}
+.w{display:inline-block;margin:3px;padding:6px 11px;border-radius:10px;font-weight:600}
+.w.ok{background:#E6F6EA;color:#1E7A41}.w.no{background:#FDECEC;color:#B53030}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stat{background:var(--ocean-soft);border-radius:12px;padding:12px 8px;text-align:center}
+.stat b{display:block;font-family:Fraunces,serif;font-size:1.5rem;color:var(--ocean-dark)}
+.stat small{color:var(--muted);font-size:.78rem}
+#result{display:none}
+.hist{margin:0;padding-left:20px;color:var(--muted)}
+</style>"""
+
+ac_body = f"""<main class="wrap">
+<h2 style="margin-top:28px">1. Choose something to say</h2>
+<div class="card">
+<label for="sel" style="font-weight:600;display:block;margin-bottom:6px">Phrase or sentence</label>
+<select id="sel">{ac_options}</select>
+<div class="row" style="margin-top:10px"><button class="btn ghost sm" id="rand" type="button">🎲 Random</button></div>
+</div>
+
+<div class="card" style="margin-top:14px">
+<div class="target" id="target"></div>
+<div style="color:var(--muted);font-style:italic;margin:6px 0 12px;min-height:1.4em" id="respell"></div>
+<div class="row"><button class="btn" id="hear" type="button">🔊 Hear it (Aussie)</button><button class="btn ghost" id="slow" type="button">🐢 Slow</button></div>
+<div class="tipbox" id="tipbox"><strong>Try this:</strong> <span id="tip"></span></div>
+</div>
+
+<h2>2. Say it out loud</h2>
+<div class="card" style="text-align:center">
+<button class="mic" id="mic" type="button" aria-label="Start listening">🎙️</button>
+<div id="status" style="margin-top:10px;color:var(--muted)" aria-live="polite">Press the mic, then say the phrase.</div>
+</div>
+
+<div id="result" class="card" style="margin-top:14px" aria-live="polite">
+<div id="chips"></div>
+<div style="color:var(--muted);margin-top:8px">We heard: <em id="heard"></em></div>
+<div class="stats3">
+<div class="stat"><b id="s-match">–</b><small>Words matched</small></div>
+<div class="stat"><b id="s-conf">–</b><small>Recogniser confidence</small></div>
+<div class="stat"><b id="s-pace">–</b><small>Pace</small></div>
+</div>
+<div id="verdict" style="font-weight:600;color:var(--ocean-dark)"></div>
+<div id="pacenote" style="color:var(--muted);margin-top:4px"></div>
+<div class="row" style="margin-top:14px"><button class="btn gold" id="again" type="button">Try again</button><a class="btn ghost" id="plink" href="/phrases/">About this phrase →</a></div>
+</div>
+
+<div class="card" id="histbox" style="margin-top:14px;display:none"><strong>This session</strong><ol class="hist" id="hist"></ol></div>
+
+<h2>What this tool does (and doesn't)</h2>
+<div class="card">
+<p style="margin-top:0">Your browser's speech recogniser listens in <strong>Australian English</strong> and turns your voice into text. We then compare that text with the phrase, word by word. If the right words come through, you were clear. This is a useful practice guide, but it does <strong>not</strong> judge how Australian your accent sounds. For that, listen carefully to real speakers and compare.</p>
+<p>Casual sounds can be written differently: "ya" is treated as "you", but other informal forms may be spelled differently by the recogniser. Your voice goes to your browser's speech service, not to us. See the <a href="/privacy/" style="text-decoration:underline">privacy policy</a>. This works in Chrome, Edge and Safari.</p>
+<a class="btn ghost" href="/lab/">Do the full 20-minute lesson →</a>
+</div>
+{SISTER}
+</main>"""
+
+ac_script = r"""<script>
+var ITEMS=""" + ac_json + r""";
+var cur=ITEMS[0],sel=document.getElementById('sel');
+
+// ---- text analysis (kept as plain functions so it can be tested) ----
+function norm(s){
+  return s.toLowerCase().replace(/['’]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+}
+function words(s){
+  var n=norm(s);if(!n)return [];
+  var t=n.split(' ').map(function(w){return w==='ya'?'you':w}),out=[],i;
+  for(i=0;i<t.length;i++){          // recognisers often write "g'day" as "good day"
+    if(t[i]==='good'&&t[i+1]==='day'){out.push('gday');i++}else out.push(t[i]);
+  }
+  return out;
+}
+function matchInOrder(t,h){            // longest common subsequence -> which target words were heard, in order
+  var m=t.length,n=h.length,dp=[],i,j;
+  for(i=0;i<=m;i++){dp.push(new Array(n+1).fill(0))}
+  for(i=1;i<=m;i++)for(j=1;j<=n;j++)
+    dp[i][j]=t[i-1]===h[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
+  var ok=new Array(m).fill(false);i=m;j=n;
+  while(i>0&&j>0){
+    if(t[i-1]===h[j-1]){ok[i-1]=true;i--;j--}
+    else if(dp[i-1][j]>=dp[i][j-1])i--;else j--;
+  }
+  return ok;
+}
+function analyse(target,heard,conf,secs){
+  var t=words(target),h=words(heard),ok=matchInOrder(t,h);
+  var hit=ok.filter(Boolean).length;
+  return {
+    words:t,ok:ok,hit:hit,pct:t.length?Math.round(hit/t.length*100):0,
+    heard:heard,conf:(conf>0?Math.round(conf*100):null),
+    wps:(secs>0&&h.length>=4)?h.length/secs:null
+  };
+}
+
+// ---- show a phrase ----
+function show(i){
+  cur=ITEMS[i];sel.value=i;
+  document.getElementById('target').textContent=cur.text;
+  document.getElementById('respell').textContent=cur.respell?'Say it: “'+cur.respell+'”':'';
+  document.getElementById('tip').textContent=cur.tip||'';
+  document.getElementById('tipbox').style.display=cur.tip?'':'none';
+  document.getElementById('plink').href='/phrases/'+cur.slug+'/';
+  document.getElementById('result').style.display='none';
+  document.getElementById('status').textContent='Press the mic, then say the phrase.';
+}
+sel.onchange=function(){show(+sel.value)};
+document.getElementById('rand').onclick=function(){show(Math.floor(Math.random()*ITEMS.length))};
+document.getElementById('again').onclick=function(){document.getElementById('result').style.display='none';window.scrollTo({top:0,behavior:'smooth'})};
+
+// ---- hear it ----
+function voiceFor(lang){
+  var vs=window.speechSynthesis?speechSynthesis.getVoices():[];
+  return vs.filter(function(v){return v.lang.replace('_','-').toLowerCase()===lang.toLowerCase()})[0]||null;
+}
+function say(rate){
+  if(!window.speechSynthesis)return;
+  var u=new SpeechSynthesisUtterance(cur.text);u.lang='en-AU';var v=voiceFor('en-AU');if(v)u.voice=v;u.rate=rate;
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+document.getElementById('hear').onclick=function(){say(.95)};
+document.getElementById('slow').onclick=function(){say(.6)};
+
+// ---- listen ----
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,t0=0,t1=0;
+var mic=document.getElementById('mic'),statusEl=document.getElementById('status'),hist=[];
+if(!SR){mic.disabled=true;statusEl.textContent="Speech recognition isn't available in this browser. Try Chrome, Edge or Safari."}
+
+function render(a){
+  var chips=document.getElementById('chips');chips.innerHTML='';
+  a.words.forEach(function(w,i){
+    var s=document.createElement('span');s.className='w '+(a.ok[i]?'ok':'no');s.textContent=(a.ok[i]?'✓ ':'✗ ')+w;chips.appendChild(s);
+  });
+  document.getElementById('heard').textContent='“'+a.heard+'”';
+  document.getElementById('s-match').textContent=a.pct+'%';
+  document.getElementById('s-conf').textContent=a.conf===null?'–':a.conf+'%';
+  document.getElementById('s-pace').textContent=a.wps===null?'–':a.wps.toFixed(1)+'/s';
+  var v=a.pct>=90?'Excellent! Clear and complete. 🎉':a.pct>=70?'Good. Most of your words came through.':a.pct>=40?'Getting there. Try again a little more slowly.':"Let's try again. Check your mic and speak a bit louder.";
+  document.getElementById('verdict').textContent=v;
+  var pn='';
+  if(a.wps!==null){pn=a.wps<1.5?'Your pace was a little slow. Natural conversation is about 2 to 3 words per second, so try linking the words.':a.wps>4?'Your pace was quite fast. Slow down slightly so every word is clear.':'Your pace is in a natural range.'}
+  document.getElementById('pacenote').textContent=pn;
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth',block:'nearest'});
+  hist.unshift(cur.text+' — '+a.pct+'%');hist=hist.slice(0,5);
+  var ol=document.getElementById('hist');ol.innerHTML='';
+  hist.forEach(function(x){var li=document.createElement('li');li.textContent=x;ol.appendChild(li)});
+  document.getElementById('histbox').style.display='block';
+}
+
+mic.onclick=function(){
+  if(!SR)return;
+  if(rec){rec.stop();return}
+  rec=new SR();rec.lang='en-AU';rec.interimResults=false;rec.maxAlternatives=1;rec.continuous=false;
+  t0=0;t1=0;
+  rec.onstart=function(){mic.classList.add('rec');statusEl.textContent='Listening… say it now.'};
+  rec.onspeechstart=function(){t0=Date.now()};
+  rec.onspeechend=function(){t1=Date.now()};
+  rec.onresult=function(e){
+    var r=e.results[0][0],secs=(t0&&t1&&t1>t0)?(t1-t0)/1000:0;
+    statusEl.textContent='Done. See your result below.';
+    render(analyse(cur.text,r.transcript,r.confidence,secs));
+  };
+  rec.onerror=function(e){
+    statusEl.textContent=e.error==='not-allowed'?'The microphone is blocked. Allow it for this site and try again.':
+      e.error==='no-speech'?"We didn't hear anything. Check your mic and try again.":
+      'Something went wrong ('+e.error+'). Please try again.';
+  };
+  rec.onend=function(){mic.classList.remove('rec');rec=null;if(statusEl.textContent.indexOf('Listening')===0)statusEl.textContent='Press the mic and try again.'};
+  rec.start();
+};
+show(0);
+</script>"""
+
+page("accent-checker", "Accent Checker: Practise Speaking Australian English | English Down Under",
+     "Say a phrase out loud and see which words come through clearly. Free speaking practice with an Australian English speech model.",
+     ac_body, nav_on="/tools/", head_extra=ac_css, script=ac_script,
+     band=("Accent Checker", "Say a phrase out loud and see how clearly it comes through.", "Tools › Accent Checker"))
 
 # ───────────────────────── ABOUT ─────────────────────────
 about_body = f"""<main class="wrap">
